@@ -1,0 +1,33 @@
+# Sourced from https://github.com/Elrondo46/davical-docker-standalone/blob/main/docker-compose.yml
+# Set the following environment variables:
+# - POSTGRES_PASSWORD: Should match PGSQL_ROOT_PASS
+# - PGSQL_ROOT_PASS: Should match POSTGRES_PASSWORD
+# - PASSDAVDB
+# - ADMINDAVICALPASS
+
+version: "3"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
+    restart: always
+
+  app:
+    image: tuxnvape/davical-standalone
+    volumes:
+      - davical_config:/config
+    restart: always
+    ports:
+      - 8083:80
+    env_file: .env
+    environment:
+      HOST_NAME: "jayherron.org"
+      DBHOST: "db"
+      LANG: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+      DAVICAL_LANG: "en_US"
+volumes:
+  davical_config:
+  pgsql_data:
