@@ -1,0 +1,99 @@
+version: "3"
+services:
+  davical:
+    # Sourced from https://github.com/Elrondo46/davical-docker-standalone/blob/main/docker-compose.yml
+    # Set the following environment variables:
+    # - POSTGRES_PASSWORD: Should match PGSQL_ROOT_PASS
+    # - PGSQL_ROOT_PASS: Should match POSTGRES_PASSWORD
+    # - PASSDAVDB
+    # - ADMINDAVICALPASS
+    image: tuxnvape/davical-standalone
+    container_name: davical
+    volumes:
+      - davical_config:/config
+    restart: unless-stopped
+    ports:
+      - 8083:80
+    env_file: .env
+    environment:
+      HOST_NAME: "jayherron.org"
+      DBHOST: "davical-db"
+      LANG: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+      DAVICAL_LANG: "en_US"
+  davical-db:
+    image: postgres
+    container_name: davical-db
+    volumes:
+      - davical_data:/var/lib/postgresql/data
+    restart: unless-stopped
+  
+  homeassitant:
+    # https://www.home-assistant.io/installation/linux#install-home-assistant-container
+    image: ghcr.io/home-assistant/home-assistant
+    container_name: homeassistant
+    restart: unless-stopped
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - ~/HomeAssistant:/config
+    environment:
+      - TZ=America/Denver
+  
+  mealie:
+    # https://hay-kot.github.io/mealie/getting-started/install/
+    image: hkotel/mealie
+    container_name: mealie
+    ports:
+      - 3001:80
+    restart: unless-stopped
+    volumes:
+      - ~/mealie:/app/data
+    environment:
+      - DB_TYPE=sqlite
+  
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    restart: on-failure
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+
+  netdata:
+    # https://learn.netdata.cloud/docs/agent/packaging/docker/#host-editable-configuration
+    # Set the following environment variables:
+    # - NETDATA_CLAIM_TOKEN
+    # - NETDATA_CLAIM_URL
+    # - NETDATA_CLAIM_ROOMS
+    image: netdata/netdata
+    container_name: netdata
+    hostname: jayherron.org
+    ports:
+      - 19999:19999
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdata_config:/etc/netdata
+      - netdata_lib:/var/lib/netdata
+      - netdata_cache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+volumes:
+  davical_config:
+  davical_data:
+  mosquitto_data:
+  mosquitto_log:
+  netdata_config:
+  netdata_lib:
+  netdata_cache:
