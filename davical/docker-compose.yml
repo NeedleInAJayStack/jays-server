@@ -13,7 +13,6 @@ services:
     volumes:
       - pgsql_data:/var/lib/postgresql/data
     restart: always
-
   app:
     image: tuxnvape/davical-standalone
     volumes:
@@ -28,6 +27,10 @@ services:
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
       DAVICAL_LANG: "en_US"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mealie.rule=Host(`cal.jayherron.org`)"
+      - "traefik.http.routers.mealie.entrypoints=web"
 volumes:
   davical_config:
   pgsql_data:

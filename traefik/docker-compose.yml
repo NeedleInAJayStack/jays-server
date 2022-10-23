@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.10
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - traefik
+    volumes:
+      - ./config.yml:/etc/traefik/config.yml
+      - ~/Data/docker/traefik/jayherron_org.json:/etc/traefik/jayherron_org.json
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  # This must be created manually outside of this file using `docker network create traefik`
+  # Any service to be exposed by traefik must use this network.
+  traefik:
+    external: true

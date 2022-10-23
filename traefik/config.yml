@@ -1,0 +1,21 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: true
+entryPoints:
+  http:
+    address: :80
+  https:
+    address: :443
+api:
+  insecure: true
+providers:
+  docker:
+    exposedByDefault: false
+    network: traefik
+certificatesResolvers:
+  resolver:
+    jayherron_org:
+      email: NeedleInAJayStack@protonmail.com
+      storage: jayherron_org.json
+      httpChallenge:
+        entryPoint: web
