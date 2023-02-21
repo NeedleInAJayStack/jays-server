@@ -9,7 +9,7 @@ version: "3"
 
 services:
   db:
-    image: postgres
+    image: postgres:14
     volumes:
       - pgsql_data:/var/lib/postgresql/data
     restart: always
