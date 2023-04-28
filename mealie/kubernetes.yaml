@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      mealie: web
+  template:
+    metadata:
+      labels:
+        mealie: web
+    spec:
+      containers:
+      - name: mealie
+        image: hkotel/mealie
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /app/data
+          name: mealie-volume
+      volumes:
+      - name: mealie-volume
+        hostPath:
+          path: /opt/minikube/mealie/
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mealie-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    mealie: web
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30001
