@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: davical
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: davical
+  template:
+    metadata:
+      labels:
+        app: davical
+    spec:
+      containers:
+      - name: davical
+        image: tuxnvape/davical-standalone
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: davical-secrets
+        env:
+        - name: HOST_NAME
+          value: "192.168.49.2"
+        - name: DBHOST
+          value: $(DAVICAL_DB_SERVICE_HOST)
+        - name: LANG
+          value: "en_US.UTF-8"
+        - name: LC_ALL
+          value: "en_US.UTF-8"
+        - name: DAVICAL_LANG
+          value: "en_US"
+        volumeMounts:
+        - mountPath: /config
+          name: davical-config
+      volumes:
+      - name: davical-config
+        hostPath:
+          path: /opt/minikube/davical/config
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: davical
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: davical
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30002
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: davical-db
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: davical-db
+  template:
+    metadata:
+      labels:
+        app: davical-db
+    spec:
+      containers:
+      - name: db
+        image: postgres:14
+        envFrom:
+        - secretRef:
+            name: davical-secrets
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: davical-db-data
+      volumes:
+      - name: davical-db-data
+        hostPath:
+          path: /opt/minikube/davical/db
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: davical-db
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: davical-db
+  ports:
+  - name: "davical-db"
+    protocol: TCP
+    port: 5432
+    targetPort: 5432
+    nodePort: 30432

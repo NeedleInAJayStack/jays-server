@@ -10,3 +10,15 @@ export PGPASSWORD=<password>							# Set PostgreSQL password
 dba/update-davical-database --dbhost db --dbname davical --dbuser postgres	# Run upgdate script
 ```
 Be careful with this though - It can assign ownership to new items to `postgres` incorrectly.
+
+## Kubernetes
+
+Create the secret from .env:
+
+```bash
+kubectl create secret generic davical-secrets --from-env-file=davical/.env
+```
+
+```bash
+kubectl create -f davical/kubernetes.yaml
+```
