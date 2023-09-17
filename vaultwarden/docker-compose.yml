@@ -1,4 +1,4 @@
-# https://hay-kot.github.io/mealie/getting-started/install/
+# https://github.com/dani-garcia/vaultwarden
 version: '3'
 services:
   vaultwarden:
