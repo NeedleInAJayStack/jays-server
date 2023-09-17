@@ -1,0 +1,11 @@
+# https://hay-kot.github.io/mealie/getting-started/install/
+version: '3'
+services:
+  vaultwarden:
+    image: vaultwarden/server
+    container_name: vaultwarden
+    ports:
+      - 3010:80
+    restart: unless-stopped
+    volumes:
+      - ~/vaultwarden:/data/
