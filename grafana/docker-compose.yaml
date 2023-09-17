@@ -1,0 +1,13 @@
+# https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/#run-grafana-via-docker-compose
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 2999:3000
+    restart: unless-stopped
+    volumes:
+      - ~/grafana:/var/lib/grafana
+    environment:
+     - GF_SERVER_ROOT_URL=https://grafana.jayherron.org/
