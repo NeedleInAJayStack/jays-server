@@ -4,10 +4,11 @@ services:
   mealie:
     image: hkotel/mealie
     container_name: mealie
+    user: '1000'
     ports:
       - 3001:80
     restart: unless-stopped
     volumes:
-      - ~/mealie:/app/data
+      - ~/Data/docker/mealie:/app/data
     environment:
       - DB_TYPE=sqlite
