@@ -4,8 +4,9 @@ services:
   vaultwarden:
     image: vaultwarden/server
     container_name: vaultwarden
+    user: '1000'
     ports:
       - 3010:80
     restart: unless-stopped
     volumes:
-      - ~/vaultwarden:/data/
+      - ~/Data/docker/vaultwarden:/data/

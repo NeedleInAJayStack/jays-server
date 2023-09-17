@@ -5,9 +5,10 @@ services:
     image: ghcr.io/home-assistant/home-assistant
     container_name: homeassistant
     restart: unless-stopped
+    user: '1000'
     privileged: true
     network_mode: "host"
     volumes:
-      - ~/HomeAssistant:/config
+      - ~/Data/docker/HomeAssistant:/config
     environment:
       - TZ=America/Denver

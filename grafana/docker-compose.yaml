@@ -10,6 +10,6 @@ services:
       - 3000:3000
     restart: unless-stopped
     volumes:
-      - ~/grafana:/var/lib/grafana
+      - ~/Data/docker/grafana:/var/lib/grafana
     environment:
      - GF_SERVER_ROOT_URL=https://grafana.jayherron.org/
