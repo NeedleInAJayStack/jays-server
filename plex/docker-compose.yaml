@@ -1,0 +1,17 @@
+# https://hub.docker.com/r/plexinc/pms-docker
+version: '3'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    env_file: .env # Should contain PLEX_CLAIM
+    environment:
+      - TZ=America/Denver
+    network_mode: host
+    volumes:
+      - /var/lib/plexmediaserver:/config
+      # - <path/to/transcode/temp>:/transcode # Uses container storage for transcoding if commented out
+      - /home/jay/Audio:/data/Audio
+      - /home/jay/Video:/data/Video
+      - /home/jay/Image:/data/Image
