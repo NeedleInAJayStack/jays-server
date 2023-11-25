@@ -1,0 +1,32 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: cloudflare
+  namespace: traefik
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: NeedleInAJayStack@protonmail.com
+    privateKeySecretRef:
+      name: cloudflare-key
+    solvers:
+      - dns01:
+          cloudflare:
+            email: NeedleInAJayStack@protonmail.com
+            apiTokenSecretRef:
+              name: cloudflare
+              key: api-token
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: recipes-jayherron-org
+  namespace: traefik
+spec:
+  secretName: recipes-jayherron-org-tls
+  dnsNames:
+    - "recipes.jayherron-org"
+  issuerRef:
+    name: cloudflare
+    kind: Issuer

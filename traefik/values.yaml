@@ -1,0 +1,10 @@
+providers:
+  kubernetesCRD:
+    endpoint: "http://localhost:8080"
+dashboard:
+  enabled: true
+  domain: traefik-ui.minikube
+tlsStore:
+  default:
+    defaultCertificate:
+      secretName: recipes-jayherron-org-tls
