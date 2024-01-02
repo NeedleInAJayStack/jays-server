@@ -9,4 +9,4 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       # You must provide your own certificate files
-      - /etc/letsencrypt/live:/etc/nginx/certs:ro
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
