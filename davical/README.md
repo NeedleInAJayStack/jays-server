@@ -9,3 +9,4 @@ cd /usr/share/davical
 export PGPASSWORD=<password>							# Set PostgreSQL password
 dba/update-davical-database --dbhost db --dbname davical --dbuser postgres	# Run upgdate script
 ```
+Be careful with this though - It can assign ownership to new items to `postgres` incorrectly.
