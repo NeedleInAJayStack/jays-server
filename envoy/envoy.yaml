@@ -1,0 +1,280 @@
+static_resources:
+  listeners:
+  - name: http
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: https_redirect
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: https_redirect
+          route_config:
+            name: https_redirect
+            virtual_hosts:
+            - name: https_redirect
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                redirect:
+                  https_redirect: true
+  - name: https
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 443
+    filter_chains:
+    - filters:
+      - name: jayherron.org
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: jayherron.org
+          access_log:
+          - name: envoy.access_loggers.stdout
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+          upgrade_configs:
+          - upgrade_type: websocket
+          route_config:
+            name: jayherron.org
+            virtual_hosts:
+            - name: cal
+              domains: ["cal.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: cal
+            - name: data
+              domains: ["data.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: data
+            - name: grafana
+              domains: ["grafana.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: grafana
+            - name: home
+              domains: ["home.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: home
+            - name: nextcloud
+              domains: ["nextcloud.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: nextcloud
+            - name: plex
+              domains: ["plex.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: plex
+            - name: recipes
+              domains: ["recipes.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: recipes
+            - name: syncthing
+              domains: ["syncthing.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: syncthing
+            - name: trello-bot
+              domains: ["trello-bot.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: trello-bot
+            - name: utility-api
+              domains: ["utility-api.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: utility-api
+            - name: vaultwarden
+              domains: ["vaultwarden.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: vaultwarden
+            - name: www
+              domains: ["www.jayherron.org"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: www
+            - name: catchall
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                redirect:
+                  host_redirect: "www.jayherron.org"
+      transport_socket:
+        name: jayherron.org
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+            - certificate_chain: {filename: "/etc/letsencrypt/live/jayherron.org/fullchain.pem"}
+              private_key: {filename: "/etc/letsencrypt/live/jayherron.org/privkey.pem"}
+  clusters:
+  - name: cal
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: cal
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8083
+  - name: data
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: data
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8082
+  - name: grafana
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: grafana
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 3000
+  - name: home
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: home
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8123
+  - name: nextcloud
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: nextcloud
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 11000
+  - name: plex
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: plex
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 32400
+  - name: recipes
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: recipes
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 3001
+  - name: syncthing
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: syncthing
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8384
+  - name: trello-bot
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: trello-bot
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 3333
+  - name: utility-api
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: utility-api
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8082
+  - name: vaultwarden
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: vaultwarden
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 3010
+  - name: www
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: www
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 3002
+
