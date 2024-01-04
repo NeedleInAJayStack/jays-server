@@ -1,0 +1,11 @@
+version: '3'
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.28-latest
+    network_mode: host
+    environment:
+      - ENVOY_UID=0
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+      # You must provide your own certificate files
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
