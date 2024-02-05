@@ -111,13 +111,13 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: utility-api
-            - name: vaultwarden
-              domains: ["vaultwarden.jayherron.org"]
+            - name: bitwarden
+              domains: ["bitwarden.jayherron.org"]
               routes:
               - match:
                   prefix: "/"
                 route:
-                  cluster: vaultwarden
+                  cluster: bitwarden
             - name: www
               domains: ["www.jayherron.org"]
               routes:
@@ -251,10 +251,10 @@ static_resources:
               socket_address:
                 address: localhost
                 port_value: 8082
-  - name: vaultwarden
+  - name: bitwarden
     type: STRICT_DNS
     load_assignment:
-      cluster_name: vaultwarden
+      cluster_name: bitwarden
       endpoints:
       - lb_endpoints:
         - endpoint:
