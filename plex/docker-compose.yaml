@@ -5,10 +5,13 @@ services:
     container_name: plex
     image: plexinc/pms-docker
     restart: unless-stopped
+    privileged: true
     env_file: .env # Should contain PLEX_CLAIM
     environment:
       - TZ=America/Denver
     network_mode: host
+    devices:
+      - /dev/bus/usb/001/002
     volumes:
       - /var/lib/plexmediaserver:/config
       # - <path/to/transcode/temp>:/transcode # Uses container storage for transcoding if commented out
