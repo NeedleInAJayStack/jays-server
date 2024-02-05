@@ -1,12 +1,12 @@
 # https://github.com/dani-garcia/vaultwarden
 version: '3'
 services:
-  vaultwarden:
+  bitwarden:
     image: vaultwarden/server
-    container_name: vaultwarden
+    container_name: bitwarden
     user: '1000'
     ports:
       - 3010:80
     restart: unless-stopped
     volumes:
-      - ~/Data/docker/vaultwarden:/data/
+      - ~/Data/docker/bitwarden:/data/
