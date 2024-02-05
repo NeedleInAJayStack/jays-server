@@ -8,4 +8,8 @@ Of particular interest is the security hardening guide: https://github.com/dani-
 
 Create a .env with the following values set:
 
-- `ADMIN_TOKEN`: https://github.com/dani-garcia/vaultwarden/wiki/Enabling-admin-page
+- `ADMIN_TOKEN`
+- `PUSH_INSTALLATION_ID`
+- `PUSH_INSTALLATION_KEY`
+
+See for more details: https://github.com/dani-garcia/vaultwarden/blob/main/.env.template

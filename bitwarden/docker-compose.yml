@@ -4,6 +4,10 @@ services:
     image: vaultwarden/server
     container_name: bitwarden
     env_file: .env
+    environment:
+      - DOMAIN=https://bitwarden.jayherron.org
+      - PUSH_ENABLED=true
+      - SIGNUPS_ALLOWED=false
     ports:
       - 3010:80
     restart: unless-stopped
