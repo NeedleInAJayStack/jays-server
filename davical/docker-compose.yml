@@ -8,18 +8,20 @@
 version: "3"
 
 services:
-  db:
+  davical_db:
+    container_name: davical_db
     image: postgres:14
     restart: unless-stopped
     volumes:
       - pgsql_data:/var/lib/postgresql/data
-  app:
+  davical:
+    container_name: davical
     image: tuxnvape/davical-standalone
     restart: unless-stopped
     env_file: .env
     environment:
       HOST_NAME: "jayherron.org"
-      DBHOST: "db"
+      DBHOST: "davical_db"
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
       DAVICAL_LANG: "en_US"
