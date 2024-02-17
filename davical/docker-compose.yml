@@ -8,8 +8,7 @@
 version: "3"
 
 services:
-  davical_db:
-    container_name: davical_db
+  db: # This CANNOT be changed from db (even if changed below), since it appears to be hardcoded in DAViCal config. :(
     image: postgres:14
     restart: unless-stopped
     volumes:
@@ -21,7 +20,7 @@ services:
     env_file: .env
     environment:
       HOST_NAME: "jayherron.org"
-      DBHOST: "davical_db"
+      DBHOST: "db"
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
       DAVICAL_LANG: "en_US"
