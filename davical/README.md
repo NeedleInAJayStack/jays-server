@@ -4,9 +4,9 @@
 This is sometimes necessary after pulling a new DAViCal docker image
 
 ```bash
-docker exec -it davical_app_1 bash  						# Log into shell in Docker image
+docker exec -it davical bash  						# Log into shell in Docker image
 cd /usr/share/davical
 export PGPASSWORD=<password>							# Set PostgreSQL password
-dba/update-davical-database --dbhost db --dbname davical --dbuser postgres	# Run upgdate script
+dba/update-davical-database --dbhost davical_db --dbname davical --dbuser postgres	# Run update script
 ```
 Be careful with this though - It can assign ownership to new items to `postgres` incorrectly.

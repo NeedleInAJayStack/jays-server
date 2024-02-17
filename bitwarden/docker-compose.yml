@@ -1,8 +1,9 @@
 version: '3'
 services:
   bitwarden:
-    image: vaultwarden/server
     container_name: bitwarden
+    image: vaultwarden/server
+    restart: unless-stopped
     env_file: .env
     environment:
       - DOMAIN=https://bitwarden.jayherron.org
@@ -10,6 +11,5 @@ services:
       - SIGNUPS_ALLOWED=false
     ports:
       - 3010:80
-    restart: unless-stopped
     volumes:
       - ~/Data/docker/bitwarden:/data/
