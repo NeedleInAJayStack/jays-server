@@ -1,6 +1,7 @@
 version: '3'
 services:
   envoy:
+    container_name: envoy
     image: envoyproxy/envoy:v1.28-latest
     restart: unless-stopped
     environment:
