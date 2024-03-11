@@ -76,7 +76,7 @@ services:
     network_mode: host
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-      # You must provide your own certificate files
+      # You must provide your own certificate files. See `ansible` directory for certbot config.
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
   
   # Monitoring
