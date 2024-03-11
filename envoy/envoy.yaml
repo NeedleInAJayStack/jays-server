@@ -28,10 +28,10 @@ static_resources:
         port_value: 443
     filter_chains:
     - filters:
-      - name: jayherron.org
+      - name: jays-server
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-          stat_prefix: jayherron.org
+          stat_prefix: jays-server
           http_filters:
           - name: envoy.filters.http.router
             typed_config:
@@ -39,87 +39,123 @@ static_resources:
           upgrade_configs:
           - upgrade_type: websocket
           route_config:
-            name: jayherron.org
+            name: jays-server
             virtual_hosts:
             - name: cal
-              domains: ["cal.jayherron.org"]
+              domains: [
+                "cal.jayherron.org",
+                "cal.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: cal
             - name: data
-              domains: ["data.jayherron.org"]
+              domains: [
+                "data.jayherron.org",
+                "data.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: data
             - name: grafana
-              domains: ["grafana.jayherron.org"]
+              domains: [
+                "grafana.jayherron.org",
+                "grafana.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: grafana
             - name: home
-              domains: ["home.jayherron.org"]
+              domains: [
+                "home.jayherron.org",
+                "home.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: home
             - name: nextcloud
-              domains: ["nextcloud.jayherron.org"]
+              domains: [
+                "nextcloud.jayherron.org",
+                "nextcloud.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: nextcloud
             - name: plex
-              domains: ["plex.jayherron.org"]
+              domains: [
+                "plex.jayherron.org",
+                "plex.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: plex
             - name: recipes
-              domains: ["recipes.jayherron.org"]
+              domains: [
+                "recipes.jayherron.org",
+                "recipes.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: recipes
             - name: syncthing
-              domains: ["syncthing.jayherron.org"]
+              domains: [
+                "syncthing.jayherron.org",
+                "syncthing.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: syncthing
             - name: trello-bot
-              domains: ["trello-bot.jayherron.org"]
+              domains: [
+                "trello-bot.jayherron.org",
+                "trello-bot.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: trello-bot
             - name: utility-api
-              domains: ["utility-api.jayherron.org"]
+              domains: [
+                "utility-api.jayherron.org",
+                "utility-api.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: utility-api
             - name: bitwarden
-              domains: ["bitwarden.jayherron.org"]
+              domains: [
+                "bitwarden.jayherron.org",
+                "bitwarden.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
                 route:
                   cluster: bitwarden
             - name: www
-              domains: ["www.jayherron.org"]
+              domains: [
+                "www.jayherron.org",
+                "www.jay-herron.com"
+              ]
               routes:
               - match:
                   prefix: "/"
@@ -131,15 +167,17 @@ static_resources:
               - match:
                   prefix: "/"
                 redirect:
-                  host_redirect: "www.jayherron.org"
+                  host_redirect: "www.jayherron.org" # TODO: change to jay-herron.com
       transport_socket:
-        name: jayherron.org
+        name: jays-server
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
           common_tls_context:
             tls_certificates:
             - certificate_chain: {filename: "/etc/letsencrypt/live/jayherron.org/fullchain.pem"}
               private_key: {filename: "/etc/letsencrypt/live/jayherron.org/privkey.pem"}
+            - certificate_chain: {filename: "/etc/letsencrypt/live/jay-herron.com/fullchain.pem"}
+              private_key: {filename: "/etc/letsencrypt/live/jay-herron.com/privkey.pem"}
   clusters:
   - name: cal
     type: STRICT_DNS
