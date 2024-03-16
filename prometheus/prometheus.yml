@@ -24,6 +24,12 @@ scrape_configs:
   #     # CREATE MANUALLY: Long-Lived Access Token
   #     credentials_file: "/etc/prometheus/homeassistant-credentials.txt"
 
+  # TODO: This doesn't work because envoy only serves to 127.0.0.1, not 172.17.0.1 (host.docker.internal)
+  # - job_name: 'envoy'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:9901']
+  #   metrics_path: '/stats/prometheus'
+
 # remote_write:
 #   - url: '<Your Prometheus remote_write endpoint>'
 #     basic_auth:
