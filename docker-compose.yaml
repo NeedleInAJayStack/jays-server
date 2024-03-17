@@ -1,0 +1,214 @@
+version: '3'
+services:
+
+  # Bitwarden
+  bitwarden:
+    profiles:
+      - bitwarden
+    container_name: bitwarden
+    image: vaultwarden/server
+    restart: unless-stopped
+    env_file: ./bitwarden/.env
+    environment:
+      - DOMAIN=https://bitwarden.jayherron.org
+      - PUSH_ENABLED=true
+      - SIGNUPS_ALLOWED=false
+    ports:
+      - 3010:80
+    volumes:
+      - ~/Data/docker/bitwarden:/data/
+
+  # Davical
+    # Sourced from https://github.com/Elrondo46/davical-docker-standalone/blob/main/docker-compose.yml
+    # Set the following environment variables:
+    # - POSTGRES_PASSWORD: Should match PGSQL_ROOT_PASS
+    # - PGSQL_ROOT_PASS: Should match POSTGRES_PASSWORD
+    # - PASSDAVDB
+    # - ADMINDAVICALPASS
+  db: # This CANNOT be changed from db (even if changed below), since it appears to be hardcoded in DAViCal config. :(
+    profiles:
+      - davical
+    image: postgres:14
+    restart: unless-stopped
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
+  davical:
+    profiles:
+      - davical
+    container_name: davical
+    image: tuxnvape/davical-standalone
+    restart: unless-stopped
+    env_file: ./davical/.env
+    environment:
+      HOST_NAME: "jayherron.org"
+      DBHOST: "db"
+      LANG: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+      DAVICAL_LANG: "en_US"
+    ports:
+      - 8083:80
+    volumes:
+      - davical_config:/config
+
+  # Envoy
+  envoy:
+    profiles:
+      - envoy
+    container_name: envoy
+    image: envoyproxy/envoy:v1.28-latest
+    restart: unless-stopped
+    environment:
+      - ENVOY_UID=0
+    network_mode: host
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+      # You must provide your own certificate files
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+  
+  # Monitoring
+    # https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/#run-grafana-via-docker-compose
+  grafana:
+    profiles:
+      - monitoring
+    container_name: grafana
+    image: grafana/grafana
+    restart: unless-stopped
+    environment:
+      - GF_SERVER_ROOT_URL=https://grafana.jayherron.org/
+    networks:
+      - monitoring
+    ports:
+      - 3000:3000
+    user: '1000' # Must match the user id of the user who owns the data directory
+    volumes:
+      - ~/Data/docker/grafana:/var/lib/grafana
+  prometheus:
+    profiles:
+      - monitoring
+    container_name: prometheus
+    expose:
+      - 9090
+    image: prom/prometheus:latest
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    networks:
+      - monitoring
+    volumes:
+      - ./grafana/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+  node-exporter:
+    profiles:
+      - monitoring
+    container_name: node-exporter
+    image: prom/node-exporter:latest
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    restart: unless-stopped
+    expose:
+      - 9100
+    networks:
+      - monitoring
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+  
+  # Home Assistant
+    # https://www.home-assistant.io/installation/linux#install-home-assistant-container
+  homeassitant:
+    profiles:
+      - homeassistant
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant
+    restart: unless-stopped
+    environment:
+      - TZ=America/Denver
+    network_mode: host
+    privileged: true
+    user: '1000'
+    volumes:
+      - ~/Data/docker/HomeAssistant:/config
+  
+  # Mealie
+    # https://hay-kot.github.io/mealie/getting-started/install/
+  mealie:
+    profiles:
+      - mealie
+    container_name: mealie
+    image: hkotel/mealie
+    restart: unless-stopped
+    environment:
+      - DB_TYPE=sqlite
+    ports:
+      - 3001:80
+    volumes:
+      - ~/Data/docker/mealie:/app/data
+    user: '1000'
+
+  # Nextcloud
+    # For documentation: https://github.com/nextcloud/all-in-one/blob/main/compose.yaml
+  nextcloud:
+    profiles:
+      - nextcloud
+    image: nextcloud/all-in-one:latest
+    restart: unless-stopped
+    container_name: nextcloud-aio-mastercontainer
+    volumes:
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 8080:8080
+    environment: # Is needed when using any of the options below
+      - APACHE_PORT=11000
+      - APACHE_IP_BINDING=127.0.0.1
+  
+  # Plex
+    # https://hub.docker.com/r/plexinc/pms-docker
+  plex:
+    profiles:
+      - plex
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    privileged: true
+    env_file: ./plex/.env # Should contain PLEX_CLAIM
+    environment:
+      - TZ=America/Denver
+    network_mode: host
+    devices:
+      - /dev/bus/usb/001/002 # For TV Tuner
+    volumes:
+      - /var/lib/plexmediaserver:/config
+      # - <path/to/transcode/temp>:/transcode # Uses container storage for transcoding if commented out
+      - /home/jay/Audio:/data/Audio
+      - /home/jay/Video:/data/Video
+      - /home/jay/Image:/data/Image
+
+volumes:
+  # Davical
+  davical_config:
+    name: davical_davical_config
+  pgsql_data:
+    name: davical_pgsql_data
+
+  # Monitoring
+  prometheus_data:
+    name: grafana_prometheus_data
+
+  # Nextcloud
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer
+
+networks:
+  # Monitoring
+  monitoring:
+    name: monitoring
+    driver: bridge
