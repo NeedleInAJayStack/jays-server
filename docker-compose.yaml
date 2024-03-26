@@ -99,7 +99,7 @@ services:
     networks:
       - monitoring
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
   node-exporter:
     profiles:
