@@ -15,14 +15,12 @@ scrape_configs:
       - targets: ['grafana:3000']
   
   - job_name: 'homeassistant'
-    metrics_path: /api/prometheus
-
-    # Long-Lived Access Token
-    authorization:
-      credentials_file: "./homeassistant-credentials.txt"
-
     static_configs:
       - targets: ['homeassistant:8123']
+    metrics_path: /api/prometheus
+    authorization:
+      # CREATE MANUALLY: Long-Lived Access Token
+      credentials_file: "./homeassistant-credentials.txt"
 
 # remote_write:
 #   - url: '<Your Prometheus remote_write endpoint>'
