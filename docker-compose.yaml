@@ -169,6 +169,20 @@ services:
     environment: # Is needed when using any of the options below
       - APACHE_PORT=11000
       - APACHE_IP_BINDING=127.0.0.1
+
+  # Nginx
+  # This will fight with envoy if both are running.
+  # nginx:
+  #   profiles:
+  #     - nginx
+  #   image: nginx
+  #   container_name: nginx
+  #   network_mode: host
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     # You must provide your own certificate files
+  #     - /etc/letsencrypt/:/etc/letsencrypt/:ro
   
   # Plex
     # https://hub.docker.com/r/plexinc/pms-docker
