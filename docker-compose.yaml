@@ -206,6 +206,16 @@ services:
       - /home/jay/Video:/data/Video
       - /home/jay/Image:/data/Image
 
+  trello-bot:
+    profiles:
+      - trello-bot
+    image: ghcr.io/needleinajaystack/trello-bot:master
+    restart: unless-stopped
+    env_file:
+      - ./trello-bot/.env
+    ports:
+      - '3333:3333'
+
 volumes:
   # Davical
   davical_config:
