@@ -184,6 +184,15 @@ services:
   #     # You must provide your own certificate files
   #     - /etc/letsencrypt/:/etc/letsencrypt/:ro
   
+  particle-sync:
+    profiles:
+      - particle-sync
+    container_name: particle-sync
+    image: registry.gitlab.com/needleinajaystack/particle-sync:latest
+    restart: unless-stopped
+    env_file:
+      - ./particle-sync/.env
+
   # Plex
     # https://hub.docker.com/r/plexinc/pms-docker
   plex:
@@ -209,6 +218,7 @@ services:
   trello-bot:
     profiles:
       - trello-bot
+    container_name: trello-bot
     image: ghcr.io/needleinajaystack/trello-bot:master
     restart: unless-stopped
     env_file:
