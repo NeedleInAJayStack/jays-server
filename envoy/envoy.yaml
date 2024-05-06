@@ -217,7 +217,7 @@ static_resources:
             address:
               socket_address:
                 address: localhost
-                port_value: 3001
+                port_value: 9925
   - name: syncthing
     type: STRICT_DNS
     load_assignment:

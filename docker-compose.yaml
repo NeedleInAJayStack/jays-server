@@ -138,17 +138,26 @@ services:
       - ~/Data/docker/HomeAssistant:/config
   
   # Mealie
-    # https://hay-kot.github.io/mealie/getting-started/install/
+    # https://docs.mealie.io/documentation/getting-started/installation/sqlite/
   mealie:
     profiles:
       - mealie
     container_name: mealie
-    image: hkotel/mealie
+    image: ghcr.io/mealie-recipes/mealie
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
     environment:
-      - DB_TYPE=sqlite
+      PUID: 1000
+      PGID: 1000
+      TZ: America/Denver
+      MAX_WORKERS: 1
+      WEB_CONCURRENCY: 1
+      BASE_URL: 'https://recipes.jayherron.org/'
     ports:
-      - 3001:80
+      - 9925:9000
     volumes:
       - ~/Data/docker/mealie:/app/data
     user: '1000'
