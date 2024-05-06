@@ -237,12 +237,6 @@ services:
       - '3333:3333'
 
 volumes:
-  # Davical
-  davical_config:
-    name: davical_davical_config
-  pgsql_data:
-    name: davical_pgsql_data
-
   # Monitoring
   prometheus_data:
     name: grafana_prometheus_data
