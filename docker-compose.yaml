@@ -31,7 +31,8 @@ services:
     image: postgres:14
     restart: unless-stopped
     volumes:
-      - pgsql_data:/var/lib/postgresql/data
+      - ~/Data/docker/davical/postgresql/:/var/lib/postgresql/data
+    user: '1000'
   davical:
     profiles:
       - davical
@@ -48,7 +49,7 @@ services:
     ports:
       - 8083:80
     volumes:
-      - davical_config:/config
+      - ~/Data/docker/davical/config:/config
 
   # Envoy
   envoy:
