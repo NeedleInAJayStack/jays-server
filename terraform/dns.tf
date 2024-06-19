@@ -5,6 +5,9 @@ variable "cloudflare_api_token" {}
 variable "jaysdesktop_ip" {
   default = "76.23.30.196"
 }
+variable "jaysserver_ip" {
+  default = "34.222.62.168"
+}
 
 data "cloudflare_zone" "jayherron_org" {
   name = "jayherron.org"
@@ -15,28 +18,28 @@ resource "cloudflare_record" "a_bitwarden" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "bitwarden"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_cal" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "cal"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_data" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "data"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysdesktop_ip # TODO: Is this part of docker compose?
   proxied = true
 }
 resource "cloudflare_record" "a_grafana" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "grafana"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_home" {
@@ -50,7 +53,7 @@ resource "cloudflare_record" "a_jayherron_org" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "jayherron.org"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip  # TODO: Is this part of docker compose?
   proxied = true
 }
 resource "cloudflare_record" "a_nextcloud" {
@@ -71,7 +74,7 @@ resource "cloudflare_record" "a_recipes" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "recipes"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_superset" {
@@ -92,7 +95,7 @@ resource "cloudflare_record" "a_trello_bot" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "trello-bot"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_utility_api" {
@@ -106,7 +109,7 @@ resource "cloudflare_record" "a_www" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "www"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = false
 }
 
