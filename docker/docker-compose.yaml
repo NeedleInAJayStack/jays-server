@@ -225,6 +225,20 @@ services:
       - /home/jay/Video:/data/Video
       - /home/jay/Image:/data/Image
 
+  timescaledb:
+    profiles:
+      - timescaledb
+    container_name: timescaledb
+    image: timescale/timescaledb:2.6.0-pg14
+    restart: unless-stopped
+    env_file: ./timescaledb/.env 
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/Data/docker/timescaledb/:/var/lib/postgresql/data
+      - /etc/passwd:/etc/passwd:ro # Bind-mounted for user access
+    user: 1000:1000
+  
   trello-bot:
     profiles:
       - trello-bot
