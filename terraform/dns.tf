@@ -6,7 +6,7 @@ variable "jaysdesktop_ip" {
   default = "76.23.30.196"
 }
 variable "jaysserver_ip" {
-  default = "34.222.62.168"
+  default = "18.236.68.87"
 }
 
 data "cloudflare_zone" "jayherron_org" {
