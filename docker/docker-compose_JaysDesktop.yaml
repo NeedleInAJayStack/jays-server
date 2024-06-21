@@ -1,67 +1,6 @@
 name: jays-server
 services:
 
-  # API
-  api:
-    profiles:
-      - api
-    container_name: api
-    image: ghcr.io/needleinajaystack/api:main
-    restart: unless-stopped
-    env_file: ./api/.env
-    ports:
-      - '8082:8080'
-
-  # Bitwarden
-  bitwarden:
-    profiles:
-      - bitwarden
-    container_name: bitwarden
-    image: vaultwarden/server
-    restart: unless-stopped
-    env_file: ./bitwarden/.env
-    environment:
-      - DOMAIN=https://bitwarden.jayherron.org
-      - PUSH_ENABLED=true
-      - SIGNUPS_ALLOWED=false
-    ports:
-      - 3010:80
-    volumes:
-      - ~/Data/docker/bitwarden:/data/
-
-  # Davical
-    # Sourced from https://github.com/Elrondo46/davical-docker-standalone/blob/main/docker-compose.yml
-    # Set the following environment variables:
-    # - POSTGRES_PASSWORD: Should match PGSQL_ROOT_PASS
-    # - PGSQL_ROOT_PASS: Should match POSTGRES_PASSWORD
-    # - PASSDAVDB
-    # - ADMINDAVICALPASS
-  db: # This CANNOT be changed from db (even if changed below), since it appears to be hardcoded in DAViCal config. :(
-    profiles:
-      - davical
-    image: postgres:14
-    restart: unless-stopped
-    volumes:
-      - ~/Data/docker/davical/postgresql/:/var/lib/postgresql/data
-    user: '1000'
-  davical:
-    profiles:
-      - davical
-    container_name: davical
-    image: tuxnvape/davical-standalone
-    restart: unless-stopped
-    env_file: ./davical/.env
-    environment:
-      HOST_NAME: "jayherron.org"
-      DBHOST: "db"
-      LANG: "en_US.UTF-8"
-      LC_ALL: "en_US.UTF-8"
-      DAVICAL_LANG: "en_US"
-    ports:
-      - 8083:80
-    volumes:
-      - ~/Data/docker/davical/config:/config
-
   # Envoy
   envoy:
     profiles:
@@ -149,31 +88,6 @@ services:
     volumes:
       - ~/Data/docker/HomeAssistant:/config
   
-  # Mealie
-    # https://docs.mealie.io/documentation/getting-started/installation/sqlite/
-  mealie:
-    profiles:
-      - mealie
-    container_name: mealie
-    image: ghcr.io/mealie-recipes/mealie
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 1000M
-    environment:
-      PUID: 1000
-      PGID: 1000
-      TZ: America/Denver
-      MAX_WORKERS: 1
-      WEB_CONCURRENCY: 1
-      BASE_URL: 'https://recipes.jayherron.org/'
-    ports:
-      - 9925:9000
-    volumes:
-      - ~/Data/docker/mealie:/app/data
-    user: '1000'
-
   # Nextcloud
     # For documentation: https://github.com/nextcloud/all-in-one/blob/main/compose.yaml
   nextcloud:
@@ -205,15 +119,6 @@ services:
   #     # You must provide your own certificate files
   #     - /etc/letsencrypt/:/etc/letsencrypt/:ro
   
-  particle-sync:
-    profiles:
-      - particle-sync
-    container_name: particle-sync
-    image: registry.gitlab.com/needleinajaystack/particle-sync:latest
-    restart: unless-stopped
-    env_file:
-      - ./particle-sync/.env
-
   # Plex
     # https://hub.docker.com/r/plexinc/pms-docker
   plex:
@@ -235,41 +140,6 @@ services:
       - /home/jay/Audio:/data/Audio
       - /home/jay/Video:/data/Video
       - /home/jay/Image:/data/Image
-
-  timescaledb:
-    profiles:
-      - timescaledb
-    container_name: timescaledb
-    image: timescale/timescaledb:2.6.0-pg14
-    restart: unless-stopped
-    env_file: ./timescaledb/.env 
-    ports:
-      - 5432:5432
-    volumes:
-      - ~/Data/docker/timescaledb/:/var/lib/postgresql/data
-      - /etc/passwd:/etc/passwd:ro # Bind-mounted for user access
-    user: 1000:1000
-  
-  trello-bot:
-    profiles:
-      - trello-bot
-    container_name: trello-bot
-    image: ghcr.io/needleinajaystack/trello-bot:main
-    restart: unless-stopped
-    env_file:
-      - ./trello-bot/.env
-    ports:
-      - '3333:3333'
-
-  # Website
-  website:
-    profiles:
-      - website
-    container_name: website
-    image: ghcr.io/needleinajaystack/website:main
-    restart: unless-stopped
-    ports:
-      - '3002:80'
 
 volumes:
   # Monitoring

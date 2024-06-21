@@ -30,3 +30,8 @@ resource "aws_instance" "jays_server" {
     Name = "JaysServer"
   }
 }
+
+resource "aws_eip" "jays_server" {
+  instance = aws_instance.jays_server.id
+  domain   = "vpc"
+}
