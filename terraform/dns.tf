@@ -32,7 +32,7 @@ resource "cloudflare_record" "a_data" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "data"
   type    = "A"
-  value   = var.jaysdesktop_ip # TODO: Is this part of docker compose?
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_grafana" {
@@ -53,7 +53,7 @@ resource "cloudflare_record" "a_jayherron_org" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "jayherron.org"
   type    = "A"
-  value   = var.jaysserver_ip  # TODO: Is this part of docker compose?
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_nextcloud" {
@@ -102,7 +102,7 @@ resource "cloudflare_record" "a_utility_api" {
   zone_id = data.cloudflare_zone.jayherron_org.id
   name    = "utility-api"
   type    = "A"
-  value   = var.jaysdesktop_ip
+  value   = var.jaysserver_ip
   proxied = true
 }
 resource "cloudflare_record" "a_www" {

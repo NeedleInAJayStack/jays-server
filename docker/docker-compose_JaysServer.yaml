@@ -1,6 +1,17 @@
 name: jays-server
 services:
 
+  # API
+  api:
+    profiles:
+      - api
+    container_name: api
+    image: ghcr.io/needleinajaystack/api:main
+    restart: unless-stopped
+    env_file: ./api/.env
+    ports:
+      - '8082:8080'
+
   # Bitwarden
   bitwarden:
     profiles:
@@ -174,12 +185,22 @@ services:
     profiles:
       - trello-bot
     container_name: trello-bot
-    image: ghcr.io/needleinajaystack/trello-bot:master
+    image: ghcr.io/needleinajaystack/trello-bot:main
     restart: unless-stopped
     env_file:
       - ./trello-bot/.env
     ports:
       - '3333:3333'
+
+  # Website
+  website:
+    profiles:
+      - website
+    container_name: website
+    image: ghcr.io/needleinajaystack/website:main
+    restart: unless-stopped
+    ports:
+      - '3002:80'
 
 volumes:
   # Monitoring
