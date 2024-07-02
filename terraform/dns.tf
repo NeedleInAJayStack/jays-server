@@ -9,6 +9,15 @@ variable "jaysdesktop_ip" {
 data "cloudflare_zone" "jayherron_org" {
   name = "jayherron.org"
 }
+data "cloudflare_zone" "herron_dev" {
+  name = "herron.dev"
+}
+data "cloudflare_zone" "jayherron_dev" {
+  name = "jayherron.dev"
+}
+data "cloudflare_zone" "jay_herron_com" {
+  name = "jay-herron.com"
+}
 
 # A Records
 resource "cloudflare_record" "a_bitwarden" {
