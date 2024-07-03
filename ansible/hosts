@@ -1,0 +1,1 @@
+JaysDesktop.local ansible_connection=ssh ansible_user=jay

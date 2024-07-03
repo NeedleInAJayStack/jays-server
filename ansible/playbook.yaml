@@ -1,6 +1,6 @@
-- name: Configure JaysServer
-  hosts: ec2-34-222-62-168.us-west-2.compute.amazonaws.com
-  remote_user: ubuntu
+- name: Configure JaysDesktop
+  hosts: JaysDesktop.local
+  remote_user: jay
 
   tasks:
 
