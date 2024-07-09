@@ -11,6 +11,8 @@ services:
     env_file: ./api/.env
     ports:
       - '8082:8080'
+    networks:
+      - timescaledb
 
   # Bitwarden
   bitwarden:
@@ -88,6 +90,7 @@ services:
     environment:
       - GF_SERVER_ROOT_URL=https://grafana.jayherron.org/
     networks:
+      - timescaledb
       - monitoring
     ports:
       - 3000:3000
@@ -242,13 +245,35 @@ services:
     container_name: timescaledb
     image: timescale/timescaledb:2.6.0-pg14
     restart: unless-stopped
+    command: -c config_file=/etc/postgresql.conf
     env_file: ./timescaledb/.env 
     ports:
       - 5432:5432
+    networks:
+      - timescaledb
     volumes:
       - ~/Data/docker/timescaledb/:/var/lib/postgresql/data
+      - ./timescaledb/postgresql.conf:/etc/postgresql.conf
       - /etc/passwd:/etc/passwd:ro # Bind-mounted for user access
     user: 1000:1000
+  timescaledb-exporter:
+    profiles:
+      - timescaledb
+    container_name: timescaledb-exporter
+    image: quay.io/prometheuscommunity/postgres-exporter
+    restart: unless-stopped
+    env_file: ./timescaledb-exporter/.env # Include DATA_SOURCE_PASS
+    environment:
+      DATA_SOURCE_URI: "timescaledb:5432/postgres?sslmode=disable"
+      DATA_SOURCE_USER: postgres
+    expose:
+      - 9187
+    networks:
+      - timescaledb
+      - monitoring
+    volumes:
+      - ./timescaledb-exporter/postgres_exporter.yml:/postgres_exporter.yml:ro
+
   
   trello-bot:
     profiles:
@@ -284,4 +309,7 @@ networks:
   # Monitoring
   monitoring:
     name: monitoring
+    driver: bridge
+  timescaledb:
+    name: timescaledb
     driver: bridge
