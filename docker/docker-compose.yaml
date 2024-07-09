@@ -249,6 +249,21 @@ services:
       - ~/Data/docker/timescaledb/:/var/lib/postgresql/data
       - /etc/passwd:/etc/passwd:ro # Bind-mounted for user access
     user: 1000:1000
+  timescaledb-exporter:
+    profiles:
+      - timescaledb
+    container_name: timescaledb-exporter
+    image: quay.io/prometheuscommunity/postgres-exporter
+    restart: unless-stopped
+    env_file: ./timescaledb-exporter/.env # Include DATA_SOURCE_PASS
+    environment:
+      DATA_SOURCE_URI: "timescaledb:5432/postgres?sslmode=disable"
+      DATA_SOURCE_USER: postgres
+    ports:
+      - 9187:9187
+    volumes:
+      - ./timescaledb-exporter/postgres_exporter.yml:/postgres_exporter.yml:ro
+
   
   trello-bot:
     profiles:
