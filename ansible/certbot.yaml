@@ -1,0 +1,40 @@
+- name: Configure certbot and cloudflare plugin
+  hosts: JaysDesktop.local
+  remote_user: jay
+
+  vars_prompt:
+    - name: cloudflare_api_key
+      prompt: What is your Cloudflare API Key?
+      private: true
+
+  tasks:
+    - name: Install certbot
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - certbot
+        - python3-certbot-dns-cloudflare
+      become: true
+    - name: Set secrets directory permission
+      ansible.builtin.file:
+        path: /root/.secrets/
+        state: directory
+        mode: '0700'
+      become: true
+    - name: Ensure cloudflare email is present
+      ansible.builtin.lineinfile:
+        regexp: '^dns_cloudflare_email = '
+        line: 'dns_cloudflare_email = "NeedleInAJayStack@protonmail.com"'
+        path: /root/.secrets/cloudflare.ini
+        create: true
+        mode: '0700'
+      become: true
+    - name: Ensure cloudflare API key is present
+      ansible.builtin.lineinfile:
+        regexp: '^dns_cloudflare_api_key = '
+        line: 'dns_cloudflare_api_key = "{{ cloudflare_api_key }}"'
+        path: /root/.secrets/cloudflare.ini
+        create: true
+        mode: '0700'
+      become: true
