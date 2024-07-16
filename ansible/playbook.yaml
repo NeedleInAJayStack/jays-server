@@ -17,6 +17,7 @@
     - name: Add docker to apt repositories
       # See https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
       ansible.builtin.shell: |
+        set -o pipefail
         which docker || (
           install -m 0755 -d /etc/apt/keyrings
           curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -58,4 +59,5 @@
     - name: Clone jays-server repo
       ansible.builtin.git:
         repo: 'https://github.com/NeedleInAJayStack/jays-server.git'
+        version: main
         dest: ~/dev/jays-server
