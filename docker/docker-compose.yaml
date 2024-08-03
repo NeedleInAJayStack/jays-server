@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
     env_file: ./bitwarden/.env
     environment:
-      - DOMAIN=https://bitwarden.jayherron.org
+      - DOMAIN=https://bitwarden.herron.dev
       - PUSH_ENABLED=true
       - SIGNUPS_ALLOWED=false
     ports:
@@ -54,7 +54,7 @@ services:
     restart: unless-stopped
     env_file: ./davical/.env
     environment:
-      HOST_NAME: "jayherron.org"
+      HOST_NAME: "herron.dev"
       DBHOST: "db"
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
@@ -88,7 +88,7 @@ services:
     image: grafana/grafana
     restart: unless-stopped
     environment:
-      - GF_SERVER_ROOT_URL=https://grafana.jayherron.org/
+      - GF_SERVER_ROOT_URL=https://grafana.herron.dev/
     networks:
       - timescaledb
       - monitoring
@@ -170,7 +170,7 @@ services:
       TZ: America/Denver
       MAX_WORKERS: 1
       WEB_CONCURRENCY: 1
-      BASE_URL: 'https://recipes.jayherron.org/'
+      BASE_URL: 'https://recipes.herron.dev/'
     ports:
       - 9925:9000
     volumes:
