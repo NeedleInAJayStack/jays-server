@@ -21,6 +21,29 @@ data "cloudflare_zone" "jay_herron_com" {
 
 # jayherron.org
 
+resource "cloudflare_ruleset" "jayherron_org" {
+  zone_id     = data.cloudflare_zone.jayherron_org.id
+  name        = "default"
+  description = "Redirect to herron.dev"
+  kind        = "zone"
+  phase       = "http_request_dynamic_redirect"
+
+  rules {
+    action = "redirect"
+    action_parameters {
+      from_value {
+        status_code = 301
+        target_url {
+          expression = "concat(\"https://\", wildcard_replace(http.host, \"*.jayherron.org\", \"$${1}.herron.dev\"), http.request.uri.path)"
+        }
+        preserve_query_string = false
+      }
+    }
+    expression  = "(ends_with(http.host, \"jayherron.org\"))"
+    enabled     = false
+  }
+}
+
 # A Records
 resource "cloudflare_record" "a_bitwarden" {
   zone_id = data.cloudflare_zone.jayherron_org.id
