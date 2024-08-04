@@ -22,7 +22,7 @@ scrape_configs:
   # - job_name: 'homeassistant'
   #   scheme: https
   #   static_configs:
-  #     - targets: ['home.jayherron.org:443']
+  #     - targets: ['home.herron.dev:443']
   #   metrics_path: /api/prometheus
   #   authorization:
   #     # CREATE MANUALLY: Long-Lived Access Token

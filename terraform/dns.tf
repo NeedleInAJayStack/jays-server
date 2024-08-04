@@ -19,6 +19,31 @@ data "cloudflare_zone" "jay_herron_com" {
   name = "jay-herron.com"
 }
 
+# jayherron.org
+
+resource "cloudflare_ruleset" "jayherron_org" {
+  zone_id     = data.cloudflare_zone.jayherron_org.id
+  name        = "default"
+  description = "Redirect to herron.dev"
+  kind        = "zone"
+  phase       = "http_request_dynamic_redirect"
+
+  rules {
+    action = "redirect"
+    action_parameters {
+      from_value {
+        status_code = 301
+        target_url {
+          expression = "concat(\"https://\", wildcard_replace(http.host, \"*.jayherron.org\", \"$${1}.herron.dev\"), http.request.uri.path)"
+        }
+        preserve_query_string = false
+      }
+    }
+    expression  = "(ends_with(http.host, \"jayherron.org\"))"
+    enabled     = false
+  }
+}
+
 # A Records
 resource "cloudflare_record" "a_bitwarden" {
   zone_id = data.cloudflare_zone.jayherron_org.id
@@ -188,4 +213,23 @@ resource "cloudflare_record" "txt_protonmail_domainkey" {
   type    = "TXT"
   value   = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCz+Uq5u7Hn/wPpmjoehbWsALNFWDH8pUXAC4oupv9n2N9GfJTztyflJ7Vj/mAIAVyC0+YJBwUg7jPPgfc6MZiE+jknxpJWwMf2pSDrcTge/xCNePPEDR0ub/e9H0RYVuqVF9bcfonszg5N9JyM3YaTLJxe1l+PjFUzwG9ats+MAwIDAQAB"
   proxied = false
+}
+
+
+# herron.dev
+
+# A Records
+resource "cloudflare_record" "herron_dev_a_root" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "herron.dev"
+  type    = "A"
+  value   = var.jaysdesktop_ip
+  proxied = true
+}
+resource "cloudflare_record" "herron_dev_a_wildcard" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "*"
+  type    = "A"
+  value   = var.jaysdesktop_ip
+  proxied = true
 }

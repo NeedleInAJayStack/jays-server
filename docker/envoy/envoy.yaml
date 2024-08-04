@@ -26,12 +26,26 @@ static_resources:
       socket_address:
         address: 0.0.0.0
         port_value: 443
+    listener_filters: # Required for SNI for filter server name matching
+    - name: "envoy.filters.listener.tls_inspector"
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.filters.listener.tls_inspector.v3.TlsInspector
     filter_chains:
-    - filters:
+    - filter_chain_match:
+        server_names: ["*.jayherron.org"]
+      transport_socket:
+        name: jayherron.org
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+            - certificate_chain: {filename: "/etc/letsencrypt/live/jayherron.org/fullchain.pem"}
+              private_key: {filename: "/etc/letsencrypt/live/jayherron.org/privkey.pem"}
+      filters:
       - name: jayherron.org
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-          stat_prefix: jayherron.org
+          stat_prefix: jayherron-org
           http_filters:
           - name: envoy.filters.http.router
             typed_config:
@@ -132,14 +146,121 @@ static_resources:
                   prefix: "/"
                 redirect:
                   host_redirect: "www.jayherron.org"
+    - filter_chain_match:
+        server_names: ["*.herron.dev"]
       transport_socket:
-        name: jayherron.org
+        name: herron.dev
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
           common_tls_context:
             tls_certificates:
-            - certificate_chain: {filename: "/etc/letsencrypt/live/jayherron.org/fullchain.pem"}
-              private_key: {filename: "/etc/letsencrypt/live/jayherron.org/privkey.pem"}
+            - certificate_chain: {filename: "/etc/letsencrypt/live/herron.dev/fullchain.pem"}
+              private_key: {filename: "/etc/letsencrypt/live/herron.dev/privkey.pem"}
+      filters:
+      - name: herron.dev
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: herron-dev
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+          upgrade_configs:
+          - upgrade_type: websocket
+          route_config:
+            name: herron.dev
+            virtual_hosts:
+            - name: cal
+              domains: ["cal.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: cal
+            - name: data
+              domains: ["data.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: data
+            - name: grafana
+              domains: ["grafana.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: grafana
+            - name: home
+              domains: ["home.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: home
+            - name: nextcloud
+              domains: ["nextcloud.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: nextcloud
+            - name: plex
+              domains: ["plex.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: plex
+            - name: recipes
+              domains: ["recipes.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: recipes
+            - name: syncthing
+              domains: ["syncthing.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: syncthing
+            - name: trello-bot
+              domains: ["trello-bot.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: trello-bot
+            - name: utility-api
+              domains: ["utility-api.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: utility-api
+            - name: bitwarden
+              domains: ["bitwarden.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: bitwarden
+            - name: www
+              domains: ["www.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: www
+            - name: catchall
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                redirect:
+                  host_redirect: "www.herron.dev"
   clusters:
   - name: cal
     type: STRICT_DNS
