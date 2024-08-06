@@ -233,3 +233,61 @@ resource "cloudflare_record" "herron_dev_a_wildcard" {
   value   = var.jaysdesktop_ip
   proxied = true
 }
+resource "cloudflare_record" "herron_dev_cname_protonmail" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "protonmail._domainkey"
+  type    = "CNAME"
+  value   = "protonmail.domainkey.dcgwlficuvageoro6lkemesa6dzrqu2ypglv3njkxaje5rsjk23pq.domains.proton.ch."
+  proxied = false
+}
+resource "cloudflare_record" "herron_dev_cname_protonmail2" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "protonmail2._domainkey"
+  type    = "CNAME"
+  value   = "protonmail2.domainkey.dcgwlficuvageoro6lkemesa6dzrqu2ypglv3njkxaje5rsjk23pq.domains.proton.ch."
+  proxied = false
+}
+resource "cloudflare_record" "herron_dev_cname_protonmail3" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "protonmail3._domainkey"
+  type    = "CNAME"
+  value   = "protonmail3.domainkey.dcgwlficuvageoro6lkemesa6dzrqu2ypglv3njkxaje5rsjk23pq.domains.proton.ch."
+  proxied = false
+}
+resource "cloudflare_record" "herron_dev_mx_mail_protonmail" {
+  zone_id  = data.cloudflare_zone.herron_dev.id
+  name     = "herron.dev"
+  type     = "MX"
+  value    = "mail.protonmail.ch"
+  priority = 10
+  proxied  = false
+}
+resource "cloudflare_record" "herron_dev_mx_mailsec_protonmail" {
+  zone_id  = data.cloudflare_zone.herron_dev.id
+  name     = "herron.dev"
+  type     = "MX"
+  value    = "mailsec.protonmail.ch"
+  priority = 20
+  proxied  = false
+}
+resource "cloudflare_record" "herron_dev_txt_protonmail_verification" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "herron.dev"
+  type    = "TXT"
+  value   = "protonmail-verification=1fea0a3fe95573f3dd296b09d692b8c615faea75"
+  proxied = false
+}
+resource "cloudflare_record" "herron_dev_txt_dmarc" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "_dmarc"
+  type    = "TXT"
+  value   = "v=DMARC1; p=quarantine"
+  proxied = false
+}
+resource "cloudflare_record" "herron_dev_txt_spf1" {
+  zone_id = data.cloudflare_zone.herron_dev.id
+  name    = "herron.dev"
+  type    = "TXT"
+  value   = "v=spf1 include:_spf.protonmail.ch ~all"
+  proxied = false
+}
