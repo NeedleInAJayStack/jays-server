@@ -54,6 +54,27 @@ static_resources:
           - upgrade_type: websocket
           route_config:
             name: jayherron.org
+            response_headers_to_add:
+            - header:
+                key: "Cross-Origin-Resource-Policy"
+                value: "same-origin"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
+                key: "Content-Security-Policy"
+                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to url"  # report-to set by cloudflare
+              append_action: ADD_IF_ABSENT
+            - header:
+                key: "Referrer-Policy"
+                value: "same-origin"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
+                key: "Strict-Transport-Security"
+                value: "max-age=63072000; includeSubDomains; preload"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
+                key: "X-Content-Type-Options"
+                value: "nosniff"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
             virtual_hosts:
             - name: cal
               domains: ["cal.jayherron.org"]
@@ -169,6 +190,27 @@ static_resources:
           - upgrade_type: websocket
           route_config:
             name: herron.dev
+            response_headers_to_add:
+            - header:
+                key: "Cross-Origin-Resource-Policy"
+                value: "same-origin"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
+                key: "Content-Security-Policy"
+                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to url"  # report-to set by cloudflare
+              append_action: ADD_IF_ABSENT
+            - header:
+                key: "Referrer-Policy"
+                value: "same-origin"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
+                key: "Strict-Transport-Security"
+                value: "max-age=63072000; includeSubDomains; preload"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
+                key: "X-Content-Type-Options"
+                value: "nosniff"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
             virtual_hosts:
             - name: cal
               domains: ["cal.herron.dev"]
