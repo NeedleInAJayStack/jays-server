@@ -56,6 +56,10 @@ static_resources:
             name: jayherron.org
             response_headers_to_add:
             - header:
+                key: "Cross-Origin-Resource-Policy"
+                value: "same-origin"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+            - header:
                 key: "Strict-Transport-Security"
                 value: "max-age=63072000; includeSubDomains; preload"
               append_action: OVERWRITE_IF_EXISTS_OR_ADD
