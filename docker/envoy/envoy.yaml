@@ -54,6 +54,11 @@ static_resources:
           - upgrade_type: websocket
           route_config:
             name: jayherron.org
+            response_headers_to_add:
+            - header:
+                key: "Strict-Transport-Security"
+                value: "max-age=63072000; includeSubDomains; preload"
+              append_action: OVERWRITE_IF_EXISTS_OR_ADD
             virtual_hosts:
             - name: cal
               domains: ["cal.jayherron.org"]
