@@ -226,6 +226,13 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: data
+            - name: data-go
+              domains: ["data-go.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: data-go
             - name: grafana
               domains: ["grafana.herron.dev"]
               routes:
@@ -326,6 +333,17 @@ static_resources:
               socket_address:
                 address: localhost
                 port_value: 8082
+  - name: data-go
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: data-go
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8092
   - name: grafana
     type: STRICT_DNS
     load_assignment:

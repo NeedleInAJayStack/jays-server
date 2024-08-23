@@ -13,6 +13,17 @@ services:
       - '8082:8080'
     networks:
       - timescaledb
+  api-server:
+    profiles:
+      - api
+    container_name: api-server
+    image: ghcr.io/needleinajaystack/api-server:main
+    restart: unless-stopped
+    env_file: ./api-server/.env
+    ports:
+      - '8092:80'
+    networks:
+      - timescaledb
 
   # Bitwarden
   bitwarden:
