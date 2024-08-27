@@ -58,7 +58,7 @@ static_resources:
             - header:
                 key: "Cross-Origin-Resource-Policy"
                 value: "same-origin"
-              append_action: OVERWRITE_IF_EXISTS_OR_ADD
+              append_action: ADD_IF_ABSENT
             - header:
                 key: "Content-Security-Policy"
                 value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to url"  # report-to set by cloudflare
