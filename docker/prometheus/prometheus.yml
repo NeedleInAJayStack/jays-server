@@ -28,8 +28,7 @@ scrape_configs:
   #     # CREATE MANUALLY: Long-Lived Access Token
   #     credentials_file: "/etc/prometheus/homeassistant-credentials.txt"
 
-# remote_write:
-#   - url: '<Your Prometheus remote_write endpoint>'
-#     basic_auth:
-#       username: '<Your Grafana Username>'
-#       password: '<Your Grafana API key>'
+  # See Ansible playbook for setup
+  - job_name: docker
+    static_configs:
+      - targets: ['host.docker.internal:9323']
