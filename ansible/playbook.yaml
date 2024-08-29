@@ -56,6 +56,15 @@
         groups:
           - docker
       become: true
+    - name: Set up docker metrics
+      ansible.builtin.copy:
+        content: |
+          {
+            "metrics-addr": "127.0.0.1:9323"
+          }
+        dest: /etc/docker/daemon.json
+        mode: '0500'
+      become: true
 
     # Misc
     - name: Clone jays-server repo
