@@ -27,6 +27,8 @@
             $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         )
+      args:
+        executable: /bin/bash
       become: true
       register: docker_result
       changed_when: docker_result.stdout is not regex(".*/docker")
