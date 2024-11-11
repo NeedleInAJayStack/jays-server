@@ -11,6 +11,7 @@ services:
     env_file: ./api/.env
     ports:
       - '8082:80'
+      - '2112:2112'
     networks:
       - monitoring
       - timescaledb
@@ -102,8 +103,6 @@ services:
     profiles:
       - monitoring
     container_name: prometheus
-    expose:
-      - 9090
     image: prom/prometheus:latest
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -112,6 +111,8 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
     restart: unless-stopped
+    ports:
+      - 9090:9090
     networks:
       - monitoring
     volumes:
