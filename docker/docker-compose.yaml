@@ -183,14 +183,16 @@ services:
     profiles:
       - mosquitto
     container_name: mosquitto
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:openssl
     restart: unless-stopped
     ports:
       - 1883:1883
       - 9001:9001
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
-      - ./mosquitto/passwd:/mosquitto/config/passwd
+      - ./mosquitto/passwd:/mosquitto/config/passwd:ro
+      # You must provide your own certificate files. See `ansible` directory for certbot config.
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
   # Nextcloud
     # For documentation: https://github.com/nextcloud/all-in-one/blob/main/compose.yaml
