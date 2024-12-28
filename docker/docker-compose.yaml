@@ -4,7 +4,7 @@ services:
   # API
   api:
     container_name: api-server
-    image: ghcr.io/needleinajaystack/api-server:main
+    image: ghcr.io/needleinajaystack/go-timeseries-api:main
     restart: unless-stopped
     env_file: ./api/.env
     ports:
