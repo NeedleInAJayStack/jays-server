@@ -132,7 +132,6 @@ services:
       - TZ=America/Denver
     network_mode: host
     privileged: true
-    user: '1000'
     volumes:
       - ~/Data/docker/HomeAssistant:/config
 
