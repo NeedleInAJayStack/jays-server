@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: prometheus-community/kube-prometheus-stack
+      chart: kube-prometheus-stack
       interval: 10m
       sourceRef:
         kind: HelmRepository
