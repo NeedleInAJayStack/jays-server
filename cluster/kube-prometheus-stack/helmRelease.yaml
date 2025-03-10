@@ -4,14 +4,16 @@ metadata:
   name: podinfo
   namespace: kube-prometheus-stack
 spec:
-  interval: 10m
   chart:
     spec:
       chart: prometheus-community/kube-prometheus-stack
-      version: '<70.0.0'
+      interval: 10m
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-      interval: 10m
+      version: '<70.0.0'
+  install:
+    createNamespace: true
+  interval: 10m
   values:
     replicaCount: 2
