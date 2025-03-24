@@ -18,6 +18,3 @@ spec:
     app:
       ingress:
         enabled: true
-        annotations:
-          kubernetes.io/ingress.class: istio
-        ingressClassName: istio
