@@ -18,4 +18,6 @@ spec:
     app:
       ingress:
         enabled: true
+        hosts:
+          - host: jaysdesktop.local
         ingressClassName: public
