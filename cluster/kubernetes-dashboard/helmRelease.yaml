@@ -13,3 +13,11 @@ spec:
         name: kubernetes-dashboard
   interval: 10m
   targetNamespace: kubernetes-dashboard
+  # Defaults: https://github.com/kubernetes/dashboard/blob/master/charts/kubernetes-dashboard/values.yaml
+  values:
+    app:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: istio
+        ingressClassName: true
