@@ -19,5 +19,5 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - host: jaysdesktop.local
+          - jaysdesktop.local
         ingressClassName: public
