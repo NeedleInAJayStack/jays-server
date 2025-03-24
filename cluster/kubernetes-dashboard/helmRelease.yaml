@@ -19,5 +19,5 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - jaysdesktop.local
+          - kubernetes-dashboard.herron.dev
         ingressClassName: public
