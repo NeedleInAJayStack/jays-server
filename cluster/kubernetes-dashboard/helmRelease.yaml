@@ -18,5 +18,4 @@ spec:
     app:
       ingress:
         enabled: true
-      tls:
-        enabled: false
+        ingressClassName: public
