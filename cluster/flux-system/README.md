@@ -10,7 +10,6 @@ Create a personal access token, and run:
 ```bash
 export GITHUB_TOKEN=<gh-token>
 flux bootstrap github \
-  --token-auth \
   --owner=NeedleInAJayStack \
   --repository=jays-server \
   --branch=main \
