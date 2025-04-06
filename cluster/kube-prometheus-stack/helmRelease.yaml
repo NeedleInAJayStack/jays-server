@@ -16,3 +16,9 @@ spec:
   targetNamespace: kube-prometheus-stack
   values:
     replicaCount: 2
+    grafana:
+      ingress:
+        enabled: true
+        hosts:
+          - kubernetes-grafana.herron.dev
+        ingressClassName: public
