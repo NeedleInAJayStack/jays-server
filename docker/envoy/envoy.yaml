@@ -32,142 +32,6 @@ static_resources:
         "@type": type.googleapis.com/envoy.extensions.filters.listener.tls_inspector.v3.TlsInspector
     filter_chains:
     - filter_chain_match:
-        server_names: ["*.jayherron.org"]
-      transport_socket:
-        name: jayherron.org
-        typed_config:
-          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
-          common_tls_context:
-            tls_certificates:
-            - certificate_chain: {filename: "/etc/letsencrypt/live/jayherron.org/fullchain.pem"}
-              private_key: {filename: "/etc/letsencrypt/live/jayherron.org/privkey.pem"}
-      filters:
-      - name: jayherron.org
-        typed_config:
-          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-          stat_prefix: jayherron-org
-          http_filters:
-          - name: envoy.filters.http.router
-            typed_config:
-              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
-          upgrade_configs:
-          - upgrade_type: websocket
-          route_config:
-            name: jayherron.org
-            response_headers_to_add:
-            - header:
-                key: "Cross-Origin-Resource-Policy"
-                value: "same-origin"
-              append_action: ADD_IF_ABSENT
-            - header:
-                key: "Content-Security-Policy"
-                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to url"  # report-to set by cloudflare
-              append_action: ADD_IF_ABSENT
-            - header:
-                key: "Referrer-Policy"
-                value: "same-origin"
-              append_action: OVERWRITE_IF_EXISTS_OR_ADD
-            - header:
-                key: "Strict-Transport-Security"
-                value: "max-age=63072000; includeSubDomains; preload"
-              append_action: OVERWRITE_IF_EXISTS_OR_ADD
-            - header:
-                key: "X-Content-Type-Options"
-                value: "nosniff"
-              append_action: OVERWRITE_IF_EXISTS_OR_ADD
-            virtual_hosts:
-            - name: cal
-              domains: ["cal.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: cal
-            - name: data
-              domains: ["data.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: data
-            - name: grafana
-              domains: ["grafana.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: grafana
-            - name: home
-              domains: ["home.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: home
-            - name: nextcloud
-              domains: ["nextcloud.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: nextcloud
-            - name: plex
-              domains: ["plex.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: plex
-            - name: recipes
-              domains: ["recipes.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: recipes
-            - name: syncthing
-              domains: ["syncthing.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: syncthing
-            - name: trello-bot
-              domains: ["trello-bot.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: trello-bot
-            - name: utility-api
-              domains: ["utility-api.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: utility-api
-            - name: bitwarden
-              domains: ["bitwarden.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: bitwarden
-            - name: www
-              domains: ["www.jayherron.org"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: www
-            - name: catchall
-              domains: ["*"]
-              routes:
-              - match:
-                  prefix: "/"
-                redirect:
-                  host_redirect: "www.jayherron.org"
-    - filter_chain_match:
         server_names: ["*.herron.dev"]
       transport_socket:
         name: herron.dev
@@ -243,6 +107,7 @@ static_resources:
             - name: kubernetes
               domains:
                 - kubernetes-dashboard.herron.dev
+                - kubernetes-grafana.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -313,7 +178,7 @@ static_resources:
                   host_redirect: "www.herron.dev"
   clusters:
   - name: cal
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: cal
       endpoints:
@@ -321,10 +186,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8083
   - name: data
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: data
       endpoints:
@@ -332,10 +197,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8082
   - name: grafana
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: grafana
       endpoints:
@@ -343,10 +208,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3000
   - name: home
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: home
       endpoints:
@@ -354,10 +219,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8123
   - name: kubernetes
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: kubernetes
       endpoints:
@@ -365,10 +230,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 5080
   - name: nextcloud
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: nextcloud
       endpoints:
@@ -376,10 +241,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 11000
   - name: plex
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: plex
       endpoints:
@@ -387,10 +252,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 32400
   - name: recipes
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: recipes
       endpoints:
@@ -398,10 +263,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 9925
   - name: syncthing
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: syncthing
       endpoints:
@@ -409,10 +274,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8384
   - name: trello-bot
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: trello-bot
       endpoints:
@@ -420,10 +285,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3333
   - name: utility-api
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: utility-api
       endpoints:
@@ -431,10 +296,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8082
   - name: bitwarden
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: bitwarden
       endpoints:
@@ -442,10 +307,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3010
   - name: www
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: www
       endpoints:
@@ -453,5 +318,5 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3002
