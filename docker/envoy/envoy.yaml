@@ -243,6 +243,7 @@ static_resources:
             - name: kubernetes
               domains:
                 - kubernetes-dashboard.herron.dev
+                - kubernetes-grafana.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -357,7 +358,7 @@ static_resources:
                 address: localhost
                 port_value: 8123
   - name: kubernetes
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: kubernetes
       endpoints:
@@ -365,7 +366,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 5080
   - name: nextcloud
     type: STRICT_DNS
