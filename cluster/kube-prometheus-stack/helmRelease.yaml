@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: podinfo
+  name: kube-prometheus-stack
   namespace: kube-prometheus-stack
 spec:
   chart:
@@ -15,7 +15,7 @@ spec:
   interval: 10m
   targetNamespace: kube-prometheus-stack
   values:
-    replicaCount: 2
+    replicaCount: 1
     grafana:
       ingress:
         enabled: true
