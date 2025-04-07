@@ -21,3 +21,5 @@ spec:
         hosts:
           - kubernetes-dashboard.herron.dev
         ingressClassName: public
+        tls:
+          enabled: false
