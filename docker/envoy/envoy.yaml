@@ -314,7 +314,7 @@ static_resources:
                   host_redirect: "www.herron.dev"
   clusters:
   - name: cal
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: cal
       endpoints:
@@ -322,10 +322,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8083
   - name: data
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: data
       endpoints:
@@ -333,10 +333,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8082
   - name: grafana
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: grafana
       endpoints:
@@ -344,10 +344,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3000
   - name: home
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: home
       endpoints:
@@ -355,7 +355,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8123
   - name: kubernetes
     type: STATIC
@@ -369,7 +369,7 @@ static_resources:
                 address: 127.0.0.1
                 port_value: 5080
   - name: nextcloud
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: nextcloud
       endpoints:
@@ -377,10 +377,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 11000
   - name: plex
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: plex
       endpoints:
@@ -388,10 +388,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 32400
   - name: recipes
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: recipes
       endpoints:
@@ -399,10 +399,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 9925
   - name: syncthing
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: syncthing
       endpoints:
@@ -410,10 +410,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8384
   - name: trello-bot
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: trello-bot
       endpoints:
@@ -421,10 +421,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3333
   - name: utility-api
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: utility-api
       endpoints:
@@ -432,10 +432,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 8082
   - name: bitwarden
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: bitwarden
       endpoints:
@@ -443,10 +443,10 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3010
   - name: www
-    type: STRICT_DNS
+    type: STATIC
     load_assignment:
       cluster_name: www
       endpoints:
@@ -454,5 +454,5 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: localhost
+                address: 127.0.0.1
                 port_value: 3002
