@@ -19,8 +19,11 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - localhost
           - kubernetes-dashboard.herron.dev
         ingressClassName: public
         tls:
           enabled: false
+    kong:
+      proxy:
+        http:
+          enabled: true
