@@ -23,6 +23,7 @@ spec:
         ingressClassName: public
         tls:
           enabled: false
+        useDefaultAnnotations: false
     kong:
       proxy:
         http:
