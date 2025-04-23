@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: herron-dot-dev
+spec:
+  selector:
+    app: herron-dot-dev
+  ports:
+  - port: 80
+    targetPort: 80

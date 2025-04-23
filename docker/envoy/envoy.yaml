@@ -108,6 +108,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
+                - kubernetes-www.herron.dev
               routes:
               - match:
                   prefix: "/"

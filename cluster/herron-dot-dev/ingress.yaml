@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: herron-dot-dev
+  namespace: herron-dot-dev
+  labels:
+    app: herron-dot-dev
+spec:
+  ingressClassName: public
+  rules:
+    - host: kubernetes-www.herron.dev
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: herron-dot-dev
+              port:
+                number: 80
