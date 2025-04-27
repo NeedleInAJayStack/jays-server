@@ -70,7 +70,7 @@ static_resources:
               append_action: OVERWRITE_IF_EXISTS_OR_ADD
             - header:
                 key: "Content-Security-Policy"
-                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to url"  # report-to set by cloudflare
+                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to cf-nel"  # report-to cf-nel set by cloudflare
               append_action: ADD_IF_ABSENT
             - header:
                 key: "Referrer-Policy"
@@ -237,7 +237,7 @@ static_resources:
               append_action: OVERWRITE_IF_EXISTS_OR_ADD
             - header:
                 key: "Content-Security-Policy"
-                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to url"  # report-to set by cloudflare
+                value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to cf-nel"  # report-to cf-nel set by cloudflare
               append_action: ADD_IF_ABSENT
             - header:
                 key: "Referrer-Policy"
