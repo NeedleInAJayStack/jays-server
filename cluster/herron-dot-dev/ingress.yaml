@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: kubernetes-www.herron.dev
+    - host: www.herron.dev
       http:
         paths:
         - pathType: Prefix
