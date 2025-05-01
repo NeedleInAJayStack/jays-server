@@ -117,7 +117,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
-                - kubernetes-www.herron.dev
+                - www.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -172,13 +172,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: bitwarden
-            - name: www
-              domains: ["www.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: www
             - name: catchall
               domains: ["*"]
               routes:
@@ -284,7 +277,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
-                - kubernetes-www.herron.dev
+                - www.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -339,13 +332,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: bitwarden
-            - name: www
-              domains: ["www.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: www
             - name: catchall
               domains: ["*"]
               routes:

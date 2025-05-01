@@ -264,14 +264,6 @@ services:
     ports:
       - '3333:3333'
 
-  # Website
-  website:
-    container_name: website
-    image: ghcr.io/needleinajaystack/website:main
-    restart: unless-stopped
-    ports:
-      - '3002:80'
-
 volumes:
   # Monitoring
   prometheus_data:
