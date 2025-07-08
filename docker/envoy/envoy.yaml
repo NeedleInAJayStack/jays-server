@@ -117,6 +117,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
+                - trello-bot.herron.dev
                 - www.herron.dev
               routes:
               - match:
@@ -151,13 +152,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: syncthing
-            - name: trello-bot
-              domains: ["trello-bot.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: trello-bot
             - name: utility-api
               domains: ["utility-api.herron.dev"]
               routes:
@@ -277,6 +271,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
+                - trello-bot.herron.dev
                 - www.herron.dev
               routes:
               - match:
@@ -311,13 +306,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: syncthing
-            - name: trello-bot
-              domains: ["trello-bot.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: trello-bot
             - name: utility-api
               domains: ["utility-api.herron.dev"]
               routes:
@@ -440,17 +428,6 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8384
-  - name: trello-bot
-    type: STATIC
-    load_assignment:
-      cluster_name: trello-bot
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 3333
   - name: utility-api
     type: STATIC
     load_assignment:
