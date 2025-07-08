@@ -18,17 +18,3 @@ flux bootstrap github \
 ```
 
 To update the personal access token used by Flux (like after expiration), just regenerate the token, delete the `flux-system` secret, and run the commands above again.
-
-## Secrets
-
-To generate the kustomization_secrets.yaml file, run:
-
-```sh
-flux create --export kustomization secrets \
-      --source=flux-system \
-      --path=cluster \
-      --prune=true \
-      --interval=10m \
-      --decryption-provider=sops \
-      --decryption-secret=sops-gpg
-```

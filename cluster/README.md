@@ -24,3 +24,15 @@ Furthermore, the Ingress Controller must avoid overlapping ports with the `docke
 ## Secrets
 
 I use SOPS and OpenPGP to encrypt and commit the secrets to the git repository. For configuration, see the [Flux guide](https://fluxcd.io/flux/guides/mozilla-sops/). In particular, this is controlled by a manually created secret named `sops-gpg` in the `flux-system` namespace.
+
+To enable the SOPS decryption in the cluster, run:
+
+```sh
+flux create kustomization secrets \
+  --source=flux-system \
+  --path=cluster \
+  --prune=true \
+  --interval=10m \
+  --decryption-provider=sops \
+  --decryption-secret=sops-gpg
+```
