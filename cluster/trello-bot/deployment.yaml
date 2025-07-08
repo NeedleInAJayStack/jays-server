@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trello-bot
+  namespace: trello-bot
+  labels:
+    app: trello-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trello-bot
+  template:
+    metadata:
+      labels:
+        app: trello-bot
+    spec:
+      containers:
+        - name: website
+          image: ghcr.io/needleinajaystack/trello-bot@sha256:f2ebba2bb9e6c0485fe6418cb12df86b8221e24988e2f1c0a864646bf680d84a
+          ports:
+            - containerPort: 3333

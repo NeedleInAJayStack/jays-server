@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trello-bot
+  namespace: trello-bot
+spec:
+  selector:
+    app: trello-bot
+  ports:
+  - port: 80
+    targetPort: 3333
