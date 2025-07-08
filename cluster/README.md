@@ -20,3 +20,7 @@ Furthermore, the Ingress Controller must avoid overlapping ports with the `docke
           protocol: TCP
 ...
 ```
+
+## Secrets
+
+I use SOPS and OpenPGP to encrypt and commit the secrets to the git repository. For configuration, see the [Flux guide](https://fluxcd.io/flux/guides/mozilla-sops/). In particular, this is controlled by a manually created secret named `sops-gpg` in the `flux-system` namespace.
