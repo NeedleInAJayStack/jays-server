@@ -20,3 +20,14 @@ spec:
           image: ghcr.io/needleinajaystack/trello-bot@sha256:f2ebba2bb9e6c0485fe6418cb12df86b8221e24988e2f1c0a864646bf680d84a
           ports:
             - containerPort: 3333
+          env:
+            - name: TRELLO_DEV_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: devKey
+            - name: TRELLO_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: botToken
