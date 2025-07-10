@@ -11,3 +11,15 @@ spec:
         kind: HelmRepository
         name: openebs
   interval: 10m
+  values:
+    # See https://openebs.io/docs/Solutioning/openebs-on-kubernetes-platforms/microkubernetes
+    mayastor:
+      csi:
+        node:
+          kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
+    lvm-localpv:
+      lvmNode:
+        kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
+    zfs-localpv:
+      zfsNode:
+        kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
