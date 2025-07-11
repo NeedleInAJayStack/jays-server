@@ -12,18 +12,15 @@ spec:
         name: openebs
   interval: 10m
   values:
-    # See https://openebs.io/docs/Solutioning/openebs-on-kubernetes-platforms/microkubernetes
+    # See https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/installation/platforms/microk8s.md
     # Defaults: https://github.com/openebs/openebs/blob/develop/charts/values.yaml
-    mayastor:
-      csi:
-        node:
-          kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
-    lvm-localpv:
-      lvmNode:
-        kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
-    zfs-localpv:
-      zfsNode:
-        kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
+    localprovisioner:
+      basePath: /var/snap/microk8s/common/var/openebs/local
+    ndm:
+      sparse:
+        path: /var/snap/microk8s/common/var/openebs/sparse
+    varDirectoryPath:
+      baseDir: /var/snap/microk8s/common/var/openebs
     loki:
       enabled: false
     alloy:
