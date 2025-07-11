@@ -18,3 +18,7 @@ flux bootstrap github \
 ```
 
 To update the personal access token used by Flux (like after expiration), just regenerate the token, delete the `flux-system` secret, and run the commands above again.
+
+## Secrets
+
+I use SOPS and OpenPGP to encrypt and commit the secrets to the git repository. For configuration, see the [Flux guide](https://fluxcd.io/flux/guides/mozilla-sops/). In particular, this is controlled by a manually created secret named `sops-gpg` in the `flux-system` namespace, and the `decryption` section of the `flux-system` kustomization in `./gotk-sync.yaml`.
