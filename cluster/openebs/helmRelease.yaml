@@ -13,6 +13,7 @@ spec:
   interval: 10m
   values:
     # See https://openebs.io/docs/Solutioning/openebs-on-kubernetes-platforms/microkubernetes
+    # Defaults: https://github.com/openebs/openebs/blob/develop/charts/values.yaml
     mayastor:
       csi:
         node:
@@ -23,3 +24,7 @@ spec:
     zfs-localpv:
       zfsNode:
         kubeletDir: /var/snap/microk8s/common/var/lib/kubelet/
+    loki:
+      enabled: false
+    alloy:
+      enabled: false
