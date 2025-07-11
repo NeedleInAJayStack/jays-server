@@ -21,6 +21,10 @@ spec:
         path: /var/snap/microk8s/common/var/openebs/sparse
     varDirectoryPath:
       baseDir: /var/snap/microk8s/common/var/openebs
+    engines:
+      replicated:
+        mayastor:
+          enabled: false
     loki:
       enabled: false
     alloy:
