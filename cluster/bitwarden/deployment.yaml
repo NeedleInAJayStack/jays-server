@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitwarden
+  namespace: bitwarden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitwarden
+  template:
+    metadata:
+      labels:
+        app: bitwarden
+    spec:
+      containers:
+        - name: bitwarden
+          image: vaultwarden/server:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DOMAIN
+              value: https://bitwarden.herron.dev
+            - name: PUSH_ENABLED
+              value: "true"
+            - name: SIGNUPS_ALLOWED
+              value: "false"
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: bitwarden
+                  key: adminToken
+            - name: PUSH_INSTALLATION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: bitwarden
+                  key: pushInstallationId
+            - name: PUSH_INSTALLATION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bitwarden
+                  key: pushInstallationKey
+          volumeMounts:
+            - name: bitwarden-data
+              mountPath: /data
+      volumes:
+        - name: bitwarden-data
+          persistentVolumeClaim:
+            claimName: bitwarden
