@@ -48,13 +48,3 @@ spec:
         - name: vaultwarden
           persistentVolumeClaim:
             claimName: vaultwarden
-  volumeClaimTemplates:
-    - metadata:
-        name: vaultwarden
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        storageClassName: openebs-hostpath
-        resources:
-          requests:
-            storage: 1Gi

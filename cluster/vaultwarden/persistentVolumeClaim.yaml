@@ -1,0 +1,13 @@
+# Having a declared PVC increases the reuse and deletion safety over letting the StatefulSet manage it automatically.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: openebs-hostpath
+  resources:
+    requests:
+      storage: 1Gi
