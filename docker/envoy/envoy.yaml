@@ -117,6 +117,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
+                - k8s-bitwarden.herron.dev
                 - trello-bot.herron.dev
                 - www.herron.dev
               routes:
@@ -271,6 +272,7 @@ static_resources:
               domains:
                 - kubernetes-dashboard.herron.dev
                 - kubernetes-grafana.herron.dev
+                - k8s-bitwarden.herron.dev
                 - trello-bot.herron.dev
                 - www.herron.dev
               routes:
