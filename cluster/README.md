@@ -20,3 +20,11 @@ Furthermore, the Ingress Controller must avoid overlapping ports with the `docke
           protocol: TCP
 ...
 ```
+
+## Secrets
+
+Secrets are encrypted with SOPS and committed to the git repository. To do this, create a normal k8s secret, and then run:
+
+```sh
+sops --encrypt --in-place secret.yaml
+```
