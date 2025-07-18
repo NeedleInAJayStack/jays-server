@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: vaultwarden
   namespace: vaultwarden
@@ -8,6 +8,7 @@ spec:
   selector:
     matchLabels:
       app: vaultwarden
+  serviceName: vaultwarden
   template:
     metadata:
       labels:
@@ -41,9 +42,19 @@ spec:
                   name: vaultwarden
                   key: pushInstallationKey
           volumeMounts:
-            - name: vaultwarden-data
+            - name: vaultwarden
               mountPath: /data
       volumes:
-        - name: vaultwarden-data
+        - name: vaultwarden
           persistentVolumeClaim:
             claimName: vaultwarden
+  volumeClaimTemplates:
+    - metadata:
+        name: vaultwarden
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: openebs-hostpath
+        resources:
+          requests:
+            storage: 1Gi
