@@ -11,16 +11,12 @@ spec:
         kind: HelmRepository
         name: openebs
   interval: 10m
+  # See https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/installation/platforms/microk8s.md
+  # Defaults: https://github.com/openebs/openebs/blob/develop/charts/values.yaml
   values:
-    # See https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/installation/platforms/microk8s.md
-    # Defaults: https://github.com/openebs/openebs/blob/develop/charts/values.yaml
-    localprovisioner:
-      basePath: /var/snap/microk8s/common/var/openebs/local
-    ndm:
-      sparse:
-        path: /var/snap/microk8s/common/var/openebs/sparse
-    varDirectoryPath:
-      baseDir: /var/snap/microk8s/common/var/openebs
+    localpv-provisioner:
+      hostpathClass:
+        reclaimPolicy: Retain
     engines:
       replicated:
         mayastor:
