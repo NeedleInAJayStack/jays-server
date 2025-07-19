@@ -20,5 +20,5 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - kubernetes-grafana.herron.dev
+          - k8s-grafana.herron.dev
         ingressClassName: public
