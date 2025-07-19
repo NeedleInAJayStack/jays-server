@@ -16,7 +16,7 @@ spec:
   values:
     localpv-provisioner:
       hostpathClass:
-        isDefaultClass: false
+        isDefaultClass: true
     engines:
       replicated:
         mayastor:
