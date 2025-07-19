@@ -14,9 +14,6 @@ spec:
   # See https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/installation/platforms/microk8s.md
   # Defaults: https://github.com/openebs/openebs/blob/develop/charts/values.yaml
   values:
-    localpv-provisioner:
-      hostpathClass:
-        reclaimPolicy: Retain
     engines:
       replicated:
         mayastor:
