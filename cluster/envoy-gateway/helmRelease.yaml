@@ -1,12 +1,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prometheus
+  name: envoy-gateway
   namespace: envoy-gateway
 spec:
   chart:
     spec:
-      chart: eg
+      chart: gateway-helm
       interval: 10m
       sourceRef:
         kind: HelmRepository
