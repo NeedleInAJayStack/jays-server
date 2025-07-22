@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: envoy-gateway
+spec:
+  chart:
+    spec:
+      chart: eg
+      interval: 10m
+      sourceRef:
+        kind: HelmRepository
+        name: envoy-gateway
+    version: '<2.0.0'
+  interval: 10m
+  targetNamespace: envoy-gateway
+  # Defaults: https://github.com/envoyproxy/gateway/blob/main/charts/gateway-helm/values.tmpl.yaml
