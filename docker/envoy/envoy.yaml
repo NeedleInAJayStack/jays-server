@@ -115,6 +115,7 @@ static_resources:
                   cluster: home
             - name: kubernetes
               domains:
+                - harbor.herron.dev
                 - kubernetes-dashboard.herron.dev
                 - k8s-grafana.herron.dev
                 - k8s-bitwarden.herron.dev
@@ -270,6 +271,7 @@ static_resources:
                   cluster: home
             - name: kubernetes
               domains:
+                - harbor.herron.dev
                 - kubernetes-dashboard.herron.dev
                 - k8s-grafana.herron.dev
                 - k8s-bitwarden.herron.dev
