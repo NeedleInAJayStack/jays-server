@@ -154,18 +154,6 @@ services:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
       - ./mosquitto/passwd:/mosquitto/config/passwds
 
-  # Nginx
-  # This will fight with envoy if both are running.
-  # nginx:
-  #   image: nginx
-  #   container_name: nginx
-  #   network_mode: host
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-  #     # You must provide your own certificate files
-  #     - /etc/letsencrypt/:/etc/letsencrypt/:ro
-
   particle-sync:
     container_name: particle-sync
     image: registry.gitlab.com/needleinajaystack/particle-sync:latest
