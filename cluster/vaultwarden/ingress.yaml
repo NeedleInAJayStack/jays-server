@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: k8s-bitwarden.herron.dev
+    - host: bitwarden.herron.dev
       http:
         paths:
         - pathType: Prefix

@@ -115,10 +115,10 @@ static_resources:
                   cluster: home
             - name: kubernetes
               domains:
+                - bitwarden.herron.dev
                 - harbor.herron.dev
                 - kubernetes-dashboard.herron.dev
                 - k8s-grafana.herron.dev
-                - k8s-bitwarden.herron.dev
                 - trello-bot.herron.dev
                 - www.herron.dev
               routes:
@@ -161,13 +161,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: utility-api
-            - name: bitwarden
-              domains: ["bitwarden.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: bitwarden
             - name: catchall
               domains: ["*"]
               routes:
@@ -271,10 +264,10 @@ static_resources:
                   cluster: home
             - name: kubernetes
               domains:
+                - bitwarden.herron.dev
                 - harbor.herron.dev
                 - kubernetes-dashboard.herron.dev
                 - k8s-grafana.herron.dev
-                - k8s-bitwarden.herron.dev
                 - trello-bot.herron.dev
                 - www.herron.dev
               routes:
@@ -317,13 +310,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: utility-api
-            - name: bitwarden
-              domains: ["bitwarden.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: bitwarden
             - name: catchall
               domains: ["*"]
               routes:
@@ -443,17 +429,6 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8082
-  - name: bitwarden
-    type: STATIC
-    load_assignment:
-      cluster_name: bitwarden
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 3010
   - name: www
     type: STATIC
     load_assignment:
