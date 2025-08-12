@@ -14,21 +14,6 @@ services:
       - monitoring
       - timescaledb
 
-  # Bitwarden
-  bitwarden:
-    container_name: bitwarden
-    image: vaultwarden/server
-    restart: unless-stopped
-    env_file: ./bitwarden/.env
-    environment:
-      - DOMAIN=https://bitwarden.herron.dev
-      - PUSH_ENABLED=true
-      - SIGNUPS_ALLOWED=false
-    ports:
-      - 3010:80
-    volumes:
-      - ~/Data/docker/bitwarden:/data/
-
   # Davical
     # Sourced from https://github.com/Elrondo46/davical-docker-standalone/blob/main/docker-compose.yml
     # Set the following environment variables:
