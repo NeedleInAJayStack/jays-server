@@ -217,10 +217,6 @@ volumes:
   prometheus_data:
     name: grafana_prometheus_data
 
-  # Nextcloud
-  nextcloud_aio_mastercontainer:
-    name: nextcloud_aio_mastercontainer
-
 networks:
   # Monitoring
   monitoring:
