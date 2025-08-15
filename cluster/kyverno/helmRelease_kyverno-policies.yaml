@@ -17,9 +17,9 @@ spec:
   values:
     policyExclude:
       disallow-host-ports:
-      any:
-      - resources:
-          kinds:
-          - Pod
-          namespaces:
-          - ingress
+        any:
+        - resources:
+            kinds:
+            - Pod
+            namespaces:
+            - ingress
