@@ -14,3 +14,16 @@ spec:
       version: '<4.0.0'
   interval: 10m
   # See https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml
+  values:
+    admissionController:
+      metricsService:
+        create: true
+    backgroundController:
+      metricsService:
+        create: true
+    cleanupController:
+      metricsService:
+        create: true
+    reportsController:
+      metricsService:
+        create: true
