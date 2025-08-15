@@ -16,14 +16,14 @@ spec:
   # See https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml
   values:
     admissionController:
-      metricsService:
-        create: true
+      serviceMonitor:
+        enabled: true
     backgroundController:
-      metricsService:
-        create: true
+      serviceMonitor:
+        enabled: true
     cleanupController:
-      metricsService:
-        create: true
+      serviceMonitor:
+        enabled: true
     reportsController:
-      metricsService:
-        create: true
+      serviceMonitor:
+        enabled: true
