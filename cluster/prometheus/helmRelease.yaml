@@ -11,10 +11,10 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-      version: '<28.0.0'
+      version: '<77.0.0'
   interval: 10m
   targetNamespace: prometheus
-  # See https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
+  # See https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
     grafana:
       enabled: false
