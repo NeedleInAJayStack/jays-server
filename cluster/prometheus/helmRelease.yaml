@@ -24,6 +24,8 @@ spec:
         hosts:
           - k8s-prometheus.localhost
       prometheusSpec:
+        podMonitorSelectorNilUsesHelmValues: false # Collects all PodMonitors in all namespaces
+        serviceMonitorSelectorNilUsesHelmValues: false # Collects all ServiceMonitors in all namespaces
         storageSpec:
           volumeClaimTemplate:
             spec:
