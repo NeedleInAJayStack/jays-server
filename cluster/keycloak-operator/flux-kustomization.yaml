@@ -5,6 +5,7 @@ metadata:
   namespace: keycloak-operator
 spec:
   interval: 10m
+  targetNamespace: keycloak-operator
   sourceRef:
     kind: GitRepository
     name: keycloak-operator
