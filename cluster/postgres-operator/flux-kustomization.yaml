@@ -9,7 +9,7 @@ spec:
   targetNamespace: postgres-operator
   sourceRef:
     kind: GitRepository
-    name: postgres-operator-examples
+    name: postgres-operator
   path: "./kustomize/install/default"
   prune: true
   wait: true
