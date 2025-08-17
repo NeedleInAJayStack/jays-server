@@ -15,3 +15,7 @@ spec:
       resources:
         requests:
           storage: 1Gi
+  users:
+    - name: keycloak
+      databases:
+        - keycloak
