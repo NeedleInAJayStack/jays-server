@@ -12,3 +12,6 @@ spec:
         kind: GitRepository
         name: flux-system # This points to this repo
         namespace: flux-system
+  values:
+    features:
+      OpenTelemetryMetrics: true
