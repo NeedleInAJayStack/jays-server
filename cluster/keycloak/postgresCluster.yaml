@@ -1,22 +1,22 @@
-# apiVersion: postgres-operator.crunchydata.com/v1beta1
-# kind: PostgresCluster
-# metadata:
-#   name: postgres
-#   namespace: keycloak
-#   annotations:
-#     postgres-operator.crunchydata.com/autoCreateUserSchema: "true"
-# spec:
-#   postgresVersion: 17
-#   instances:
-#   - name: keycloak
-#     dataVolumeClaimSpec:
-#       accessModes:
-#       - "ReadWriteOnce"
-#       resources:
-#         requests:
-#           storage: 1Gi
-#   users:
-#     - name: keycloak
-#       databases:
-#         - keycloak
-#   instrumentation: {}
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: postgres
+  namespace: keycloak
+  annotations:
+    postgres-operator.crunchydata.com/autoCreateUserSchema: "true"
+spec:
+  postgresVersion: 17
+  instances:
+  - name: keycloak
+    dataVolumeClaimSpec:
+      accessModes:
+      - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: 1Gi
+  users:
+    - name: keycloak
+      databases:
+        - keycloak
+  instrumentation: {}
