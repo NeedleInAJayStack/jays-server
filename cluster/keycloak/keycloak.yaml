@@ -17,6 +17,6 @@ spec:
   http:
     httpEnabled: true
   hostname:
-    hostname: keycloak.herron.dev
+    hostname: https://keycloak.herron.dev
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
