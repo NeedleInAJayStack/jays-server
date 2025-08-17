@@ -62,11 +62,9 @@ resources:
 # customPodLabels:
 #  example.com: custom-label
 
-# Enable feature gates for PGO, by explicitly seting the value for the flags
-# features:
-#   AutoGrowVolumes: true
-#   Feature2: false
-#   Feature3: somevalue
+# Enable feature gates for PGO, by explicitly setting the value for the flags
+features:
+  OpenTelemetryMetrics: true
 
 # Define extra environment variables for the chart, which will get added to the container's env
 # extraEnv:
