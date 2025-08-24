@@ -119,8 +119,8 @@ static_resources:
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
-                - k8s-recipes.herron.dev
                 - k8s-grafana.herron.dev
+                - recipes.herron.dev
                 - trello-bot.herron.dev
                 - www.herron.dev
               routes:
@@ -263,8 +263,8 @@ static_resources:
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
-                - k8s-recipes.herron.dev
                 - k8s-grafana.herron.dev
+                - recipes.herron.dev
                 - trello-bot.herron.dev
                 - www.herron.dev
               routes:
