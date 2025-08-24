@@ -2,5 +2,5 @@ To create an authorized system, log into the container and use `mosquitto_passwd
 
 ```bash
 docker compose exec -it mosquitto sh
-mosquitto_passwd -c passwd <username>
+mosquitto_passwd -c /mosquitto/config/passwd <username>
 ```

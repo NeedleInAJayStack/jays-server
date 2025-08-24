@@ -135,7 +135,7 @@ services:
       - 9001:9001
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
-      - ./mosquitto/passwd:/mosquitto/config/passwds
+      - ./mosquitto/passwd:/mosquitto/config/passwd
 
   particle-sync:
     container_name: particle-sync
