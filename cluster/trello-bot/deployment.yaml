@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: website
-          image: ghcr.io/needleinajaystack/trello-bot@sha256:614f853e389983b737067b74f23ebd4e40bade75034c84845b7fd9ac8af6224b
+          image: ghcr.io/needleinajaystack/trello-bot:v1.0.0
           ports:
             - containerPort: 3333
           env:
