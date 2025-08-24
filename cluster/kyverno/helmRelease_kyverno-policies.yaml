@@ -16,6 +16,14 @@ spec:
   # See https://github.com/kyverno/kyverno/blob/main/charts/kyverno-policies/values.yaml
   values:
     policyExclude:
+      disallow-host-path:
+        any:
+        # Falco must bind to host filesystem paths for monitoring
+        - resources:
+            kinds:
+            - Pod
+            namespaces:
+            - falco
       disallow-host-ports:
         any:
         - resources:
@@ -23,3 +31,11 @@ spec:
             - Pod
             namespaces:
             - ingress
+      disallow-privileged-containers:
+        any:
+        # Falco must run in privileged mode for eBPF
+        - resources:
+            kinds:
+            - DaemonSet
+            namespaces:
+            - falco
