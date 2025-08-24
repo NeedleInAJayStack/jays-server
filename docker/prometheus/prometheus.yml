@@ -6,22 +6,18 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'node'
-    static_configs:
-      - targets: ['node-exporter:9100']
-  
   - job_name: 'api'
     static_configs:
       - targets: ['api:2112']
-  
+
   - job_name: 'grafana'
     static_configs:
       - targets: ['grafana:3000']
-  
+
   - job_name: timescaledb
     static_configs:
       - targets: ['timescaledb-exporter:9187']
-  
+
   # Unable to get this to work with host networking
   # - job_name: 'homeassistant'
   #   scheme: https
