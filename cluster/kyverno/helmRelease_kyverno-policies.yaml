@@ -21,6 +21,7 @@ spec:
         # Falco must bind to host filesystem paths for monitoring
         - resources:
             kinds:
+            - DaemonSet
             - Pod
             namespaces:
             - falco
@@ -37,5 +38,6 @@ spec:
         - resources:
             kinds:
             - DaemonSet
+            - Pod
             namespaces:
             - falco
