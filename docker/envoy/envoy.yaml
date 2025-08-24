@@ -135,13 +135,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: plex
-            - name: recipes
-              domains: ["recipes.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: recipes
             - name: syncthing
               domains: ["syncthing.herron.dev"]
               routes:
@@ -279,13 +272,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: plex
-            - name: recipes
-              domains: ["recipes.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: recipes
             - name: syncthing
               domains: ["syncthing.herron.dev"]
               routes:
@@ -375,17 +361,6 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 32400
-  - name: recipes
-    type: STATIC
-    load_assignment:
-      cluster_name: recipes
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 9925
   - name: syncthing
     type: STATIC
     load_assignment:
