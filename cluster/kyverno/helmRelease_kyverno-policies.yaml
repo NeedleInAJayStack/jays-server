@@ -16,6 +16,35 @@ spec:
   # See https://github.com/kyverno/kyverno/blob/main/charts/kyverno-policies/values.yaml
   values:
     policyExclude:
+      disallow-host-namespaces:
+        any:
+        # OpenEBS ZFS operator requires host namespaces
+        - resources:
+            kinds:
+            - DaemonSet
+            - Pod
+            names:
+            - openebs-zfs-localpv-node*
+            namespaces:
+            - openebs
+        # Calico requires host networking for CNI functionality
+        - resources:
+            kinds:
+            - DaemonSet
+            - Pod
+            names:
+            - calico-node*
+            namespaces:
+            - kube-system
+        # Prometheus Node Exporter requires host networking for metrics collection
+        - resources:
+            kinds:
+            - DaemonSet
+            - Pod
+            names:
+            - prometheus-*-node-exporter*
+            namespaces:
+            - prometheus
       disallow-host-path:
         any:
         # Falco must bind to host filesystem paths for monitoring
@@ -25,13 +54,57 @@ spec:
             - Pod
             namespaces:
             - falco
-      disallow-host-ports:
-        any:
+        # Kube system requires host paths for CNI functionality
         - resources:
             kinds:
             - Pod
+            names:
+            - calico-node*
+            namespaces:
+            - kube-system
+        # OpenEBS operators require host paths
+        - resources:
+            kinds:
+            - Pod
+            names:
+            - openebs-*
+            namespaces:
+            - openebs
+        # Prometheus Node Exporter requires host paths for metrics collection
+        - resources:
+            kinds:
+            - Pod
+            names:
+            - prometheus-*-node-exporter*
+            namespaces:
+            - prometheus
+      disallow-host-ports:
+        any:
+        # Nginx Ingress Controller requires host ports
+        - resources:
+            kinds:
+            - DaemonSet
+            - Pod
+            names:
+            - nginx-ingress-microk8s-controller*
             namespaces:
             - ingress
+        # OpenEBS ZFS operator requires host ports
+        - resources:
+            kinds:
+            - Pod
+            names:
+            - openebs-zfs*
+            namespaces:
+            - openebs
+        # Prometheus Node Exporter requires host ports for metrics collection
+        - resources:
+            kinds:
+            - Pod
+            names:
+            - prometheus-*-node-exporter*
+            namespaces:
+            - prometheus
       disallow-privileged-containers:
         any:
         # Falco must run in privileged mode for eBPF
@@ -41,3 +114,19 @@ spec:
             - Pod
             namespaces:
             - falco
+        # Kube System requires privileged containers for CNI functionality
+        - resources:
+            kinds:
+            - Pod
+            names:
+            - calico-node*
+            namespaces:
+            - kube-system
+        # OpenEBS LVM operator requires privileged containers for storage management
+        - resources:
+            kinds:
+            - Pod
+            names:
+            - openebs-lvm*
+            namespaces:
+            - openebs
