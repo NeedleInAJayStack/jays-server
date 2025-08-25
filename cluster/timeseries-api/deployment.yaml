@@ -22,3 +22,55 @@ spec:
             - containerPort: 80
             - name: metrics
               containerPort: 2112
+          env:
+            - name: HOST
+              value: localhost
+            - name: PORT
+              value: '80'
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: timeseries-api
+                  key: username
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: timeseries-api
+                  key: password
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: timeseries-api
+                  key: api-key
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pguser-timeseries-api
+                  key: host
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pguser-timeseries-api
+                  key: dbname
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pguser-timeseries-api
+                  key: user
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pguser-timeseries-api
+                  key: password
+            - name: MQTT_ADDRESS
+              value: tcp://JaysDesktop.local:1883
+            - name: MQTT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: timeseries-api
+                  key: mqttUsername
+            - name: MQTT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: timeseries-api
+                  key: mqttPassword
