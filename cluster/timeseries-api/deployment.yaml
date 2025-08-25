@@ -62,6 +62,8 @@ spec:
                 secretKeyRef:
                   name: postgres-pguser-timeseries-api
                   key: password
+            - name: DATABASE_SSL
+              value: prefer
             - name: MQTT_ADDRESS
               value: tcp://JaysDesktop.local:1883
             - name: MQTT_USERNAME
