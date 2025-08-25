@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: timeseries-api
+  namespace: timeseries-api
+spec:
+  selector:
+    matchLabels:
+      app: timeseries-api
+  endpoints:
+  - path: /metrics
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - timeseries-api

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeseries-api
+  namespace: timeseries-api
+  labels:
+    app: timeseries-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timeseries-api
+  template:
+    metadata:
+      labels:
+        app: timeseries-api
+    spec:
+      containers:
+        - name: timeseries-api
+          image: ghcr.io/needleinajaystack/go-timeseries-api:main
+          ports:
+            - containerPort: 80
+            - name: metrics
+              containerPort: 2112

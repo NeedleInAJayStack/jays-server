@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: timeseries-api
+  namespace: timeseries-api
+  labels:
+    app: timeseries-api
+spec:
+  ingressClassName: public
+  rules:
+    - host: k8s-data.herron.dev
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: timeseries-api
+              port:
+                number: 80
+    - host: k8s-utility-api.herron.dev
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: timeseries-api
+              port:
+                number: 80
