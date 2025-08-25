@@ -41,7 +41,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: timeseries-api
-                  key: api-key
+                  key: apiKey
             - name: DATABASE_HOST
               valueFrom:
                 secretKeyRef:
