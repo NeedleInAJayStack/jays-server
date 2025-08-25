@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: timeseries-api
-          image: ghcr.io/needleinajaystack/go-timeseries-api:main
+          image: ghcr.io/needleinajaystack/go-timeseries-api@sha256:afb08ed58478ecf4fe9493a627ab002f92e95b33a543e7050e4a8ce35016e5dd
           ports:
             - containerPort: 80
             - name: metrics
