@@ -5,5 +5,4 @@ metadata:
   namespace: flux-system
 spec:
   podMetricsEndpoints:
-  - path: /metrics
-    port: 8080
+  - portNumber: 8080
