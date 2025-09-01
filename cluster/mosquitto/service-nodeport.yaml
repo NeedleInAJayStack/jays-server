@@ -9,7 +9,7 @@ spec:
   type: NodePort
   ports:
   - port: 1883
-    nodePort: 1883
+    nodePort: 31883
     protocol: TCP
   selector:
     app: mosquitto
