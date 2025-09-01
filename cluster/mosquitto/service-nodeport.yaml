@@ -1,0 +1,15 @@
+# This provides local-network access to the MQTT broker by binding it directly
+# to the port (since HTTP ingress won't work)
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto-nodeport
+  namespace: mosquitto
+spec:
+  type: NodePort
+  ports:
+  - port: 1883
+    nodePort: 1883
+    protocol: TCP
+  selector:
+    app: mosquitto
