@@ -20,4 +20,4 @@ data:
     acl_file /mosquitto/config/acl.conf
   acl.conf: |-
     user jay
-    pattern readwrite
+    pattern readwrite #
