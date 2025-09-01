@@ -373,7 +373,7 @@ static_resources:
             address:
               socket_address:
                 address: 127.0.0.1
-                port_value: 8883
+                port_value: 31883
   - name: plex
     type: STATIC
     load_assignment:
