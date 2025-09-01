@@ -293,6 +293,34 @@ static_resources:
                   prefix: "/"
                 redirect:
                   host_redirect: "www.herron.dev"
+  - name: mqtt
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 1883
+    listener_filters: # Required for SNI for filter server name matching
+    - name: "envoy.filters.listener.tls_inspector"
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.filters.listener.tls_inspector.v3.TlsInspector
+    filter_chains:
+    - filter_chain_match:
+        server_names: ["*.herron.dev"]
+      transport_socket:
+        name: herron.dev
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+            - certificate_chain:
+                filename: "/etc/letsencrypt/live/herron.dev/fullchain.pem"
+              private_key:
+                filename: "/etc/letsencrypt/live/herron.dev/privkey.pem"
+      filters:
+      - name: herron.dev
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy
+          stat_prefix: herron-dev
+          cluster: mqtt
 
   clusters:
   - name: cal
@@ -350,6 +378,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 5080
+  - name: mqtt
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: mqtt
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 1883
   - name: plex
     type: STATIC
     load_assignment:
