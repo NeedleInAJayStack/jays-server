@@ -103,17 +103,6 @@ services:
     volumes:
       - ~/Data/docker/HomeAssistant:/config
 
-  mosquitto:
-    container_name: mosquitto
-    image: eclipse-mosquitto
-    restart: unless-stopped
-    ports:
-      - 8883:1883
-      - 9001:9001
-    volumes:
-      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
-      - ./mosquitto/passwd:/mosquitto/config/passwd
-
   particle-sync:
     container_name: particle-sync
     image: registry.gitlab.com/needleinajaystack/particle-sync:latest
