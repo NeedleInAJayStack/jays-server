@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: k8s-data.herron.dev
+    - host: data.herron.dev
       http:
         paths:
         - pathType: Prefix
@@ -18,7 +18,7 @@ spec:
               name: timeseries-api
               port:
                 number: 80
-    - host: k8s-utility-api.herron.dev
+    - host: utility-api.herron.dev
       http:
         paths:
         - pathType: Prefix
