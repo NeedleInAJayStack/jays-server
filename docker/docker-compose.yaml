@@ -103,13 +103,6 @@ services:
     volumes:
       - ~/Data/docker/HomeAssistant:/config
 
-  particle-sync:
-    container_name: particle-sync
-    image: registry.gitlab.com/needleinajaystack/particle-sync:latest
-    restart: unless-stopped
-    env_file:
-      - ./particle-sync/.env
-
   # Plex
     # https://hub.docker.com/r/plexinc/pms-docker
   plex:
