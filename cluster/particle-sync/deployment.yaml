@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: particle-sync
+  namespace: particle-sync
+  labels:
+    app: particle-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: particle-sync
+  template:
+    metadata:
+      labels:
+        app: particle-sync
+    spec:
+      containers:
+        - name: particle-sync
+          image: registry.gitlab.com/needleinajaystack/particle-sync@sha256:f3f1d49dc9bbe38482051f860a8231a2f88f3517f620d466414e6c5754a8211e
+          env:
+            - name: API_USER
+              valueFrom:
+                secretKeyRef:
+                  name: particle-sync
+                  key: apiUser
+            - name: API_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: particle-sync
+                  key: apiPassword
+            - name: PARTICLE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: particle-sync
+                  key: particleUser
+            - name: PARTICLE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: particle-sync
+                  key: particlePassword
