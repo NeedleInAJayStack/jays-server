@@ -9,6 +9,7 @@ data:
     type = htpasswd
     htpasswd_filename = /etc/radicale/users
     htpasswd_encryption = plain
+    cache_logins = true
 
     [server]
     hosts = 0.0.0.0:5232, [::]:5232
