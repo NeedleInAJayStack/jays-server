@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radicale
+  namespace: radicale
+  labels:
+    app: radicale
+spec:
+  rules:
+    - host: radicale.herron.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radicale
+                port:
+                  name: radicale

@@ -5,9 +5,9 @@ metadata:
   namespace: radicale
 spec:
   ports:
-    - port: 5232
-      targetPort: radicale
+    - name: radicale
+      port: 5232
       protocol: TCP
-      name: radicale
+      targetPort: radicale
   selector:
     app: radicale
