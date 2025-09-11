@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: particle-sync
-          image: registry.gitlab.com/needleinajaystack/particle-sync@sha256:f3f1d49dc9bbe38482051f860a8231a2f88f3517f620d466414e6c5754a8211e
+          image: ghcr.io/needleinajaystack/particle-sync:v1.0.0
           env:
             - name: API_USER
               valueFrom:
