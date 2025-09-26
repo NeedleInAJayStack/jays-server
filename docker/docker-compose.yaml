@@ -56,22 +56,6 @@ services:
       # You must provide your own certificate files. See `ansible` directory for certbot config.
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
-  # Monitoring
-    # https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/#run-grafana-via-docker-compose
-  grafana:
-    container_name: grafana
-    image: grafana/grafana
-    restart: unless-stopped
-    environment:
-      - GF_SERVER_ROOT_URL=https://grafana.herron.dev/
-    networks:
-      - timescaledb
-      - monitoring
-    ports:
-      - 3000:3000
-    user: '1000' # Must match the user id of the user who owns the data directory
-    volumes:
-      - ~/Data/docker/grafana:/var/lib/grafana
   prometheus:
     container_name: prometheus
     image: prom/prometheus:latest
