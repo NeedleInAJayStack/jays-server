@@ -21,4 +21,4 @@ spec:
     ingress:
       enabled: true
       hosts:
-        - k8s-grafana.herron.dev
+        - grafana.herron.dev
