@@ -1,6 +1,6 @@
 This contains a FluxCD configuration that is watched by a local microk8s cluster.
 
-The following addons must be enabled and configured
+The following addons must be enabled and configured:
 
 ## Ingress
 https://microk8s.io/docs/ingress
@@ -21,7 +21,10 @@ Furthermore, the Ingress Controller must avoid overlapping ports with the `docke
 ...
 ```
 
-## Secrets
+## Host Access
+https://microk8s.io/docs/addon-host-access
+
+# Secrets
 
 Secrets are encrypted with SOPS and committed to the git repository. To do this, create a normal k8s secret, and then run:
 

@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  chart:
+    spec:
+      chart: grafana
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      version: '<11.0.0'
+  interval: 10m
+  # Defaults: https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+  values:
+    persistence:
+      enabled: true
+    serviceMonitor:
+      enabled: true
+    ingress:
+      enabled: true
+      hosts:
+        - grafana-k8s.herron.dev
