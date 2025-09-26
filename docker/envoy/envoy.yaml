@@ -99,13 +99,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: data
-            - name: grafana
-              domains: ["grafana.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: grafana
             - name: home
               domains: ["home.herron.dev"]
               routes:
@@ -119,7 +112,7 @@ static_resources:
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
-                - k8s-grafana.herron.dev
+                - grafana.herron.dev
                 - radicale.herron.dev
                 - recipes.herron.dev
                 - trello-bot.herron.dev
@@ -237,13 +230,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: data
-            - name: grafana
-              domains: ["grafana.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: grafana
             - name: home
               domains: ["home.herron.dev"]
               routes:
@@ -257,7 +243,7 @@ static_resources:
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
-                - k8s-grafana.herron.dev
+                - grafana.herron.dev
                 - radicale.herron.dev
                 - recipes.herron.dev
                 - trello-bot.herron.dev
@@ -332,17 +318,6 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8082
-  - name: grafana
-    type: STATIC
-    load_assignment:
-      cluster_name: grafana
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 3000
   - name: home
     type: STATIC
     load_assignment:
