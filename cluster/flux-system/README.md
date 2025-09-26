@@ -10,6 +10,7 @@ Create a personal access token, and run:
 ```bash
 export GITHUB_TOKEN=<gh-token>
 flux bootstrap github \
+  --token-auth \
   --owner=NeedleInAJayStack \
   --repository=jays-server \
   --branch=main \
@@ -17,7 +18,8 @@ flux bootstrap github \
   --personal
 ```
 
-To update the personal access token used by Flux (like after expiration), just regenerate the token, delete the `flux-system` secret, and run the commands above again.
+To update the personal access token used by Flux (like after expiration), just regenerate the token and update the
+`flux-system` `data.password` to be the base64-encoded version of the password.
 
 ## SOPS
 
