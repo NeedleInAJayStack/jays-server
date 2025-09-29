@@ -6,6 +6,7 @@ metadata:
   annotations:
     postgres-operator.crunchydata.com/autoCreateUserSchema: "true"
 spec:
+  image: ghcr.io/needleinajaystack/jays-server/timescaledb:16.10-2534
   instances:
   - name: timeseries-api
     dataVolumeClaimSpec:
