@@ -9,7 +9,7 @@ spec:
       chart: stackgres-operator
       sourceRef:
         name: stackgres-operator
-        version: '<2.0.0'
+      version: '<2.0.0'
   values:
     adminui:
       service:
