@@ -10,6 +10,8 @@ spec:
       sourceRef:
         name: stackgres-operator
       version: '<2.0.0'
+  interval: 10m
+  # Defaults: https://stackgres.io/doc/latest/install/helm/parameters/
   values:
     adminui:
       service:
