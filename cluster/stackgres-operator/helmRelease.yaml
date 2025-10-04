@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: stackgres-operator
+  namespace: stackgres-operator
+spec:
+  chart:
+    spec:
+      chart: stackgres-operator
+      sourceRef:
+        name: stackgres-operator
+        version: '<2.0.0'
+  values:
+    adminui:
+      service:
+        type: LoadBalancer
