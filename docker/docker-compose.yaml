@@ -14,35 +14,6 @@ services:
       - monitoring
       - timescaledb
 
-  # Davical
-    # Sourced from https://github.com/Elrondo46/davical-docker-standalone/blob/main/docker-compose.yml
-    # Set the following environment variables:
-    # - POSTGRES_PASSWORD: Should match PGSQL_ROOT_PASS
-    # - PGSQL_ROOT_PASS: Should match POSTGRES_PASSWORD
-    # - PASSDAVDB
-    # - ADMINDAVICALPASS
-  db: # This CANNOT be changed from db (even if changed below), since it appears to be hardcoded in DAViCal config. :(
-    image: postgres:14
-    restart: unless-stopped
-    volumes:
-      - ~/Data/docker/davical/postgresql/:/var/lib/postgresql/data
-    user: '1000'
-  davical:
-    container_name: davical
-    image: tuxnvape/davical-standalone
-    restart: unless-stopped
-    env_file: ./davical/.env
-    environment:
-      HOST_NAME: "herron.dev"
-      DBHOST: "db"
-      LANG: "en_US.UTF-8"
-      LC_ALL: "en_US.UTF-8"
-      DAVICAL_LANG: "en_US"
-    ports:
-      - 8083:80
-    volumes:
-      - ~/Data/docker/davical/config:/config
-
   # Envoy
   envoy:
     container_name: envoy
