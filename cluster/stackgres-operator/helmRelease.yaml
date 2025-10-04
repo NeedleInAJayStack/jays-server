@@ -8,6 +8,7 @@ spec:
     spec:
       chart: stackgres-operator
       sourceRef:
+        kind: HelmRepository
         name: stackgres-operator
       version: '<2.0.0'
   interval: 10m
