@@ -43,25 +43,19 @@ spec:
                   name: timeseries-api
                   key: apiKey
             - name: DATABASE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-pguser-timeseries-api
-                  key: host
+              value: cluster
             - name: DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-pguser-timeseries-api
-                  key: dbname
+              value: timeseries_api
             - name: DATABASE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: postgres-pguser-timeseries-api
-                  key: user
+                  name: cluster
+                  key: superuser-username
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-pguser-timeseries-api
-                  key: password
+                  name: cluster
+                  key: superuser-password
             - name: DATABASE_SSL
               value: prefer
             - name: MQTT_ADDRESS
