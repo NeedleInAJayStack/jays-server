@@ -6,7 +6,7 @@ metadata:
 spec:
   postgres:
     version: '17'
-  instances: 3
+  instances: 1
   pods:
     persistentVolume:
       size: '10Gi'
