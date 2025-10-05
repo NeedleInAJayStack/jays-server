@@ -1,0 +1,14 @@
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  namespace: timeseries-api
+  name: cluster
+spec:
+  postgres:
+    version: '17'
+  instances: 3
+  pods:
+    persistentVolume:
+      size: '10Gi'
+  configurations:
+    sgPostgresConfig: postgres-config
