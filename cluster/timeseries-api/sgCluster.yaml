@@ -6,6 +6,8 @@ metadata:
 spec:
   postgres:
     version: '17'
+    extensions:
+      - name: timescaledb
   instances: 1
   pods:
     persistentVolume:
