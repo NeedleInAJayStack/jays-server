@@ -92,6 +92,13 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: cal
+            - name: data
+              domains: ["data.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: data
             - name: home
               domains: ["home.herron.dev"]
               routes:
@@ -102,7 +109,6 @@ static_resources:
             - name: kubernetes
               domains:
                 - bitwarden.herron.dev
-                - data.herron.dev
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
@@ -110,7 +116,6 @@ static_resources:
                 - radicale.herron.dev
                 - recipes.herron.dev
                 - trello-bot.herron.dev
-                - utility-api.herron.dev
                 - www.herron.dev
               routes:
               - match:
@@ -131,6 +136,13 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: syncthing
+            - name: utility-api
+              domains: ["utility-api.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: utility-api
             - name: catchall
               domains: ["*"]
               routes:
@@ -211,6 +223,13 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: cal
+            - name: data
+              domains: ["data.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: data
             - name: home
               domains: ["home.herron.dev"]
               routes:
@@ -221,7 +240,6 @@ static_resources:
             - name: kubernetes
               domains:
                 - bitwarden.herron.dev
-                - data.herron.dev
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
@@ -229,7 +247,6 @@ static_resources:
                 - radicale.herron.dev
                 - recipes.herron.dev
                 - trello-bot.herron.dev
-                - utility-api.herron.dev
                 - www.herron.dev
               routes:
               - match:
@@ -250,6 +267,13 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: syncthing
+            - name: utility-api
+              domains: ["utility-api.herron.dev"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: utility-api
             - name: catchall
               domains: ["*"]
               routes:
@@ -283,6 +307,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8083
+  - name: data
+    type: STATIC
+    load_assignment:
+      cluster_name: data
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8082
   - name: home
     type: STATIC
     load_assignment:
@@ -338,6 +373,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8384
+  - name: utility-api
+    type: STATIC
+    load_assignment:
+      cluster_name: utility-api
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8082
   - name: www
     type: STATIC
     load_assignment:
