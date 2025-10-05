@@ -7,7 +7,7 @@ spec:
   postgres:
     version: '17'
     extensions:
-      - name: timescaledb
+      - name: timescaledb_tsl
   instances: 1
   pods:
     persistentVolume:
