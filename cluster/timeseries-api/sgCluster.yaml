@@ -17,3 +17,5 @@ spec:
       size: '10Gi'
   configurations:
     sgPostgresConfig: postgres-config
+    observability:
+      prometheusAutobind: true
