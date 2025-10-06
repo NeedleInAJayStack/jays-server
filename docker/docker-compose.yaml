@@ -75,6 +75,3 @@ networks:
   monitoring:
     name: monitoring
     driver: bridge
-  timescaledb:
-    name: timescaledb
-    driver: bridge
