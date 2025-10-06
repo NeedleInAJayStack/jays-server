@@ -1,0 +1,16 @@
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  namespace: health-db
+  name: cluster
+spec:
+  postgres:
+    version: '17'
+  instances: 1
+  pods:
+    persistentVolume:
+      size: '10Gi'
+  configurations:
+    sgPostgresConfig: postgres-config
+    observability:
+      prometheusAutobind: true
