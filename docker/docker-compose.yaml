@@ -65,37 +65,6 @@ services:
       - /home/jay/Video:/data/Video
       - /home/jay/Image:/data/Image
 
-  timescaledb:
-    container_name: timescaledb
-    image: timescale/timescaledb:2.22.1-pg17
-    restart: unless-stopped
-    command: -c config_file=/etc/postgresql.conf
-    env_file: ./timescaledb/.env
-    ports:
-      - 5432:5432
-    networks:
-      - timescaledb
-    volumes:
-      - ~/Data/docker/timescaledb/:/var/lib/postgresql/data
-      - ./timescaledb/postgresql.conf:/etc/postgresql.conf
-      - /etc/passwd:/etc/passwd:ro # Bind-mounted for user access
-    user: 1000:1000
-  timescaledb-exporter:
-    container_name: timescaledb-exporter
-    image: quay.io/prometheuscommunity/postgres-exporter
-    restart: unless-stopped
-    env_file: ./timescaledb-exporter/.env # Include DATA_SOURCE_PASS
-    environment:
-      DATA_SOURCE_URI: "timescaledb:5432/postgres?sslmode=disable"
-      DATA_SOURCE_USER: postgres
-    expose:
-      - 9187
-    networks:
-      - timescaledb
-      - monitoring
-    volumes:
-      - ./timescaledb-exporter/postgres_exporter.yml:/postgres_exporter.yml:ro
-
 volumes:
   # Monitoring
   prometheus_data:
