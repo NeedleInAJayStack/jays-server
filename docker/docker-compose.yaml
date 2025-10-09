@@ -14,24 +14,6 @@ services:
       # You must provide your own certificate files. See `ansible` directory for certbot config.
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
 
-  prometheus:
-    container_name: prometheus
-    image: prom/prometheus:latest
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--web.enable-lifecycle'
-    restart: unless-stopped
-    ports:
-      - 9090:9090
-    networks:
-      - monitoring
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
-
   # Home Assistant
     # https://www.home-assistant.io/installation/linux#install-home-assistant-container
   homeassistant:
