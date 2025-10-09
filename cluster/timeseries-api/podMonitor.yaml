@@ -1,5 +1,5 @@
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: timeseries-api
   namespace: timeseries-api
@@ -7,9 +7,6 @@ spec:
   selector:
     matchLabels:
       app: timeseries-api
-  endpoints:
+  podMetricsEndpoints:
   - path: /metrics
     port: metrics
-  namespaceSelector:
-    matchNames:
-    - timeseries-api
