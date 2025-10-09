@@ -17,3 +17,13 @@ spec:
                 name: radicale
                 port:
                   name: radicale
+    - host: cal.herron.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radicale
+                port:
+                  name: radicale
