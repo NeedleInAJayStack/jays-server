@@ -40,7 +40,10 @@ spec:
       compactor:
         retention_enabled: true
         delete_request_store: s3
+
     lokiCanary:
+      enabled: false
+    test:
       enabled: false
 
     minio:
