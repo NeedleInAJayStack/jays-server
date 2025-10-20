@@ -15,6 +15,10 @@ spec:
   interval: 10m
   # See https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-collector/values.yaml
   values:
+    image:
+      repository: otel/opentelemetry-collector
+    command:
+      name: otelcol
     mode: daemonset
     presets:
       logsCollection:
