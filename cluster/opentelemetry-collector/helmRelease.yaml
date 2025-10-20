@@ -17,8 +17,6 @@ spec:
   values:
     image:
       repository: otel/opentelemetry-collector-contrib
-    command:
-      name: otelcol
     mode: daemonset
     presets:
       logsCollection:
