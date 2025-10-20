@@ -22,14 +22,15 @@ spec:
       exporters:
         otlphttp:
           endpoint: http://loki.loki/otlp
-      pipelines:
-        logs:
-          exporters:
-            - otlphttp
-        metrics:
-          exporters: []
-        traces:
-          exporters: []
+      service:
+        pipelines:
+          logs:
+            exporters:
+              - otlphttp
+          metrics:
+            exporters: []
+          traces:
+            exporters: []
     presets:
       logsCollection:
         enabled: true
