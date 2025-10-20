@@ -21,9 +21,7 @@ spec:
     config:
       exporters:
         otlphttp:
-          endpoint: http://loki.loki/otlp
-          tls:
-            insecure: true
+          endpoint: http://loki.loki:3100/otlp
       service:
         pipelines:
           logs:
