@@ -27,10 +27,8 @@ spec:
           logs:
             exporters:
               - otlphttp
-          metrics:
-            exporters: []
-          traces:
-            exporters: []
+          metrics: null
+          traces: null
     presets:
       logsCollection:
         enabled: true
