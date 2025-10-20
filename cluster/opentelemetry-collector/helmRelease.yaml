@@ -18,6 +18,18 @@ spec:
     image:
       repository: otel/opentelemetry-collector-contrib
     mode: daemonset
+    config:
+      exporters:
+        otlphttp:
+          endpoint: http://loki.loki/otlp
+      pipelines:
+        logs:
+          exporters:
+            - otlphttp
+        metrics:
+          exporters: []
+        traces:
+          exporters: []
     presets:
       logsCollection:
         enabled: true
@@ -27,3 +39,7 @@ spec:
         enabled: true
     podMonitor:
       enabled: true
+    resources:
+      limits:
+        cpu: 250m
+        memory: 512Mi
