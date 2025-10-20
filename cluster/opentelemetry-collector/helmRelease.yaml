@@ -16,7 +16,7 @@ spec:
   # See https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-collector/values.yaml
   values:
     image:
-      repository: otel/opentelemetry-collector
+      repository: otel/opentelemetry-collector-contrib
     command:
       name: otelcol
     mode: daemonset
