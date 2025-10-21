@@ -4,6 +4,8 @@ metadata:
   namespace: health-db
   name: postgres-config
 spec:
+  developer:
+    logLevel: WARN
   postgresVersion: '17'
   postgresql.conf:
     shared_buffers: '512MB'

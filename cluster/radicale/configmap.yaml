@@ -13,3 +13,6 @@ data:
 
     [server]
     hosts = 0.0.0.0:5232, [::]:5232
+
+    [logging]
+    level = warning
