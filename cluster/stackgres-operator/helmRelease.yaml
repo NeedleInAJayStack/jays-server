@@ -17,3 +17,5 @@ spec:
     adminui:
       service:
         type: LoadBalancer
+    developer:
+      logLevel: WARN
