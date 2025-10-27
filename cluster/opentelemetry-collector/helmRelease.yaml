@@ -32,7 +32,6 @@ spec:
     presets:
       logsCollection:
         enabled: true
-        includeCollectorLogs: true
     ports:
       metrics:
         enabled: true
