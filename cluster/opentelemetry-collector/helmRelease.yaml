@@ -31,7 +31,8 @@ spec:
           traces: null
     presets:
       logsCollection:
-        enabled: true
+        # Disabled due to high open-telemetry CPU usage.
+        enabled: false
     ports:
       metrics:
         enabled: true
