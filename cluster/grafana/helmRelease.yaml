@@ -20,5 +20,6 @@ spec:
       enabled: true
     ingress:
       enabled: true
+      ingressClassName: public
       hosts:
         - grafana.herron.dev

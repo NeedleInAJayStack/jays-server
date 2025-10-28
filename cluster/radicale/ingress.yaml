@@ -6,6 +6,7 @@ metadata:
   labels:
     app: radicale
 spec:
+  ingressClassName: public
   rules:
     - host: radicale.herron.dev
       http:

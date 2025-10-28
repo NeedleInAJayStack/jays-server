@@ -6,6 +6,7 @@ metadata:
   labels:
     app: mosquitto
 spec:
+  ingressClassName: public
   rules:
     - host: mosquitto.herron.dev
       http:
