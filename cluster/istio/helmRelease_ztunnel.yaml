@@ -13,3 +13,5 @@ spec:
       version: '<2.0.0'
   interval: 10m
   # See https://github.com/istio/istio/blob/master/manifests/charts/ztunnel/values.yaml
+  values:
+    istioNamespace: istio
