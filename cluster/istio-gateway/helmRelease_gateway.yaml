@@ -16,3 +16,5 @@ spec:
   values:
     autoscaling:
       enabled: false
+    service:
+      type: NodePort
