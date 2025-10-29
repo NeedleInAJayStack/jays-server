@@ -97,7 +97,6 @@ static_resources:
                 - bitwarden.herron.dev
                 - cal.herron.dev
                 - data.herron.dev
-                - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
                 - grafana.herron.dev
@@ -111,6 +110,14 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: kubernetes
+            - name: kubernetes-istio
+              domains:
+                - harbor.herron.dev
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: kubernetes-istio
             - name: plex
               domains: ["plex.herron.dev"]
               routes:
@@ -224,6 +231,14 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: kubernetes
+            - name: kubernetes-istio
+              domains:
+                - harbor.herron.dev
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: kubernetes-istio
             - name: plex
               domains: ["plex.herron.dev"]
               routes:
@@ -282,6 +297,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 5080
+  - name: kubernetes-istio
+    type: STATIC
+    load_assignment:
+      cluster_name: kubernetes-istio
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 30080
   - name: mqtt
     type: STRICT_DNS
     load_assignment:
