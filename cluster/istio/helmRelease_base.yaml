@@ -12,3 +12,4 @@ spec:
         name: istio
       version: '<2.0.0'
   interval: 10m
+  # See https://github.com/istio/istio/blob/master/manifests/charts/base/values.yaml
