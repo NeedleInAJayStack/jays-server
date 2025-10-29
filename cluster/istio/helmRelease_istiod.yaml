@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: istiod
+  namespace: istio
+spec:
+  chart:
+    spec:
+      chart: istiod
+      interval: 10m
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+      version: '<2.0.0'
+  interval: 10m
+  values:
+    profile: ambient
