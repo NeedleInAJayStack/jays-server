@@ -18,7 +18,7 @@ spec:
   values:
     expose:
       ingress:
-        className: istio
+        className: public
         hosts:
           core: harbor.herron.dev
       tls:
