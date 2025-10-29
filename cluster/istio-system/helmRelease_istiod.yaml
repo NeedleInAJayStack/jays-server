@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: istiod
-  namespace: istio
+  namespace: istio-system
 spec:
   chart:
     spec:
@@ -17,5 +17,3 @@ spec:
   values:
     profile: ambient
     autoscaleEnabled: false
-    global:
-      istioNamespace: istio
