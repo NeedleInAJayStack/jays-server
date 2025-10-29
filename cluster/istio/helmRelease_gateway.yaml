@@ -16,3 +16,5 @@ spec:
   values:
     autoscaling:
       enabled: false
+    podAnnotations:
+      sidecar.istio.io/inject: null
