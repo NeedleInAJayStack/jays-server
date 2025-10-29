@@ -14,4 +14,5 @@ spec:
   interval: 10m
   # See https://github.com/istio/istio/blob/master/manifests/charts/gateway/values.yaml
   values:
-    autoscalingEnabled: false
+    autoscaling:
+      enabled: false

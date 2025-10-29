@@ -17,3 +17,5 @@ spec:
   values:
     profile: ambient
     autoscaleEnabled: false
+    global:
+      istioNamespace: istio
