@@ -217,7 +217,6 @@ static_resources:
                 - bitwarden.herron.dev
                 - cal.herron.dev
                 - data.herron.dev
-                - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
                 - grafana.herron.dev
