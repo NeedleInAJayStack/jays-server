@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kubernetes-ingress
+  namespace: haproxy
+spec:
+  chart:
+    spec:
+      chart: kubernetes-ingress
+      sourceRef:
+        kind: HelmRepository
+        name: haproxy
+      version: '<2.0.0'
+  interval: 10m
+  # See https://github.com/haproxytech/helm-charts/blob/main/kubernetes-ingress/values.yaml
+  values:
+    controller:
+      kind: DaemonSet
+      daemonSet:
+        useHostPort: true
+      service:
+        enabled: false
+        hostPorts:
+          http: 30080
+          https: 30443
+          stat: 31024
+      podMonitor:
+        enabled: true
