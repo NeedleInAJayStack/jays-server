@@ -20,6 +20,7 @@ spec:
         useHostPort: true
       service:
         enabled: false
+      daemonset:
         hostPorts:
           http: 30080
           https: 30443
