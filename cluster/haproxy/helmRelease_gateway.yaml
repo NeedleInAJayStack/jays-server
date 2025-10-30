@@ -16,7 +16,7 @@ spec:
   values:
     controller:
       kind: DaemonSet
-      daemonSet:
+      daemonset:
         useHostPort: true
         hostPorts:
           http: 30080
