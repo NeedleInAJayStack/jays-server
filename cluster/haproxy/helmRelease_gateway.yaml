@@ -19,9 +19,11 @@ spec:
       daemonset:
         useHostPort: true
         hostPorts:
+          admin: 30060
           http: 30080
           https: 30443
           stat: 31024
+          quic: 30443
       service:
         enabled: false
       podMonitor:
