@@ -271,17 +271,6 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8123
-  - name: kubernetes
-    type: STATIC
-    load_assignment:
-      cluster_name: kubernetes
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 5080
   - name: kubernetes-haproxy
     type: STATIC
     load_assignment:
