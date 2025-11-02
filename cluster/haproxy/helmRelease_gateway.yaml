@@ -24,6 +24,8 @@ spec:
           https: 30443
           stat: 31024
           quic: 30443
+      defaultTLSSecret:
+        enabled: false
       service:
         enabled: false
       podMonitor:
