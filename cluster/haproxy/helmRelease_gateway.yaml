@@ -16,8 +16,8 @@ spec:
   values:
     controller:
       kind: DaemonSet
+      unprivileged: false
       daemonset:
-        useHostNetwork: true
         useHostPort: true
         hostPorts:
           admin: 30060
@@ -25,7 +25,6 @@ spec:
           https: 30443
           stat: 31024
           quic: 30443
-      dnsPolicy: ClusterFirstWithHostNet
       service:
         enabled: false
       podMonitor:
