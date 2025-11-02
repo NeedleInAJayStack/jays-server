@@ -16,7 +16,6 @@ spec:
   values:
     controller:
       kind: DaemonSet
-      unprivileged: false
       daemonset:
         useHostPort: true
         hostPorts:
