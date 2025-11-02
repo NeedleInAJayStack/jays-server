@@ -6,7 +6,7 @@ metadata:
   labels:
     app: vaultwarden
 spec:
-  ingressClassName: public
+  ingressClassName: haproxy
   rules:
     - host: bitwarden.herron.dev
       http:

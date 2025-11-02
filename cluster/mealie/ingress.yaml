@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mealie
 spec:
-  ingressClassName: public
+  ingressClassName: haproxy
   rules:
     - host: recipes.herron.dev
       http:

@@ -19,7 +19,7 @@ spec:
   hostname:
     hostname: https://keycloak.herron.dev
   ingress:
-    className: public
+    className: haproxy
   proxy:
     headers: xforwarded
   additionalOptions:

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: trello-bot
 spec:
-  ingressClassName: public
+  ingressClassName: haproxy
   rules:
     - host: trello-bot.herron.dev
       http:

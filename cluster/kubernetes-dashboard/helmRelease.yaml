@@ -20,7 +20,7 @@ spec:
         enabled: true
         hosts:
           - kubernetes-dashboard.herron.dev
-        ingressClassName: public
+        ingressClassName: haproxy
         tls:
           enabled: false
         useDefaultAnnotations: false

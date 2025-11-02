@@ -92,26 +92,19 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: home
-            - name: kubernetes
+            - name: kubernetes-haproxy
               domains:
                 - bitwarden.herron.dev
                 - cal.herron.dev
                 - data.herron.dev
+                - grafana.herron.dev
+                - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
-                - grafana.herron.dev
                 - radicale.herron.dev
                 - recipes.herron.dev
                 - trello-bot.herron.dev
                 - utility-api.herron.dev
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: kubernetes
-            - name: kubernetes-haproxy
-              domains:
-                - harbor.herron.dev
                 - www.herron.dev
               routes:
               - match:
@@ -212,26 +205,19 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: home
-            - name: kubernetes
+            - name: kubernetes-haproxy
               domains:
                 - bitwarden.herron.dev
                 - cal.herron.dev
                 - data.herron.dev
+                - grafana.herron.dev
+                - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
-                - grafana.herron.dev
                 - radicale.herron.dev
                 - recipes.herron.dev
                 - trello-bot.herron.dev
                 - utility-api.herron.dev
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: kubernetes
-            - name: kubernetes-haproxy
-              domains:
-                - harbor.herron.dev
                 - www.herron.dev
               routes:
               - match:
