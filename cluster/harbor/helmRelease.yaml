@@ -19,6 +19,9 @@ spec:
     expose:
       ingress:
         className: haproxy
+        annotations:
+          ingress.kubernetes.io/ssl-redirect: "false"
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
         hosts:
           core: harbor.herron.dev
       tls:
