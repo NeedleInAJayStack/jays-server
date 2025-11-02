@@ -104,7 +104,6 @@ static_resources:
                 - recipes.herron.dev
                 - trello-bot.herron.dev
                 - utility-api.herron.dev
-                - www.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -113,6 +112,7 @@ static_resources:
             - name: kubernetes-haproxy
               domains:
                 - harbor.herron.dev
+                - www.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -224,7 +224,6 @@ static_resources:
                 - recipes.herron.dev
                 - trello-bot.herron.dev
                 - utility-api.herron.dev
-                - www.herron.dev
               routes:
               - match:
                   prefix: "/"
@@ -233,6 +232,7 @@ static_resources:
             - name: kubernetes-haproxy
               domains:
                 - harbor.herron.dev
+                - www.herron.dev
               routes:
               - match:
                   prefix: "/"
