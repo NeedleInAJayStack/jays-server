@@ -27,6 +27,7 @@ metadata:
 spec:
   accessModes:
     - ReadOnlyMany
+  storageClassName: openebs-hostpath
   resources:
     requests:
       storage: 500Gi
