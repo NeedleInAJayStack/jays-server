@@ -26,14 +26,3 @@ services:
     privileged: true
     volumes:
       - ~/Data/docker/HomeAssistant:/config
-
-volumes:
-  # Monitoring
-  prometheus_data:
-    name: grafana_prometheus_data
-
-networks:
-  # Monitoring
-  monitoring:
-    name: monitoring
-    driver: bridge
