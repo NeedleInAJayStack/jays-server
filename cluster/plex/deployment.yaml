@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      # Exposed on port 32400 of host
+      hostNetwork: true
+      nodeSelector:
+        # Ensures the pod runs on the node with the USB device and host paths
+        kubernetes.io/hostname: jaysdesktop
+      containers:
+        - name: plex
+          image: plexinc/pms-docker:latest
+          env:
+            - name: PLEX_CLAIM
+              valueFrom:
+                secretKeyRef:
+                  name: plex
+                  key: claim
+            - name: TZ
+              value: "America/Denver"
+          securityContext:
+            privileged: true # For usb device access
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: audio
+              mountPath: /data/Audio
+              readOnly: true
+            - name: video
+              mountPath: /data/Video
+              readOnly: true
+            - name: image
+              mountPath: /data/Image
+              readOnly: true
+            - name: usb-tv-tuner
+              mountPath: /dev/bus/usb/001/002
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1000m"
+            limits:
+              memory: "8Gi"
+              cpu: "4000m"
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: audio
+        persistentVolumeClaim:
+          claimName: audio
+      - name: video
+        persistentVolumeClaim:
+          claimName: video
+      - name: image
+        persistentVolumeClaim:
+          claimName: image
+      - name: usb-tv-tuner
+        hostPath:
+          path: /dev/bus/usb/001/002
+          type: CharDevice
