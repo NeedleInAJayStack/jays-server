@@ -49,13 +49,6 @@ spec:
               readOnly: true
             - name: usb-tv-tuner
               mountPath: /dev/bus/usb/001/002
-          resources:
-            requests:
-              memory: "2Gi"
-              cpu: "1000m"
-            limits:
-              memory: "8Gi"
-              cpu: "4000m"
       volumes:
       - name: config
         persistentVolumeClaim:
