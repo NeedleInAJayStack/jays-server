@@ -104,6 +104,7 @@ static_resources:
                 - plex.herron.dev
                 - radicale.herron.dev
                 - recipes.herron.dev
+                - syncthing.herron.dev
                 - trello-bot.herron.dev
                 - utility-api.herron.dev
                 - www.herron.dev
@@ -112,13 +113,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: kubernetes-haproxy
-            - name: syncthing
-              domains: ["syncthing.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: syncthing
             - name: catchall
               domains: ["*"]
               routes:
@@ -211,6 +205,7 @@ static_resources:
                 - plex.herron.dev
                 - radicale.herron.dev
                 - recipes.herron.dev
+                - syncthing.herron.dev
                 - trello-bot.herron.dev
                 - utility-api.herron.dev
                 - www.herron.dev
@@ -219,13 +214,6 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: kubernetes-haproxy
-            - name: syncthing
-              domains: ["syncthing.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: syncthing
             - name: catchall
               domains: ["*"]
               routes:
@@ -281,14 +269,3 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 31883
-  - name: syncthing
-    type: STATIC
-    load_assignment:
-      cluster_name: syncthing
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 8384
