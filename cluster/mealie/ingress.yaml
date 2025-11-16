@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: mealie
   namespace: mealie
   labels:
