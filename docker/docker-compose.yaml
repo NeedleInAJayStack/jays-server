@@ -13,16 +13,3 @@ services:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       # You must provide your own certificate files. See `ansible` directory for certbot config.
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
-
-  # Home Assistant
-    # https://www.home-assistant.io/installation/linux#install-home-assistant-container
-  homeassistant:
-    container_name: homeassistant
-    image: ghcr.io/home-assistant/home-assistant
-    restart: unless-stopped
-    environment:
-      - TZ=America/Denver
-    network_mode: host
-    privileged: true
-    volumes:
-      - ~/Data/docker/HomeAssistant:/config
