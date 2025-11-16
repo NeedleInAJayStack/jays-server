@@ -112,6 +112,14 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: kubernetes-haproxy
+            - name: kubernetes-haproxy-https
+              domains:
+                - recipes.herron.dev
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: kubernetes-haproxy-https
             - name: syncthing
               domains: ["syncthing.herron.dev"]
               routes:
@@ -219,6 +227,14 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: kubernetes-haproxy
+            - name: kubernetes-haproxy-https
+              domains:
+                - recipes.herron.dev
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: kubernetes-haproxy-https
             - name: syncthing
               domains: ["syncthing.herron.dev"]
               routes:
@@ -270,6 +286,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 30080
+  - name: kubernetes-haproxy-https
+    type: STATIC
+    load_assignment:
+      cluster_name: kubernetes-haproxy-https
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 30443
   - name: mqtt
     type: STRICT_DNS
     load_assignment:
