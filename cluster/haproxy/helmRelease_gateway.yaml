@@ -28,5 +28,6 @@ spec:
         enabled: false
       service:
         enabled: true
+        type: LoadBalancer
       podMonitor:
         enabled: true
