@@ -15,6 +15,6 @@ spec:
           path: "/"
           backend:
             service:
-              name: web-ui
+              name: home-assistant
               port:
-                number: 8384
+                name: web-ui
