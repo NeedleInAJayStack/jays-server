@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: syncthing
+  namespace: syncthing
+  labels:
+    app: syncthing
+subsets:
+- addresses:
+  - ip: 10.0.1.1
+  ports:
+  - name: syncthing
+    port: 8384
