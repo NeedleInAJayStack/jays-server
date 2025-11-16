@@ -40,26 +40,26 @@ spec:
               containerPort: 1900
               hostPort: 1900
               protocol: UDP
-            - name: bonjour-avahi-discovery
+            - name: bonjour-avahi
               containerPort: 5353
               hostPort: 5353
               protocol: UDP
-            - name: roku-via-plex-companion
+            - name: plex-companion
               containerPort: 8324
               hostPort: 8324
-            - name: gdm-network-discovery-1
+            - name: gdm-discovery-1
               containerPort: 32410
               hostPort: 32410
               protocol: UDP
-            - name: gdm-network-discovery-2
+            - name: gdm-discovery-2
               containerPort: 32412
               hostPort: 32412
               protocol: UDP
-            - name: gdm-network-discovery-3
+            - name: gdm-discovery-3
               containerPort: 32413
               hostPort: 32413
               protocol: UDP
-            - name: gdm-network-discovery-4
+            - name: gdm-discovery-4
               containerPort: 32414
               hostPort: 32414
               protocol: UDP
