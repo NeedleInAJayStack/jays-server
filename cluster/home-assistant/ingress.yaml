@@ -17,4 +17,4 @@ spec:
             service:
               name: web-ui
               port:
-                name: web-ui
+                number: 8384

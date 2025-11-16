@@ -9,4 +9,3 @@ spec:
   ports:
   - name: web-ui
     port: 8123
-    targetPort: web-ui
