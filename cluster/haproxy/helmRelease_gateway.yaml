@@ -27,6 +27,6 @@ spec:
       defaultTLSSecret:
         enabled: false
       service:
-        enabled: false
+        enabled: true
       podMonitor:
         enabled: true
