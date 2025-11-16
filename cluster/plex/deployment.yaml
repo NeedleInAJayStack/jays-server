@@ -17,8 +17,6 @@ spec:
       labels:
         app: plex
     spec:
-      # Exposed on port 32400 of host
-      hostNetwork: true
       nodeSelector:
         # Ensures the pod runs on the node with the USB device and host paths
         kubernetes.io/hostname: jaysdesktop
@@ -33,6 +31,41 @@ spec:
                   key: claim
             - name: TZ
               value: "America/Denver"
+          # See https://support.plex.tv/articles/201543147-what-network-ports-do-i-need-to-allow-through-my-firewall/
+          ports:
+            - name: plex
+              containerPort: 32400
+            # Host ports for local network access
+            - name: dlna-udp
+              containerPort: 1900
+              hostPort: 1900
+              protocol: UDP
+            - name: bonjour-avahi-discovery
+              containerPort: 5353
+              hostPort: 5353
+              protocol: UDP
+            - name: roku-via-plex-companion
+              containerPort: 8324
+              hostPort: 8324
+            - name: gdm-network-discovery-1
+              containerPort: 32410
+              hostPort: 32410
+              protocol: UDP
+            - name: gdm-network-discovery-2
+              containerPort: 32412
+              hostPort: 32412
+              protocol: UDP
+            - name: gdm-network-discovery-3
+              containerPort: 32413
+              hostPort: 32413
+              protocol: UDP
+            - name: gdm-network-discovery-4
+              containerPort: 32414
+              hostPort: 32414
+              protocol: UDP
+            - name: dlna-tcp
+              containerPort: 32469
+              hostPort: 32469
           securityContext:
             privileged: true # For usb device access
           volumeMounts:

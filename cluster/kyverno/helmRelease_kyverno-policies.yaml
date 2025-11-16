@@ -41,12 +41,6 @@ spec:
             - Pod
             namespaces:
             - home-assistant
-        # Plex requires host networking for casting
-        - resources:
-            kinds:
-            - Pod
-            namespaces:
-            - plex
         # Prometheus Node Exporter requires host networking for metrics collection
         - resources:
             kinds:
@@ -81,12 +75,6 @@ spec:
             - openebs-*
             namespaces:
             - openebs
-        # Plex requires host networking for casting
-        - resources:
-            kinds:
-            - Pod
-            namespaces:
-            - plex
         # Prometheus Node Exporter requires host paths for metrics collection
         - resources:
             kinds:
@@ -114,7 +102,7 @@ spec:
             - openebs-zfs*
             namespaces:
             - openebs
-        # Plex requires host networking for casting
+        # Plex requires host ports for local network communication
         - resources:
             kinds:
             - Pod
