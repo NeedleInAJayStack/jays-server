@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+  labels:
+    app: home-assistant
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      hostNetwork: true
+      containers:
+        - name: home-assistant
+          image: ghcr.io/home-assistant/home-assistant:latest
+          env:
+            - name: TZ
+              value: "America/Denver"
+          securityContext:
+            privileged: true # For device access
+          volumeMounts:
+            - name: home-assistant
+              mountPath: /config
+      volumes:
+      - name: home-assistant
+        persistentVolumeClaim:
+          claimName: home-assistant
