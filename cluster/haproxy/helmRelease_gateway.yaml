@@ -16,22 +16,15 @@ spec:
   values:
     controller:
       kind: DaemonSet
-      daemonset:
-        useHostPort: true
-        hostPorts:
-          admin: 30060
-          http: 30080
-          https: 30443
-          stat: 30024
-          quic: 30443
       defaultTLSSecret:
         enabled: false
       service:
         enabled: true
         nodePorts:
-          http: 31080
-          https: 31443
-          stat: 31024
-          admin: 31060
+          admin: 30060
+          http: 30080
+          https: 30443
+          stat: 30024
+          quic: 30443
       podMonitor:
         enabled: true
