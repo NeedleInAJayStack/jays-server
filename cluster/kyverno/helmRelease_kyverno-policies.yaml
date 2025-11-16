@@ -36,6 +36,11 @@ spec:
             - calico-node*
             namespaces:
             - kube-system
+        - resources:
+            kinds:
+            - Pod
+            namespaces:
+            - home-assistant
         # Plex requires host networking for casting
         - resources:
             kinds:
@@ -140,6 +145,11 @@ spec:
             - calico-node*
             namespaces:
             - kube-system
+        - resources:
+            kinds:
+            - Pod
+            namespaces:
+            - home-assistant
         # OpenEBS LVM operator requires privileged containers for storage management
         - resources:
             kinds:
