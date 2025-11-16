@@ -1,6 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
   name: mealie
   namespace: mealie
   labels:
@@ -18,3 +20,7 @@ spec:
               name: mealie
               port:
                 number: 9000
+  tls:
+    - hosts:
+      - recipes.herron.dev
+      secretName: mealie-tls
