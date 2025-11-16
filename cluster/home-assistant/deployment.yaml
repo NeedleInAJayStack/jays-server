@@ -24,6 +24,9 @@ spec:
           env:
             - name: TZ
               value: "America/Denver"
+          ports:
+            - name: web-ui
+              containerPort: 8123
           securityContext:
             privileged: true # For device access
           volumeMounts:
