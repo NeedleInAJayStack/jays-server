@@ -85,19 +85,13 @@ static_resources:
                 value: "nosniff"
               append_action: OVERWRITE_IF_EXISTS_OR_ADD
             virtual_hosts:
-            - name: home
-              domains: ["home.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: home
             - name: kubernetes-haproxy
               domains:
                 - bitwarden.herron.dev
                 - cal.herron.dev
                 - data.herron.dev
                 - grafana.herron.dev
+                - home.herron.dev
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
@@ -186,19 +180,13 @@ static_resources:
                 value: "nosniff"
               append_action: OVERWRITE_IF_EXISTS_OR_ADD
             virtual_hosts:
-            - name: home
-              domains: ["home.herron.dev"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: home
             - name: kubernetes-haproxy
               domains:
                 - bitwarden.herron.dev
                 - cal.herron.dev
                 - data.herron.dev
                 - grafana.herron.dev
+                - home.herron.dev
                 - harbor.herron.dev
                 - keycloak.herron.dev
                 - kubernetes-dashboard.herron.dev
@@ -236,17 +224,6 @@ static_resources:
           cluster: mqtt
 
   clusters:
-  - name: home
-    type: STATIC
-    load_assignment:
-      cluster_name: home
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: 127.0.0.1
-                port_value: 8123
   - name: kubernetes-haproxy
     type: STATIC
     load_assignment:
