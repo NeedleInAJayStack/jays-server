@@ -15,7 +15,7 @@ spec:
       name: postgres-pguser-keycloak
       key: password
   http:
-    httpEnabled: true
+    tlsSecret: keycloak-tls
   hostname:
     hostname: https://keycloak.herron.dev
   ingress:

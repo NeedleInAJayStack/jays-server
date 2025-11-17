@@ -24,7 +24,4 @@ spec:
           haproxy.org/ssl-redirect: "false"
         hosts:
           core: harbor.herron.dev
-      tls:
-        # Handled by host envoy proxy
-        enabled: false
     externalURL: https://harbor.herron.dev

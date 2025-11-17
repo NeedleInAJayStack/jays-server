@@ -26,3 +26,7 @@ spec:
       ingressClassName: haproxy
       hosts:
         - grafana.herron.dev
+      tls:
+        - hosts:
+          - grafana.herron.dev
+          secretName: grafana-tls

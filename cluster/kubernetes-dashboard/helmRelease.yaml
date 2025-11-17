@@ -21,8 +21,6 @@ spec:
         hosts:
           - kubernetes-dashboard.herron.dev
         ingressClassName: haproxy
-        tls:
-          enabled: false
         useDefaultAnnotations: false
         annotations:
           cert-manager.io/cluster-issuer: acme
