@@ -12,7 +12,6 @@ metadata:
       Referrer-Policy "same-origin"
       Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
       X-Content-Type-Options "nosniff"
-    haproxy.org/ssl-redirect: "false"
   name: syncthing
   namespace: syncthing
   labels:
