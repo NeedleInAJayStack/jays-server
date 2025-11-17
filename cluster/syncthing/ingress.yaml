@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: syncthing
   namespace: syncthing
   labels:
@@ -18,3 +21,7 @@ spec:
               name: syncthing
               port:
                 number: 8384
+  tls:
+    - hosts:
+      - syncthing.herron.dev
+      secretName: syncthing-tls

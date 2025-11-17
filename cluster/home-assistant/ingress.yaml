@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: home-assistant
   namespace: home-assistant
   labels:
@@ -18,3 +21,7 @@ spec:
               name: home-assistant
               port:
                 name: web-ui
+  tls:
+    - hosts:
+      - home.herron.dev
+      secretName: home-assistant-tls

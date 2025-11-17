@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: trello-bot
   namespace: trello-bot
   labels:
@@ -18,3 +21,7 @@ spec:
               name: trello-bot
               port:
                 number: 80
+  tls:
+    - hosts:
+      - trello-bot.herron.dev
+      secretName: trello-bot-tls

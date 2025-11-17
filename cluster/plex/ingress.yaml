@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: plex
   namespace: plex
   labels:
@@ -18,3 +21,7 @@ spec:
               name: plex
               port:
                 number: 32400
+  tls:
+    - hosts:
+      - plex.herron.dev
+      secretName: plex-tls

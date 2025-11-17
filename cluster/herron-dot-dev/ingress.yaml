@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: herron-dot-dev
   namespace: herron-dot-dev
   labels:
@@ -18,3 +21,7 @@ spec:
               name: herron-dot-dev
               port:
                 number: 80
+  tls:
+    - hosts:
+      - www.herron.dev
+      secretName: herron-dot-dev-tls

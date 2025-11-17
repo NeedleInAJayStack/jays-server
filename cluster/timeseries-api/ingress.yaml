@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: timeseries-api
   namespace: timeseries-api
   labels:
@@ -28,3 +31,8 @@ spec:
               name: timeseries-api
               port:
                 number: 80
+  tls:
+    - hosts:
+      - data.herron.dev
+      - utility-api.herron.dev
+      secretName: timeseries-api-tls

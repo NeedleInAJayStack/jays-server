@@ -20,8 +20,8 @@ spec:
       ingress:
         className: haproxy
         annotations:
-          ingress.kubernetes.io/ssl-redirect: "false"
-          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          cert-manager.io/cluster-issuer: acme
+          haproxy.org/ssl-redirect: "false"
         hosts:
           core: harbor.herron.dev
       tls:

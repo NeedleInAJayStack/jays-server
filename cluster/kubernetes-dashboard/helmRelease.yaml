@@ -24,6 +24,9 @@ spec:
         tls:
           enabled: false
         useDefaultAnnotations: false
+        annotations:
+          cert-manager.io/cluster-issuer: acme
+          haproxy.org/ssl-redirect: "false"
     kong:
       proxy:
         http:

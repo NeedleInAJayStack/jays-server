@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme
+    haproxy.org/ssl-redirect: "false"
   name: radicale
   namespace: radicale
   labels:
@@ -28,3 +31,8 @@ spec:
                 name: radicale
                 port:
                   name: radicale
+  tls:
+    - hosts:
+      - radicale.herron.dev
+      - cal.herron.dev
+      secretName: radicale-tls

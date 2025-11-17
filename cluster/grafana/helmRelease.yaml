@@ -20,6 +20,9 @@ spec:
       enabled: true
     ingress:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: acme
+        haproxy.org/ssl-redirect: "false"
       ingressClassName: haproxy
       hosts:
         - grafana.herron.dev
