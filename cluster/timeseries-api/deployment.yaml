@@ -59,7 +59,7 @@ spec:
             - name: DATABASE_SSL
               value: prefer
             - name: MQTT_ADDRESS
-              value: tcp://192.168.4.100:1883
+              value: tcp://192.168.4.100:31883
             - name: MQTT_USERNAME
               valueFrom:
                 secretKeyRef:
