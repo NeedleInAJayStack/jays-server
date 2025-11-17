@@ -16,6 +16,8 @@ spec:
       key: password
   hostname:
     hostname: https://keycloak.herron.dev
+  http:
+    httpEnabled: true
   ingress:
     className: haproxy
     annotations:
