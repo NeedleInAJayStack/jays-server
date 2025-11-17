@@ -14,8 +14,6 @@ spec:
     passwordSecret:
       name: postgres-pguser-keycloak
       key: password
-  http:
-    tlsSecret: keycloak-tls
   hostname:
     hostname: https://keycloak.herron.dev
   ingress:
@@ -23,6 +21,7 @@ spec:
     annotations:
       cert-manager.io/cluster-issuer: acme
       haproxy.org/ssl-redirect: "false"
+    tlsSecret: keycloak-tls
   proxy:
     headers: xforwarded
   additionalOptions:
