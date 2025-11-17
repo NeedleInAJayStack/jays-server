@@ -7,13 +7,11 @@ spec:
   chart:
     spec:
       chart: harbor
-      interval: 10m
       sourceRef:
         kind: HelmRepository
         name: harbor
       version: '<2.0.0'
   interval: 10m
-  targetNamespace: harbor
   # See https://github.com/goharbor/harbor-helm/blob/main/values.yaml
   values:
     expose:

@@ -7,12 +7,10 @@ spec:
   chart:
     spec:
       chart: kubernetes-dashboard
-      interval: 10m
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
   interval: 10m
-  targetNamespace: kubernetes-dashboard
   # Defaults: https://github.com/kubernetes/dashboard/blob/master/charts/kubernetes-dashboard/values.yaml
   values:
     app:

@@ -7,13 +7,11 @@ spec:
   chart:
     spec:
       chart: cert-manager
-      interval: 10m
       sourceRef:
         kind: HelmRepository
         name: cert-manager
       version: '<2.0.0'
   interval: 10m
-  targetNamespace: cert-manager
   # See https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/values.yaml
   values:
     crds:

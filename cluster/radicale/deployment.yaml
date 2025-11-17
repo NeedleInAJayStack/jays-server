@@ -21,7 +21,6 @@ spec:
           ports:
             - name: radicale
               containerPort: 5232
-              protocol: TCP
           volumeMounts:
             - name: config
               mountPath: /etc/radicale/config

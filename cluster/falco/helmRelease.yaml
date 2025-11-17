@@ -7,13 +7,11 @@ spec:
   chart:
     spec:
       chart: falco
-      interval: 10m
       sourceRef:
         kind: HelmRepository
         name: falco
       version: '<7.0.0'
   interval: 10m
-  targetNamespace: falco
   # See https://github.com/falcosecurity/charts/blob/master/charts/falco/values.yaml
   values:
     metrics:

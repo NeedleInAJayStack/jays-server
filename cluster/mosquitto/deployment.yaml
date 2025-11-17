@@ -19,10 +19,8 @@ spec:
           ports:
             - name: mqtt
               containerPort: 1883
-              protocol: TCP
             - name: mqtt-ws
               containerPort: 9001
-              protocol: TCP
           volumeMounts:
             - name: config
               mountPath: /mosquitto/config/mosquitto.conf

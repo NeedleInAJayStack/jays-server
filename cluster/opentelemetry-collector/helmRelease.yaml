@@ -7,7 +7,6 @@ spec:
   chart:
     spec:
       chart: opentelemetry-collector
-      interval: 10m
       sourceRef:
         kind: HelmRepository
         name: opentelemetry-collector

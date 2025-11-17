@@ -8,4 +8,3 @@ spec:
     app: vaultwarden
   ports:
     - port: 80
-      targetPort: 80
