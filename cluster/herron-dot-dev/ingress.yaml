@@ -5,6 +5,12 @@ metadata:
     cert-manager.io/cluster-issuer: acme
     external-dns.alpha.kubernetes.io/target: "97.117.2.112"
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    haproxy.org/response-set-header: |
+      Cross-Origin-Resource-Policy "same-origin"
+      Content-Security-Policy "frame-ancestors 'none'; upgrade-insecure-requests; report-to cf-nel"
+      Referrer-Policy "same-origin"
+      Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+      X-Content-Type-Options "nosniff"
     haproxy.org/ssl-redirect: "false"
   name: herron-dot-dev
   namespace: herron-dot-dev
