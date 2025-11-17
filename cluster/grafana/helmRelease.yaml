@@ -22,6 +22,8 @@ spec:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: acme
+        external-dns.alpha.kubernetes.io/target: "97.117.2.112"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         haproxy.org/ssl-redirect: "false"
       ingressClassName: haproxy
       hosts:
