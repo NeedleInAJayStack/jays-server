@@ -24,6 +24,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "97.117.2.112"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           haproxy.org/response-set-header: |
+            Alt-Svc "h3=\":443\"; ma=86400"
             Cross-Origin-Resource-Policy "same-origin"
             Content-Security-Policy "frame-ancestors 'none'; upgrade-insecure-requests; report-to cf-nel"
             Referrer-Policy "same-origin"
