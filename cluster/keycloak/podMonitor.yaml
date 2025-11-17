@@ -5,8 +5,8 @@ metadata:
   namespace: keycloak
 spec:
   podMetricsEndpoints:
-  - path: /metrics
-    port: otel-metrics
+    - path: /metrics
+      port: otel-metrics
   selector:
     matchLabels:
       postgres-operator.crunchydata.com/crunchy-otel-collector: "true"

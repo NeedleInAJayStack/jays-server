@@ -8,8 +8,8 @@ spec:
     matchLabels:
       app: keycloak
   endpoints:
-  - path: /metrics
-    port: management
+    - path: /metrics
+      port: management
   namespaceSelector:
     matchNames:
-    - keycloak
+      - keycloak

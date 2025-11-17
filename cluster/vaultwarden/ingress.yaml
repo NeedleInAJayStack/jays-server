@@ -22,14 +22,14 @@ spec:
     - host: bitwarden.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: vaultwarden
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  number: 80
   tls:
     - hosts:
-      - bitwarden.herron.dev
+        - bitwarden.herron.dev
       secretName: vaultwarden-tls

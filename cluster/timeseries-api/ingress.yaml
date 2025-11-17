@@ -22,25 +22,25 @@ spec:
     - host: data.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: timeseries-api
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: timeseries-api
+                port:
+                  number: 80
     - host: utility-api.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: timeseries-api
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: timeseries-api
+                port:
+                  number: 80
   tls:
     - hosts:
-      - data.herron.dev
-      - utility-api.herron.dev
+        - data.herron.dev
+        - utility-api.herron.dev
       secretName: timeseries-api-tls

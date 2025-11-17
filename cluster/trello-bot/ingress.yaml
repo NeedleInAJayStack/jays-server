@@ -22,14 +22,14 @@ spec:
     - host: trello-bot.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: trello-bot
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: trello-bot
+                port:
+                  number: 80
   tls:
     - hosts:
-      - trello-bot.herron.dev
+        - trello-bot.herron.dev
       secretName: trello-bot-tls

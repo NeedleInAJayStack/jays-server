@@ -31,5 +31,5 @@ spec:
                   number: 9001
   tls:
     - hosts:
-      - mosquitto.herron.dev
+        - mosquitto.herron.dev
       secretName: mosquitto-tls

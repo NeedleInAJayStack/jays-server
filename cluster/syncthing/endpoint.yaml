@@ -6,8 +6,8 @@ metadata:
   labels:
     app: syncthing
 subsets:
-- addresses:
-  - ip: 10.0.1.1
-  ports:
-  - name: syncthing
-    port: 8384
+  - addresses:
+      - ip: 10.0.1.1
+    ports:
+      - name: syncthing
+        port: 8384

@@ -83,19 +83,19 @@ spec:
             - name: usb-tv-tuner
               mountPath: /dev/bus/usb/001/002
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: config
-      - name: audio
-        persistentVolumeClaim:
-          claimName: audio
-      - name: video
-        persistentVolumeClaim:
-          claimName: video
-      - name: image
-        persistentVolumeClaim:
-          claimName: image
-      - name: usb-tv-tuner
-        hostPath:
-          path: /dev/bus/usb/001/002
-          type: CharDevice
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: audio
+          persistentVolumeClaim:
+            claimName: audio
+        - name: video
+          persistentVolumeClaim:
+            claimName: video
+        - name: image
+          persistentVolumeClaim:
+            claimName: image
+        - name: usb-tv-tuner
+          hostPath:
+            path: /dev/bus/usb/001/002
+            type: CharDevice

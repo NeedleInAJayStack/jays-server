@@ -22,14 +22,14 @@ spec:
     - host: home.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: home-assistant
-              port:
-                name: web-ui
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  name: web-ui
   tls:
     - hosts:
-      - home.herron.dev
+        - home.herron.dev
       secretName: home-assistant-tls

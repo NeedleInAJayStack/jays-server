@@ -41,6 +41,6 @@ spec:
                   name: radicale
   tls:
     - hosts:
-      - radicale.herron.dev
-      - cal.herron.dev
+        - radicale.herron.dev
+        - cal.herron.dev
       secretName: radicale-tls

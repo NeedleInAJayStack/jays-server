@@ -36,5 +36,5 @@ spec:
         - grafana.herron.dev
       tls:
         - hosts:
-          - grafana.herron.dev
+            - grafana.herron.dev
           secretName: grafana-tls

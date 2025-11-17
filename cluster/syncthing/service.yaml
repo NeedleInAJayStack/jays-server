@@ -7,6 +7,6 @@ metadata:
     app: syncthing
 spec:
   ports:
-  - name: syncthing
-    port: 8384
-    targetPort: 8384
+    - name: syncthing
+      port: 8384
+      targetPort: 8384

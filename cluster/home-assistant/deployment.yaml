@@ -33,6 +33,6 @@ spec:
             - name: home-assistant
               mountPath: /config
       volumes:
-      - name: home-assistant
-        persistentVolumeClaim:
-          claimName: home-assistant
+        - name: home-assistant
+          persistentVolumeClaim:
+            claimName: home-assistant

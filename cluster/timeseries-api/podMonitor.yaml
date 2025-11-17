@@ -8,5 +8,5 @@ spec:
     matchLabels:
       app: timeseries-api
   podMetricsEndpoints:
-  - path: /metrics
-    port: metrics
+    - path: /metrics
+      port: metrics

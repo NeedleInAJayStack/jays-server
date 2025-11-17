@@ -22,14 +22,14 @@ spec:
     - host: recipes.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: mealie
-              port:
-                number: 9000
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: mealie
+                port:
+                  number: 9000
   tls:
     - hosts:
-      - recipes.herron.dev
+        - recipes.herron.dev
       secretName: mealie-tls

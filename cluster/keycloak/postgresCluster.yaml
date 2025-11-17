@@ -8,13 +8,13 @@ metadata:
 spec:
   postgresVersion: 17
   instances:
-  - name: keycloak
-    dataVolumeClaimSpec:
-      accessModes:
-      - "ReadWriteOnce"
-      resources:
-        requests:
-          storage: 1Gi
+    - name: keycloak
+      dataVolumeClaimSpec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
   users:
     - name: keycloak
       databases:

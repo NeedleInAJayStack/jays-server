@@ -22,14 +22,14 @@ spec:
     - host: plex.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: plex
-              port:
-                number: 32400
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: plex
+                port:
+                  number: 32400
   tls:
     - hosts:
-      - plex.herron.dev
+        - plex.herron.dev
       secretName: plex-tls

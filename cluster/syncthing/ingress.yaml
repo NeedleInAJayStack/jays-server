@@ -22,14 +22,14 @@ spec:
     - host: syncthing.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: syncthing
-              port:
-                number: 8384
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: syncthing
+                port:
+                  number: 8384
   tls:
     - hosts:
-      - syncthing.herron.dev
+        - syncthing.herron.dev
       secretName: syncthing-tls

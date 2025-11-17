@@ -18,5 +18,5 @@ spec:
               key: cloudflare-api-token
         selector:
           dnsZones:
-          - 'herron.dev'
-          - 'jayherron.org'
+            - 'herron.dev'
+            - 'jayherron.org'

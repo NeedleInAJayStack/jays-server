@@ -22,25 +22,25 @@ spec:
     - host: herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: herron-dot-dev
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: herron-dot-dev
+                port:
+                  number: 80
     - host: www.herron.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: herron-dot-dev
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: herron-dot-dev
+                port:
+                  number: 80
   tls:
     - hosts:
-      - herron.dev
-      - www.herron.dev
+        - herron.dev
+        - www.herron.dev
       secretName: herron-dot-dev-tls

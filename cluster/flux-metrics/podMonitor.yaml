@@ -7,4 +7,4 @@ spec:
   selector:
     matchLabels: {} # Scrapes all pods in the namespace
   podMetricsEndpoints:
-  - portNumber: 8080
+    - portNumber: 8080
