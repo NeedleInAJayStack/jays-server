@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: website
-          image: ghcr.io/needleinajaystack/website@sha256:e73206b2d6568b659865ee6dcf079433881ab63e1e1d5e72de1a8eaad789d2a8
+          image: ghcr.io/needleinajaystack/website@sha256:40aa365f037d51fa4d5f176e904b8f57794e621cbf9dadc734c39c988aa0a6e9
           ports:
             - containerPort: 80
