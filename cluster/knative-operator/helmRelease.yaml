@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: knative-operator
+  namespace: knative-operator
+spec:
+  chart:
+    spec:
+      chart: knative-operator
+      sourceRef:
+        kind: HelmRepository
+        name: knative-operator
+      version: '<2.0.0'
+  interval: 10m
