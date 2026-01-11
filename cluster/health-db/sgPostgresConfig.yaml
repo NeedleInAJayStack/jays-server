@@ -9,4 +9,10 @@ spec:
     shared_buffers: '512MB'
     random_page_cost: '1.5'
     password_encryption: 'scram-sha-256'
-    log_checkpoints: 'on'
+    log_min_duration_statement: '-1'
+    log_checkpoints: off
+    log_connections: off
+    log_disconnections: off
+    log_lock_waits: off
+    log_temp_files: '-1'
+    log_autovacuum_min_duration: '-1'
