@@ -31,3 +31,4 @@ spec:
         hosts:
           core: harbor.herron.dev
     externalURL: https://harbor.herron.dev
+    logLevel: warning
