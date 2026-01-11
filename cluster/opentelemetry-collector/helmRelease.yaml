@@ -31,7 +31,7 @@ spec:
     presets:
       logsCollection:
         # Disabled due to high open-telemetry CPU usage.
-        enabled: false
+        enabled: true
     ports:
       metrics:
         enabled: true
@@ -40,4 +40,4 @@ spec:
     resources:
       limits:
         cpu: 250m
-        memory: 512Mi
+        memory: 4Gi
