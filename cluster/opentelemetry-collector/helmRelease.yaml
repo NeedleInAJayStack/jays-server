@@ -21,6 +21,10 @@ spec:
       exporters:
         otlphttp:
           endpoint: http://loki.loki:3100/otlp
+      receivers:
+        filelog:
+          # Reduce file polling frequency from default (200ms) to decrease CPU
+          poll_interval: 2s
       processors:
         batch:
           timeout: 1s
