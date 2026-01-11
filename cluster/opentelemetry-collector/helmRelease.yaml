@@ -21,6 +21,9 @@ spec:
       exporters:
         otlphttp:
           endpoint: http://loki.loki:3100/otlp
+      processors:
+        batch:
+          timeout: 1s
       service:
         pipelines:
           logs:
