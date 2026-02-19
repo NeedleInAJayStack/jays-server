@@ -13,6 +13,13 @@ spec:
         defaults:
           model:
             primary: "anthropic/claude-sonnet-4-20250514"
+      channels:
+        telegram:
+          enabled: true
+          dmPolicy: "pairing"
+          groups:
+            "*":
+              requireMention: true
   storage:
     persistence:
       enabled: true
