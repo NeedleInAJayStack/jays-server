@@ -16,7 +16,8 @@ spec:
       channels:
         telegram:
           enabled: true
-          dmPolicy: "pairing"
+          dmPolicy: "allowlist"
+          allowFrom: ["jay_herron"]
           groups:
             "*":
               requireMention: true
