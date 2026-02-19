@@ -101,7 +101,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: my-agent-data
+          claimName: openclaw-data
       - name: config
         configMap:
           name: openclaw-config
