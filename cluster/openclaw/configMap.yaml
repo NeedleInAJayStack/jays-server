@@ -16,7 +16,7 @@ data:
       "channels": {
         "telegram": {
           "allowFrom": [
-            "jay_herron"
+            "6501578011"
           ],
           "dmPolicy": "allowlist",
           "enabled": true,
