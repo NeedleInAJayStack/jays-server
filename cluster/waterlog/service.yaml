@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: waterlog
+  namespace: waterlog
+spec:
+  selector:
+    app: waterlog
+  ports:
+    - port: 8080
