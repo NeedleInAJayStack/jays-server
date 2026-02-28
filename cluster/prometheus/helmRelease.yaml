@@ -17,6 +17,7 @@ spec:
     crds:
       upgradeJob:
         enabled: true
+        forceConflicts: true
     grafana:
       enabled: false
     prometheus:
