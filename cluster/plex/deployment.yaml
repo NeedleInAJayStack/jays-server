@@ -22,7 +22,7 @@ spec:
         kubernetes.io/hostname: jaysdesktop
       containers:
         - name: plex
-          image: plexinc/pms-docker:1.42.2.10156-f737b826c
+          image: plexinc/pms-docker:1.43.0.10492-121068a07
           env:
             - name: PLEX_CLAIM
               valueFrom:
