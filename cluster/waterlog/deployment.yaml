@@ -21,7 +21,7 @@ spec:
           ports:
             - name: waterlog
               containerPort: 8080
-          environment:
+          env:
             - name: WATERLOG_DB_POSTGRES_HOST
               value: cluster
             - name: WATERLOG_DB_POSTGRES_NAME
