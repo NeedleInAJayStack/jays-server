@@ -22,16 +22,16 @@ spec:
             - name: waterlog
               containerPort: 8080
           environment:
-            - name: DB_POSTGRES_HOST
+            - name: WATERLOG_DB_POSTGRES_HOST
               value: cluster
-            - name: DB_POSTGRES_NAME
+            - name: WATERLOG_DB_POSTGRES_NAME
               value: waterlog
-            - name: DB_POSTGRES_USER
+            - name: WATERLOG_DB_POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: cluster
                   key: superuser-username
-            - name: DB_POSTGRES_PASSWORD
+            - name: WATERLOG_DB_POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cluster
