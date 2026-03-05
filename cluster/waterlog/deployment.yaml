@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: waterlog
-          image: ghcr.io/needleinajaystack/waterlog:main
+          image: ghcr.io/needleinajaystack/waterlog:main@sha256:784e1f172a16d6ac5d68e17aa181b4e4b3039b5075640970a2dc3d2ed2a6d828
           ports:
             - name: waterlog
               containerPort: 8080
