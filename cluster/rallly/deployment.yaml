@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rallly
+  namespace: rallly
+  labels:
+    app: rallly
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rallly
+  template:
+    metadata:
+      labels:
+        app: rallly
+    spec:
+      containers:
+        - name: rallly
+          image: lukevella/rallly:4.7.4
+          ports:
+            - name: rallly
+              containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_BASE_URL
+              value: 'https://rallly.herron.dev'
+            - name: ALLOWED_EMAILS
+              value: '*@herron.dev'
+            - name: NOREPLY_EMAIL
+              value: email-bot@herron.dev
+            - name: SUPPORT_EMAIL
+              value: jay@herron.dev
+            - name: SMTP_HOST
+              value: smtp.protonmail.ch
+            - name: SMTP_PORT
+              value: '587'
+            - name: SMTP_SECURE
+              value: 'true'
+            - name: SMTP_USER
+              value: email-bot@herron.dev
+
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-url
+                  key: url
+            - name: SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rallly
+                  key: secretPassword
+            - name: SMTP_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: rallly
+                  key: smtpPwd
