@@ -6,6 +6,8 @@ metadata:
 spec:
   postgres:
     version: '14'
+    extensions:
+      - name: pgcrypto
   instances: 1
   pods:
     persistentVolume:
