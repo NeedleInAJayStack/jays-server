@@ -35,7 +35,7 @@ spec:
             - name: SMTP_PORT
               value: '587'
             - name: SMTP_SECURE
-              value: 'true'
+              value: 'false'
             - name: SMTP_USER
               value: email-bot@herron.dev
             - name: DB_USER
