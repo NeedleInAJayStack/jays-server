@@ -49,7 +49,7 @@ spec:
                   name: cluster
                   key: superuser-password
             - name: DATABASE_URL
-              value: "postgresql://$(DB_USER):$(DB_PASS)@cluster:5432/postgres"
+              value: "postgresql://$(DB_USER):$(DB_PASS)@cluster:5432/rallly"
             - name: SECRET_PASSWORD
               valueFrom:
                 secretKeyRef:
