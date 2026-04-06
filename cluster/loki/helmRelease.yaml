@@ -73,6 +73,16 @@ spec:
       replicas: 0
     bloomGateway:
       replicas: 0
+    sidecar:
+      rules:
+        env:
+          # The loki-sc-rules sidecar uses Python's ssl module (via requests), which in 3.10+
+          # rejects CA certs that lack the Key Usage extension. Our cluster CA was generated
+          # without that extension, causing SSLCertVerificationError when the sidecar queries
+          # the Kubernetes API for rule secrets. Remove this once the cluster CA is regenerated
+          # with the Key Usage extension included.
+          - name: SKIP_TLS_VERIFY
+            value: "true"
     monitoring:
       serviceMonitor:
         enabled: true
