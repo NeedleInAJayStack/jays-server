@@ -20,3 +20,10 @@ spec:
           image: ghcr.io/needleinajaystack/website@sha256:40aa365f037d51fa4d5f176e904b8f57794e621cbf9dadc734c39c988aa0a6e9
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
