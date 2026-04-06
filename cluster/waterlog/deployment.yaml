@@ -36,5 +36,12 @@ spec:
                 secretKeyRef:
                   name: cluster
                   key: superuser-password
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 1Gi
       imagePullSecrets:
         - name: ghcr

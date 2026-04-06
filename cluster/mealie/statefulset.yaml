@@ -28,6 +28,13 @@ spec:
               value: America/Denver
             - name: WEB_CONCURRENCY
               value: '1'
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           volumeMounts:
             - name: mealie
               mountPath: /app/data

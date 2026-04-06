@@ -34,6 +34,13 @@ spec:
               mountPath: /mosquitto/config/acl.conf
               subPath: acl.conf
               readOnly: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
           livenessProbe:
             tcpSocket:
               port: 1883

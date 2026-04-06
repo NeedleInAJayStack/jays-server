@@ -39,3 +39,10 @@ spec:
                 secretKeyRef:
                   name: particle-sync
                   key: particlePassword
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 512Mi

@@ -41,6 +41,13 @@ spec:
                 secretKeyRef:
                   name: vaultwarden
                   key: pushInstallationKey
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
           volumeMounts:
             - name: vaultwarden
               mountPath: /data
