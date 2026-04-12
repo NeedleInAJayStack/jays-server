@@ -58,23 +58,9 @@ spec:
           limits:
             cpu: "2"
             memory: 4Gi
-        startupProbe:
-          exec:
-            command: ["zeroclaw", "status", "--format=exit-code"]
-          periodSeconds: 60
-          timeoutSeconds: 10
         livenessProbe:
           exec:
             command: ["zeroclaw", "status", "--format=exit-code"]
-          initialDelaySeconds: 30
-          periodSeconds: 60
-          timeoutSeconds: 10
-        readinessProbe:
-          exec:
-            command: ["zeroclaw", "status", "--format=exit-code"]
-          initialDelaySeconds: 10
-          periodSeconds: 60
-          timeoutSeconds: 10
       volumes:
       - name: data
         persistentVolumeClaim:
