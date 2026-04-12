@@ -24,6 +24,7 @@ spec:
       containers:
       - name: zeroclaw
         image: ghcr.io/zeroclaw-labs/zeroclaw:v0.6.9-debian
+        args: ["daemon"]
         imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:
