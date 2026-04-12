@@ -60,8 +60,5 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: zeroclaw-data
-      - name: config
-        configMap:
-          name: zeroclaw-config
       - name: tmp
         emptyDir: {}
