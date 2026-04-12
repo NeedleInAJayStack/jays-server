@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zeroclaw
+  namespace: zeroclaw
+spec:
+  serviceName: zeroclaw
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zeroclaw
+  template:
+    metadata:
+      labels:
+        app: zeroclaw
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+      - name: init-config
+        image: busybox:1.37
+        command:
+        - sh
+        - -c
+        - cp /config/config.toml /data/config.toml
+        resources:
+          requests:
+            cpu: 10m
+            memory: 256Mi
+          limits:
+            cpu: "1"
+            memory: 1Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - name: data
+          mountPath: /zeroclaw-data
+        - name: config
+          mountPath: /config
+      containers:
+      - name: zeroclaw
+        image: ghcr.io/zeroclaw-labs/zeroclaw:v0.6.9
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: HOME
+          value: /home/zeroclaw
+        - name: OPENCLAW_DISABLE_BONJOUR
+          value: "1"
+        envFrom:
+        - secretRef:
+            name: zeroclaw-api-keys
+        ports:
+        - name: gateway
+          containerPort: 42617
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: data
+          mountPath: /home/zeroclaw/.zeroclaw
+        - name: tmp
+          mountPath: /tmp
+        resources:
+          requests:
+            cpu: 50m
+            memory: 5Mi
+          limits:
+            cpu: "2"
+            memory: 4Gi
+        startupProbe:
+          exec:
+            command: ["zeroclaw", "status", "--format=exit-code"]
+          periodSeconds: 60
+          timeoutSeconds: 10
+        livenessProbe:
+          exec:
+            command: ["zeroclaw", "status", "--format=exit-code"]
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command: ["zeroclaw", "status", "--format=exit-code"]
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          timeoutSeconds: 10
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: zeroclaw-data
+      - name: config
+        configMap:
+          name: zeroclaw-config
+      - name: tmp
+        emptyDir: {}
