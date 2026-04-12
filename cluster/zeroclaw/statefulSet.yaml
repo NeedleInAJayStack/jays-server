@@ -21,32 +21,6 @@ spec:
         runAsUser: 1000
         seccompProfile:
           type: RuntimeDefault
-      initContainers:
-      - name: init-config
-        image: busybox:1.37
-        command:
-        - sh
-        - -c
-        - cp /config/config.toml /data/config.toml
-        resources:
-          requests:
-            cpu: 10m
-            memory: 256Mi
-          limits:
-            cpu: "1"
-            memory: 1Gi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-        volumeMounts:
-        - name: data
-          mountPath: /zeroclaw-data
-        - name: config
-          mountPath: /config
       containers:
       - name: zeroclaw
         image: ghcr.io/zeroclaw-labs/zeroclaw:v0.6.9
