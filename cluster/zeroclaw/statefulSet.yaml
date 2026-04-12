@@ -48,7 +48,7 @@ spec:
             type: RuntimeDefault
         volumeMounts:
         - name: data
-          mountPath: /home/zeroclaw/.zeroclaw
+          mountPath: /zeroclaw-data/workspace/
         - name: tmp
           mountPath: /tmp
         resources:
