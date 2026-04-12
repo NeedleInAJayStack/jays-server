@@ -25,11 +25,6 @@ spec:
       - name: zeroclaw
         image: ghcr.io/zeroclaw-labs/zeroclaw:v0.6.9
         imagePullPolicy: IfNotPresent
-        env:
-        - name: HOME
-          value: /home/zeroclaw
-        - name: OPENCLAW_DISABLE_BONJOUR
-          value: "1"
         envFrom:
         - secretRef:
             name: zeroclaw-api-keys
