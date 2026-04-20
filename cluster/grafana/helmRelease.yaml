@@ -10,9 +10,9 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-      version: '<11.0.0'
+      version: '<13.0.0'
   interval: 10m
-  # Defaults: https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+  # Defaults: https://github.com/grafana-community/helm-charts/blob/main/charts/grafana/values.yaml
   values:
     persistence:
       enabled: true
