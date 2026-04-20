@@ -18,20 +18,15 @@ spec:
       repository: otel/opentelemetry-collector-contrib
     mode: daemonset
     config:
-      exporters:
-        otlphttp:
-          endpoint: http://loki.loki:3100/otlp
       service:
         pipelines:
-          logs:
-            exporters:
-              - otlphttp
+          logs: null
           metrics: null
           traces: null
     presets:
       logsCollection:
         # Disabled due to high open-telemetry CPU usage.
-        enabled: true
+        enabled: false
     ports:
       metrics:
         enabled: true
