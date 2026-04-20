@@ -18,12 +18,12 @@ spec:
       repository: otel/opentelemetry-collector-contrib
     mode: daemonset
     config:
-      exporters: {}
-      service:
-        pipelines:
-          logs: null
-          metrics: null
-          traces: null
+      # exporters: {}
+      # service:
+      #   pipelines:
+      #     logs: null
+      #     metrics: null
+      #     traces: null
     presets:
       logsCollection:
         # Disabled due to high open-telemetry CPU usage.
