@@ -18,6 +18,7 @@ spec:
       repository: otel/opentelemetry-collector-contrib
     mode: daemonset
     config:
+      exporters: {}
       service:
         pipelines:
           logs: null
