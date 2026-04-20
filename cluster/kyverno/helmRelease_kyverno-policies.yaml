@@ -107,6 +107,14 @@ spec:
                 - Pod
               namespaces:
                 - plex
+          # OTel Collector uses host ports for collection
+          - resources:
+              kinds:
+                - Pod
+              names:
+                - opentelemetry-collector-agent-*
+              namespaces:
+                - opentelemetry-collector
           # Prometheus Node Exporter requires host ports for metrics collection
           - resources:
               kinds:
