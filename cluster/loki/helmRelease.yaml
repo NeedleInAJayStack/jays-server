@@ -41,6 +41,8 @@ spec:
         delete_request_store: s3
     lokiCanary:
       enabled: false
+    gateway:
+      deploymentStrategy: Recreate
     test:
       enabled: false
     minio:
