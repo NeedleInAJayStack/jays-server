@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: rallly
-          image: lukevella/rallly:4.7.4
+          image: lukevella/rallly:4.8.1
           ports:
             - name: rallly
               containerPort: 3000
