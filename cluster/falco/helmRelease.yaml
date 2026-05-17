@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: falco
-      version: '<7.0.0'
+      version: '<9.0.0'
   interval: 10m
   # See https://github.com/falcosecurity/charts/blob/master/charts/falco/values.yaml
   values:
