@@ -29,7 +29,20 @@ spec:
                 name: waterlog
                 port:
                   number: 8080
+    - host: wtrlog.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: waterlog
+                port:
+                  number: 8080
   tls:
     - hosts:
         - waterlog.herron.dev
       secretName: waterlog-tls
+    - hosts:
+        - wtrlog.com
+      secretName: wtrlog-tls

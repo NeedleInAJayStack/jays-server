@@ -20,3 +20,4 @@ spec:
           dnsZones:
             - 'herron.dev'
             - 'jayherron.org'
+            - 'wtrlog.com'
