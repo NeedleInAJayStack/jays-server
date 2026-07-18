@@ -14,13 +14,6 @@ spec:
       labels:
         app: hermes
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsGroup: 1000
-        runAsNonRoot: true
-        runAsUser: 1000
-        seccompProfile:
-          type: RuntimeDefault
       containers:
       - name: hermes
         image: nousresearch/hermes-agent:latest
@@ -38,15 +31,6 @@ spec:
         - name: dashboard
           containerPort: 9119
           protocol: TCP
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
         volumeMounts:
         - name: data
           mountPath: /opt/data
