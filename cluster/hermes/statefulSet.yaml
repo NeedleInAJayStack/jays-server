@@ -20,7 +20,8 @@ spec:
         args: ["gateway", "run"]
         imagePullPolicy: IfNotPresent
         env:
-        - HERMES_DASHBOARD=1
+        - name: HERMES_DASHBOARD
+          value: '1'
         envFrom:
         - secretRef:
             name: hermes-api-keys
