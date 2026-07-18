@@ -24,7 +24,7 @@ spec:
       containers:
       - name: hermes
         image: nousresearch/hermes-agent:latest
-        command: ["gateway", "run"]
+        args: ["gateway", "run"]
         imagePullPolicy: IfNotPresent
         environment:
         - HERMES_DASHBOARD=1
