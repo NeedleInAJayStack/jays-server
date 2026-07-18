@@ -17,11 +17,13 @@ spec:
       containers:
       - name: hermes
         image: nousresearch/hermes-agent:latest
-        args: ["gateway", "run"]
+        args: ["serve", "--host", "0.0.0.0"]
         imagePullPolicy: IfNotPresent
         env:
         - name: HERMES_DASHBOARD
           value: '1'
+        - name: HERMES_DASHBOARD_PUBLIC_URL
+          value: 'https://hermes.herron.dev'
         envFrom:
         - secretRef:
             name: hermes-api-keys
