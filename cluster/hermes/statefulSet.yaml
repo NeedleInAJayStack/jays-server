@@ -20,6 +20,10 @@ spec:
         args: ["serve", "--host", "0.0.0.0"]
         imagePullPolicy: IfNotPresent
         env:
+        - name: HERMES_DASHBOARD_OIDC_CLIENT_ID
+          value: hermes
+        - name: HERMES_DASHBOARD_OIDC_ISSUER
+          value: 'https://keycloak.herron.dev/realms/herrondev'
         - name: HERMES_DASHBOARD_PUBLIC_URL
           value: 'https://hermes.herron.dev'
         envFrom:
