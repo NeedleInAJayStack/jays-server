@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes
+  namespace: hermes
+spec:
+  serviceName: hermes
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hermes
+  template:
+    metadata:
+      labels:
+        app: hermes
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: hermes
+        image: nousresearch/hermes-agent:latest
+        command: ["gateway", "run"]
+        imagePullPolicy: IfNotPresent
+        environment:
+        - HERMES_DASHBOARD=1
+        envFrom:
+        - secretRef:
+            name: hermes-api-keys
+        ports:
+        - name: gateway
+          containerPort: 8642
+          protocol: TCP
+        - name: dashboard
+          containerPort: 9119
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: data
+          mountPath: /opt/data
+        resources:
+          requests:
+            cpu: 50m
+            memory: 5Mi
+          limits:
+            cpu: "2"
+            memory: 4Gi
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: hermes
