@@ -19,7 +19,7 @@ spec:
         image: nousresearch/hermes-agent:latest
         args: ["gateway", "run"]
         imagePullPolicy: IfNotPresent
-        environment:
+        env:
         - HERMES_DASHBOARD=1
         envFrom:
         - secretRef:
