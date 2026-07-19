@@ -13,3 +13,5 @@ spec:
   interval: 10m
   # See https://github.com/tailscale/tailscale/blob/main/cmd/k8s-operator/deploy/chart/values.yaml
   values:
+    operatorConfig:
+      hostname: jays-server
