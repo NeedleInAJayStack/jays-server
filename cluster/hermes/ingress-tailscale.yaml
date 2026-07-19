@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hermes-tailscale
+  namespace: hermes
+  labels:
+    app: hermes
+  annotations:
+    tailscale.com/hostname: hermes
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: hermes
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: dashboard
+                port:
+                  number: 9119
+  tls:
+    - hosts:
+        - hermes
