@@ -14,6 +14,19 @@ spec:
   interval: 10m
   # Defaults: https://github.com/grafana-community/helm-charts/blob/main/charts/grafana/values.yaml
   values:
+    envFromSecret: grafana-oauth
+    grafana.ini:
+      auth.generic_oauth:
+        enabled: true
+        name: Keycloak
+        client_id: grafana
+        client_secret: $__env{client_secret}
+        scopes: openid email profile offline_access roles
+        auth_url: https://keycloak.herron.dev/realms/herrondev/protocol/openid-connect/auth
+        token_url: https://keycloak.herron.dev/realms/herrondev/protocol/openid-connect/token
+        api_url: https://keycloak.herron.dev/realms/herrondev/protocol/openid-connect/userinfo
+        use_pkce: true
+        role_attribute_path: contains(roles[*], 'admin') && 'Admin' || 'Viewer'
     persistence:
       enabled: true
     serviceMonitor:
