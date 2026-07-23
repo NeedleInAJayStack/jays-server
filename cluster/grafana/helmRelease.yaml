@@ -28,7 +28,7 @@ spec:
         token_url: https://keycloak.herron.dev/realms/herrondev/protocol/openid-connect/token
         api_url: https://keycloak.herron.dev/realms/herrondev/protocol/openid-connect/userinfo
         use_pkce: true
-        role_attribute_path: contains(roles[*], 'admin') && 'Admin' || 'Viewer'
+        role_attribute_path: "'Admin'"
     persistence:
       enabled: true
     serviceMonitor:
