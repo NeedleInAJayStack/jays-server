@@ -16,6 +16,8 @@ spec:
   values:
     envFromSecret: grafana-oauth
     grafana.ini:
+      server:
+        root_url: https://grafana.herron.dev
       auth.generic_oauth:
         enabled: true
         name: Keycloak
