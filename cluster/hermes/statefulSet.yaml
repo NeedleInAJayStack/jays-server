@@ -17,7 +17,7 @@ spec:
       containers:
       - name: hermes
         image: nousresearch/hermes-agent:v2026.8.3
-        args: ["serve", "--host", "0.0.0.0"]
+        args: ["dashboard", "--host", "0.0.0.0"]
         imagePullPolicy: IfNotPresent
         env:
         - name: HERMES_DASHBOARD_OIDC_CLIENT_ID
