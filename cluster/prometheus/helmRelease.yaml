@@ -26,6 +26,13 @@ spec:
         hosts:
           - k8s-prometheus.localhost
       prometheusSpec:
+        resources:
+          requests:
+            cpu: 250m
+            memory: 3Gi
+          limits:
+            cpu: "1"
+            memory: 4Gi
         podMonitorSelectorNilUsesHelmValues: false # Collects all PodMonitors in all namespaces
         serviceMonitorSelectorNilUsesHelmValues: false # Collects all ServiceMonitors in all namespaces
         storageSpec:
