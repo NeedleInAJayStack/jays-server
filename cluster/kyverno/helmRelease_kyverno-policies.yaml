@@ -82,6 +82,16 @@ spec:
                 - prometheus-*-node-exporter*
               namespaces:
                 - prometheus
+          # SeaweedFS S3 gateway uses a host path for object storage.
+          - resources:
+              kinds:
+                - Deployment
+                - ReplicaSet
+                - Pod
+              names:
+                - seaweedfs-s3*
+              namespaces:
+                - seaweedfs
       disallow-host-ports:
         any:
           # Nginx Ingress Controller requires host ports
