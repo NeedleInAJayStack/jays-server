@@ -22,7 +22,7 @@ spec:
       data:
         type: persistentVolumeClaim
         size: 1Gi
-        storageClass: openebs-hostpath
+        storageClass: openebs-hostpath-retain
       logs:
         type: emptyDir
       resources:
@@ -52,7 +52,7 @@ spec:
       data:
         type: persistentVolumeClaim
         size: 1Gi
-        storageClass: openebs-hostpath
+        storageClass: openebs-hostpath-retain
       logs:
         type: emptyDir
       resources:
