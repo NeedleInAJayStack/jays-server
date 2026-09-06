@@ -37,7 +37,7 @@ spec:
         - name: data
           type: persistentVolumeClaim
           size: 50Gi
-          storageClass: openebs-hostpath
+          storageClass: openebs-hostpath-retain
           maxVolumes: 0
       logs:
         type: emptyDir
