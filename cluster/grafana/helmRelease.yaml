@@ -44,7 +44,6 @@ spec:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: acme
-        external-dns.alpha.kubernetes.io/target: "97.117.4.142"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         haproxy.org/response-set-header: |
           Alt-Svc "h3=\":443\"; ma=86400"
