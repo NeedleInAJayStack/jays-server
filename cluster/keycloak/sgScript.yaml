@@ -7,8 +7,12 @@ spec:
   managedVersions: true
   scripts:
     - id: 1
-      name: create-keycloak-database
+      name: create-keycloak-user
       scriptFrom:
         secretKeyRef:
-          name: keycloak-database
+          name: postgres-keycloak
           key: init.sql
+    - id: 2
+      name: create-keycloak-database
+      script: |
+        CREATE DATABASE "keycloak" OWNER keycloak;
