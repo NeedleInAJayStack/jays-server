@@ -2,7 +2,7 @@ apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
   namespace: keycloak
-  name: cluster
+  name: postgres
 spec:
   postgres:
     version: '17'
