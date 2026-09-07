@@ -21,7 +21,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: updater
-              image: bitnami/kubectl:1.32
+              image: bitnami/kubectl
               command:
                 - /bin/sh
                 - -c
