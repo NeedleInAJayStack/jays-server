@@ -7,12 +7,12 @@ spec:
   instances: 1
   db:
     vendor: postgres
-    host: postgres-ha
+    host: cluster-primary
     usernameSecret:
-      name: postgres-pguser-keycloak
+      name: postgres-keycloak
       key: user
     passwordSecret:
-      name: postgres-pguser-keycloak
+      name: postgres-keycloak
       key: password
   hostname:
     hostname: https://keycloak.herron.dev
