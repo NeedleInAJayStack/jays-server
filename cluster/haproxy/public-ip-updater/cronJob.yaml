@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: public-ip-updater
+  namespace: haproxy
+  labels:
+    app: public-ip-updater
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          labels:
+            app: public-ip-updater
+        spec:
+          serviceAccountName: public-ip-updater
+          restartPolicy: OnFailure
+          containers:
+            - name: updater
+              image: bitnami/kubectl:1.32
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  PUBLIC_IP=$(curl -sf --max-time 10 ifconfig.me)
+                  if [ -z "$PUBLIC_IP" ]; then
+                    PUBLIC_IP=$(curl -sf --max-time 10 -4 icanhazip.com)
+                  fi
+                  if [ -z "$PUBLIC_IP" ]; then
+                    echo "ERROR: failed to determine public IP"
+                    exit 1
+                  fi
+                  echo "Public IP: $PUBLIC_IP"
+
+                  CURRENT_IPS=$(kubectl -n haproxy get svc kubernetes-ingress -o jsonpath='{.spec.externalIPs}')
+                  echo "Current externalIPs: [${CURRENT_IPS}]"
+
+                  if echo "$CURRENT_IPS" | grep -qF "$PUBLIC_IP"; then
+                    echo "Service already has IP $PUBLIC_IP. Nothing to do."
+                    exit 0
+                  fi
+
+                  echo "Updating service externalIPs to $PUBLIC_IP"
+                  kubectl -n haproxy patch svc kubernetes-ingress --type=merge \
+                    -p "{\"spec\":{\"externalIPs\":[\"$PUBLIC_IP\"]}}"
+                  echo "Done."
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  cpu: 100m
+                  memory: 64Mi
