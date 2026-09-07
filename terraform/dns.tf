@@ -3,7 +3,7 @@ provider "cloudflare" {
 }
 variable "cloudflare_api_token" {}
 variable "jaysdesktop_ip" {
-  default = "97.117.0.165"
+  default = "97.117.4.142"
 }
 
 data "cloudflare_zone" "jayherron_org" {
