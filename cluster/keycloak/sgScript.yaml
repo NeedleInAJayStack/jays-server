@@ -1,0 +1,14 @@
+apiVersion: stackgres.io/v1
+kind: SGScript
+metadata:
+  namespace: keycloak
+  name: keycloak-database
+spec:
+  managedVersions: true
+  scripts:
+    - id: 1
+      name: create-keycloak-database
+      scriptFrom:
+        secretKeyRef:
+          name: keycloak-database
+          key: init.sql

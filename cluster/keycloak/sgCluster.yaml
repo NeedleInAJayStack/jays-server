@@ -14,3 +14,7 @@ spec:
     sgPostgresConfig: postgres-config
     observability:
       prometheusAutobind: true
+  managedSql:
+    scripts:
+      - id: 1
+        sgScript: keycloak-database
