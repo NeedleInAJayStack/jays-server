@@ -1,0 +1,17 @@
+apiVersion: stackgres.io/v1
+kind: SGPostgresConfig
+metadata:
+  namespace: rallly
+  name: postgres-config
+spec:
+  postgresVersion: '17'
+  postgresql.conf:
+    # See defaults: https://stackgres.io/doc/latest/reference/crd/sgpostgresconfig/#default-values
+    password_encryption: 'scram-sha-256'
+    log_min_duration_statement: '-1'
+    log_checkpoints: off
+    log_connections: off
+    log_disconnections: off
+    log_lock_waits: off
+    log_temp_files: '-1'
+    log_autovacuum_min_duration: '-1'
