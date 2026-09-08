@@ -13,12 +13,19 @@ set -euo pipefail
 source_dir=/var/openebs/local/
 destination_dir=/home/jay/backup/kubernetes/openebs
 owner=jay
+lock_file=/run/lock/backup-kubernetes.lock
+
+exec 9>"$lock_file"
+if ! flock -n 9; then
+  printf 'Another backup is already running\n' >&2
+  exit 1
+fi
 
 echo "Starting backup of $source_dir"
-cd $source_dir
+cd "$source_dir"
 for dir in */; do
-  destination=$destination_dir/$dir
+  destination="$destination_dir/$dir"
   echo "Backing up $dir to $destination"
-  rsync --atimes --chown=$owner:$owner --delete --recursive --times "$dir" "$destination_dir/$dir"
-done;
+  rsync --archive --atimes --chown="$owner:$owner" --delete --delete-delay "$dir" "$destination"
+done
 echo "Backup complete"
