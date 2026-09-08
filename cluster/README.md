@@ -9,6 +9,10 @@ https://microk8s.io/docs/addon-host-access
 
 This exposes the host machine to k8s services at IP address `10.0.1.1`.
 
+# Storage
+
+Persistent Volumes currently default to `Delete`. If they are important, consider patching the reclaim policy to `Retain` after creation.
+
 # Secrets
 
 Secrets are encrypted with SOPS and committed to the git repository. To do this, create a normal k8s secret, and then run:
