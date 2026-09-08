@@ -1,0 +1,58 @@
+# Periodically backs up the Postgres database into a directory on the same persistent volume.
+# This enables db recovery from a volume snapshot.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup
+  namespace: keycloak
+spec:
+  schedule: '15 3 * * *'
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 1800
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: postgres-backup
+              image: postgres:17-alpine
+              env:
+                - name: PGHOST
+                  value: cluster
+                - name: PGDATABASE
+                  value: keycloak
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: cluster
+                      key: superuser-username
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: cluster
+                      key: superuser-password
+              command:
+                - /bin/sh
+                - -ec
+                - |
+                  umask 027
+                  backup_dir=/pgdata/backups
+                  stamp=$(date -u +%Y%m%dT%H%M%SZ)
+                  mkdir -p "$backup_dir"
+                  retention_days=30
+                  find "$backup_dir" -type f -name '*.dump' -mtime +$retention_days -delete
+                  temporary_file="$backup_dir/.keycloak-$stamp.dump.tmp"
+                  backup_file="$backup_dir/keycloak-$stamp.dump"
+                  pg_dump --format=custom --file="$temporary_file" "$PGDATABASE"
+                  pg_restore --list "$temporary_file" >/dev/null
+                  mv "$temporary_file" "$backup_file"
+              volumeMounts:
+                - name: postgres-data
+                  mountPath: /pgdata
+          volumes:
+            - name: postgres-data
+              persistentVolumeClaim:
+                claimName: cluster-data-cluster-0
