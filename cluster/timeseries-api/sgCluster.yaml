@@ -17,8 +17,5 @@ spec:
       size: '10Gi'
   configurations:
     sgPostgresConfig: postgres-config
-    backups:
-      - sgObjectStorage: seaweedfs-backups
-        cronSchedule: '45 3 * * *'
     observability:
       prometheusAutobind: true
