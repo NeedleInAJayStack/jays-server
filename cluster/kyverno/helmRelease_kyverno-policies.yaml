@@ -18,54 +18,27 @@ spec:
       disallow-host-namespaces:
         excludeNamespaces:
           - home-assistant
-        matchConditions:
-          # OpenEBS ZFS operator requires host namespaces.
-          - name: exclude-openebs-zfs-localpv-node
-            expression: "!(object.metadata.namespace == 'openebs' && object.metadata.name.matches('^openebs-zfs-localpv-node.*$'))"
-          # Calico requires host networking for CNI functionality.
-          - name: exclude-calico-node
-            expression: "!(object.metadata.namespace == 'kube-system' && object.metadata.name.matches('^calico-node.*$'))"
-          # Prometheus Node Exporter requires host networking for metrics collection.
-          - name: exclude-prometheus-node-exporter
-            expression: "!(object.metadata.namespace == 'prometheus' && object.metadata.name.matches('^prometheus-.*-node-exporter.*$'))"
+          - kube-system
+          - openebs
+          - prometheus
       disallow-host-path:
         excludeNamespaces:
           - falco
-        matchConditions:
-          # Calico requires host paths for CNI functionality.
-          - name: exclude-calico-node
-            expression: "!(object.metadata.namespace == 'kube-system' && object.metadata.name.matches('^calico-node.*$'))"
-          # OpenEBS operators require host paths.
-          - name: exclude-openebs
-            expression: "!(object.metadata.namespace == 'openebs' && object.metadata.name.matches('^openebs-.*$'))"
-          # Prometheus Node Exporter requires host paths for metrics collection.
-          - name: exclude-prometheus-node-exporter
-            expression: "!(object.metadata.namespace == 'prometheus' && object.metadata.name.matches('^prometheus-.*-node-exporter.*$'))"
+          - kube-system
+          - openebs
+          - prometheus
       disallow-host-ports:
         excludeNamespaces:
+          - ingress
+          - opentelemetry-collector
+          - openebs
           - plex
-        matchConditions:
-          # Nginx Ingress Controller requires host ports.
-          - name: exclude-nginx-ingress-microk8s-controller
-            expression: "!(object.metadata.namespace == 'ingress' && object.metadata.name.matches('^nginx-ingress-microk8s-controller.*$'))"
-          # OpenEBS ZFS operator requires host ports.
-          - name: exclude-openebs-zfs
-            expression: "!(object.metadata.namespace == 'openebs' && object.metadata.name.matches('^openebs-zfs.*$'))"
-          # OTel Collector uses host ports for collection.
-          - name: exclude-opentelemetry-collector-agent
-            expression: "!(object.metadata.namespace == 'opentelemetry-collector' && object.metadata.name.matches('^opentelemetry-collector-agent-.*$'))"
-          # Prometheus Node Exporter requires host ports for metrics collection.
-          - name: exclude-prometheus-node-exporter
-            expression: "!(object.metadata.namespace == 'prometheus' && object.metadata.name.matches('^prometheus-.*-node-exporter.*$'))"
+          - prometheus
       disallow-privileged-containers:
         excludeNamespaces:
           - falco
           - home-assistant
+          - kube-system
+          - openebs
           - plex
-        matchConditions:
-          # Calico requires privileged containers for CNI functionality.
-          - name: exclude-calico-node
-            expression: "!(object.metadata.namespace == 'kube-system' && object.metadata.name.matches('^calico-node.*$'))"
-          # OpenEBS LVM operator requires privileged containers for storage management.
-          - name: exclude-openebs-lvm
-            expression: "!(object.metadata.namespace == 'openebs' && object.metadata.name.matches('^openebs-lvm.*$'))"
+          - prometheus
