@@ -1,0 +1,42 @@
+name: PR Validation
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/pr-validation.yaml'
+      - 'cluster/**'
+
+jobs:
+  validate-cluster-manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flux CLI
+        uses: fluxcd/flux2/action@main
+
+      - name: Set up kubeconform
+        uses: yokawasa/action-setup-kube-tools@v0.11.2
+        with:
+          setup-tools: |
+            kubeconform
+
+      - name: Render manifests the way Flux does
+        run: |
+          # Dry-run render does not require SOPS decryption keys. Encrypted secrets
+          # are carried through as placeholders, which is enough for structure and
+          # schema validation in CI.
+          flux build kustomization flux-system \
+            --path ./cluster \
+            --kustomization-file ./cluster/flux-system/gotk-sync.yaml \
+            --dry-run \
+            --ignore-paths .sops.yaml > rendered.yaml
+
+      - name: Validate rendered manifests
+        run: |
+          kubeconform \
+            -strict \
+            -summary \
+            -ignore-missing-schemas \
+            rendered.yaml
