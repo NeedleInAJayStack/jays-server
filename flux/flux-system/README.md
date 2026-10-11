@@ -18,6 +18,10 @@ flux bootstrap github \
   --personal
 ```
 
+## Updating
+
+To update flux, just run the bootstrap function above. You may have to run `flux migrate` if there are CRD errors.
+
 To update the personal access token used by Flux (like after expiration), just regenerate the token and update the `flux-system` `data.password` to be the base64-encoded version of the password. Note that it must have a trailing newline, which you can get by doing `echo '<github_pat>' | yq '@base64'`
 
 ## SOPS
