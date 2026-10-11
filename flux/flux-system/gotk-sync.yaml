@@ -24,7 +24,7 @@ spec:
     secretRef:
       name: sops-gpg
   interval: 10m0s
-  path: ./cluster
+  path: ./flux
   prune: true
   sourceRef:
     kind: GitRepository
