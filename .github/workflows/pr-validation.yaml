@@ -4,10 +4,10 @@ on:
   pull_request:
     paths:
       - '.github/workflows/pr-validation.yaml'
-      - 'cluster/**'
+      - 'flux/**'
 
 jobs:
-  validate-cluster-manifests:
+  validate-flux-manifests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -28,8 +28,8 @@ jobs:
           # are carried through as placeholders, which is enough for structure and
           # schema validation in CI.
           flux build kustomization flux-system \
-            --path ./cluster \
-            --kustomization-file ./cluster/flux-system/gotk-sync.yaml \
+            --path ./flux \
+            --kustomization-file ./flux/flux-system/gotk-sync.yaml \
             --dry-run \
             --ignore-paths .sops.yaml > rendered.yaml
 

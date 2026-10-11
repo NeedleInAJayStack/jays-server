@@ -14,7 +14,7 @@ flux bootstrap github \
   --owner=NeedleInAJayStack \
   --repository=jays-server \
   --branch=main \
-  --path=cluster \
+  --path=flux \
   --personal
 ```
 
