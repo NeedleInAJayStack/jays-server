@@ -16,6 +16,7 @@ spec:
   # And https://kubernetes-sigs.github.io/external-dns/latest/docs/tutorials/cloudflare/#using-helm
   values:
     sources:
+      - gateway-httproute
       - ingress
     serviceMonitor:
       enabled: true
