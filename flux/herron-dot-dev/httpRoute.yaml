@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: herron-dot-dev
+  namespace: herron-dot-dev
+  labels:
+    app: herron-dot-dev
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway
+      sectionName: https
+  hostnames:
+    - herron.dev
+    - www.herron.dev
+  rules:
+    - backendRefs:
+        - name: herron-dot-dev
+          port: 80

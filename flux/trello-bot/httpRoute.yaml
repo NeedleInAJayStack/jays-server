@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: trello-bot
+  namespace: trello-bot
+  labels:
+    app: trello-bot
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway
+      sectionName: https
+  hostnames:
+    - trello-bot.herron.dev
+  rules:
+    - backendRefs:
+        - name: trello-bot
+          port: 80

@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: hermes
+  namespace: hermes
+  labels:
+    app: hermes
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway
+      sectionName: https
+  hostnames:
+    - hermes.herron.dev
+  rules:
+    - backendRefs:
+        - name: dashboard
+          port: 9119
