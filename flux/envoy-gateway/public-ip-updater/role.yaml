@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: public-ip-updater
+  namespace: envoy-gateway
+  labels:
+    app: public-ip-updater
+rules:
+  - apiGroups: ["gateway.networking.k8s.io"]
+    resources: ["gateways"]
+    resourceNames: ["envoy"]
+    verbs: ["get", "patch"]
