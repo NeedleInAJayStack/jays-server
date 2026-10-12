@@ -1,0 +1,28 @@
+# Configures the proxy that Envoy Gateway provisions for the Gateway.
+# https://gateway.envoyproxy.io/docs/api/extension_types/#envoyproxy
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: nodeport
+  namespace: envoy-gateway
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        type: NodePort
+        # Keep client source IPs, since traffic arrives directly on the node
+        externalTrafficPolicy: Local
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              ports:
+                # Names must match the "<protocol>-<listener port>" Envoy Gateway generates.
+                # The 80/443 listener ports are translated to 10080/10443 on the proxy.
+                - name: http-80
+                  port: 80
+                  nodePort: 31080
+                - name: https-443
+                  port: 443
+                  nodePort: 31443

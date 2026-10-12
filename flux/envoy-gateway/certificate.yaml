@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: herron-dev-wildcard
+  namespace: envoy-gateway
+spec:
+  secretName: herron-dev-wildcard-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: acme
+  dnsNames:
+    - herron.dev
+    - "*.herron.dev"
