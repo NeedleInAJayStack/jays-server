@@ -1,0 +1,25 @@
+# Applies to every response served by the Gateway, regardless of HTTPRoute.
+# https://gateway.envoyproxy.io/docs/api/extension_types/#clienttrafficpolicy
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: envoy
+  namespace: envoy-gateway
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy
+  headers:
+    lateResponseHeaders:
+      set:
+        - name: Cross-Origin-Resource-Policy
+          value: same-origin
+        - name: Content-Security-Policy
+          value: "frame-ancestors 'none'; upgrade-insecure-requests; report-to cf-nel"
+        - name: Referrer-Policy
+          value: same-origin
+        - name: Strict-Transport-Security
+          value: max-age=63072000; includeSubDomains; preload
+        - name: X-Content-Type-Options
+          value: nosniff
