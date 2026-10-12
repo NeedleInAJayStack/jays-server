@@ -27,7 +27,7 @@ metadata:
   namespace: plex
 spec:
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteOnce
   storageClassName: openebs-hostpath
   resources:
     requests:

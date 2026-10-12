@@ -83,7 +83,8 @@ spec:
               readOnly: true
             - name: video
               mountPath: /data/Video
-              readOnly: true
+              # Writable so that DVR can record
+              readOnly: false
             - name: image
               mountPath: /data/Image
               readOnly: true
