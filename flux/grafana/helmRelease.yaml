@@ -59,3 +59,14 @@ spec:
         - hosts:
             - grafana.herron.dev
           secretName: grafana-tls
+    route:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        hostnames:
+          - grafana.herron.dev
+        parentRefs:
+          - name: envoy
+            namespace: envoy-gateway
+            sectionName: https

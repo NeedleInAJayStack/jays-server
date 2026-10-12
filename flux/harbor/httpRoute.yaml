@@ -1,0 +1,42 @@
+# The Harbor chart can't render an Ingress and an HTTPRoute at once (expose.type is exclusive),
+# so this mirrors the chart's own HTTPRoute template alongside the chart-managed Ingress.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: harbor
+  namespace: harbor
+  labels:
+    app: harbor
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway
+      sectionName: https
+  hostnames:
+    - harbor.herron.dev
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api/
+        - path:
+            type: PathPrefix
+            value: /service/
+        - path:
+            type: PathPrefix
+            value: /v2/
+        - path:
+            type: PathPrefix
+            value: /c/
+      backendRefs:
+        - name: harbor-core
+          port: 80
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: harbor-portal
+          port: 80
