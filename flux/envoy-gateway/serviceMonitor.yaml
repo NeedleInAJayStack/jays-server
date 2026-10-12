@@ -1,3 +1,5 @@
+# Monitors envoy gateway control plane
+# https://gateway.envoyproxy.io/docs/tasks/observability/gateway-observability/
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
