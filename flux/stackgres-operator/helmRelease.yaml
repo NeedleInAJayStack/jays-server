@@ -19,3 +19,8 @@ spec:
         type: LoadBalancer
     developer:
       logLevel: WARN
+      # Rollout schedules use the operator's local timezone.
+      extraOpts:
+        - -Duser.timezone=America/Denver
+      extraEnv:
+        TZ: America/Denver

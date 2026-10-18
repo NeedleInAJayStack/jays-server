@@ -11,6 +11,13 @@ spec:
       - name: pgcrypto
   instances: 1
   pods:
+    updateStrategy:
+      type: Schedule
+      method: InPlace
+      schedule:
+        # 1–5 AM America/Denver; hourly windows preserve the cutoff across DST.
+        - cron: "0 1-4 * * *"
+          duration: PT1H
     persistentVolume:
       size: '10Gi'
   configurations:
