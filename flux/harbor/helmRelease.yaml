@@ -15,19 +15,17 @@ spec:
   # See https://github.com/goharbor/harbor-helm/blob/main/values.yaml
   values:
     expose:
-      ingress:
-        className: haproxy
+      type: route
+      tls:
+        enabled: false # TLS terminates at Envoy Gateway
+      route:
         annotations:
-          cert-manager.io/cluster-issuer: acme
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          haproxy.org/response-set-header: |
-            Alt-Svc "h3=\":443\"; ma=86400"
-            Cross-Origin-Resource-Policy "same-origin"
-            Content-Security-Policy "frame-ancestors 'none'; upgrade-insecure-requests; report-to cf-nel"
-            Referrer-Policy "same-origin"
-            Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
-            X-Content-Type-Options "nosniff"
+        parentRefs:
+          - name: envoy
+            namespace: envoy-gateway
+            sectionName: https
         hosts:
-          core: harbor.herron.dev
+          - harbor.herron.dev
     externalURL: https://harbor.herron.dev
     logLevel: warning
