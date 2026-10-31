@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: radicale
-          image: ghcr.io/kozea/radicale:3.8.3
+          image: ghcr.io/kozea/radicale:3.9.0
           ports:
             - name: radicale
               containerPort: 5232
