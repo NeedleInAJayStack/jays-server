@@ -18,6 +18,8 @@ spec:
     hostname: https://keycloak.herron.dev
   http:
     httpEnabled: true
+  ingress:
+    enabled: false
   proxy:
     headers: xforwarded
   additionalOptions:
