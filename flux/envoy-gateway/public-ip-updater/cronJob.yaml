@@ -48,6 +48,7 @@ spec:
 
                   echo "Updating Gateway target to $PUBLIC_IP"
                   kubectl -n envoy-gateway annotate gateway envoy --overwrite \
+                    --field-manager=flux-client-side-apply \
                     "external-dns.kubernetes.io/target=$PUBLIC_IP"
                   echo "Done."
               resources:
