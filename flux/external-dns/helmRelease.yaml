@@ -20,6 +20,7 @@ spec:
       - ingress
     serviceMonitor:
       enabled: true
+    policy: upsert-only
     provider:
       name: cloudflare
     env:
