@@ -20,12 +20,16 @@ spec:
         forceConflicts: true
     grafana:
       enabled: false
+    alertmanager:
+      ingress:
+        enabled: false
+      alertmanagerSpec:
+        externalUrl: https://alertmanager.herron.dev
     prometheus:
       ingress:
-        enabled: true
-        hosts:
-          - k8s-prometheus.localhost
+        enabled: false
       prometheusSpec:
+        externalUrl: https://prometheus.herron.dev
         resources:
           requests:
             cpu: 250m

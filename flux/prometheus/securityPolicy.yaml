@@ -1,0 +1,38 @@
+# Requires that KeyCloak's herrondev realm has been configured with a prometheus OIDC client
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: prometheus-oidc
+  namespace: prometheus
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: prometheus
+  oidc:
+    provider:
+      issuer: https://keycloak.herron.dev/realms/herrondev
+    clientID: prometheus
+    clientSecret:
+      name: prometheus-oidc
+    redirectURL: https://prometheus.herron.dev/oauth2/callback
+    logoutPath: /logout
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: alertmanager-oidc
+  namespace: prometheus
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: alertmanager
+  oidc:
+    provider:
+      issuer: https://keycloak.herron.dev/realms/herrondev
+    clientID: prometheus
+    clientSecret:
+      name: prometheus-oidc
+    redirectURL: https://alertmanager.herron.dev/oauth2/callback
+    logoutPath: /logout
