@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hermes
-        image: nousresearch/hermes-agent:v0.22.6
+        image: nousresearch/hermes-agent:v0.23.1
         workingDir: /opt/data
         args: ["dashboard", "--host", "0.0.0.0"]
         imagePullPolicy: IfNotPresent
@@ -45,7 +45,7 @@ spec:
             cpu: "2"
             memory: 2Gi
       - name: hermes-gateway
-        image: nousresearch/hermes-agent:v0.22.6
+        image: nousresearch/hermes-agent:v0.23.1
         workingDir: /opt/data
         args: ["gateway", "run"]
         imagePullPolicy: IfNotPresent
