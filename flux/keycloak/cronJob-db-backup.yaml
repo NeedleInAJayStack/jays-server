@@ -21,19 +21,19 @@ spec:
               image: postgres:17-alpine
               env:
                 - name: PGHOST
-                  value: cluster
+                  value: postgres-rw
                 - name: PGDATABASE
                   value: keycloak
                 - name: PGUSER
                   valueFrom:
                     secretKeyRef:
-                      name: cluster
-                      key: superuser-username
+                      name: postgres-app
+                      key: username
                 - name: PGPASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: cluster
-                      key: superuser-password
+                      name: postgres-app
+                      key: password
               command:
                 - /bin/sh
                 - -ec
