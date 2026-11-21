@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: cloudnative-pg
+  namespace: cloudnative-pg
+spec:
+  interval: 10m
+  url: https://github.com/cloudnative-pg/artifacts
+  ref:
+    branch: "main"
