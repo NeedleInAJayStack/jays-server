@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudnative-pg
+  namespace: cloudnative-pg
+spec:
+  chart:
+    spec:
+      chart: cloudnative-pg
+      sourceRef:
+        kind: HelmRepository
+        name: cloudnative-pg
+      version: '<0.30.0'
+  interval: 10m
+  # Defaults: https://github.com/cloudnative-pg/charts/blob/main/charts/cloudnative-pg/values.yaml
+  values:
+    monitoring:
+      podMonitorEnabled: true
