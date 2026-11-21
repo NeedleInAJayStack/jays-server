@@ -4,7 +4,7 @@ metadata:
   namespace: rallly
   name: postgres-config
 spec:
-  postgresVersion: '14'
+  postgresVersion: '18'
   postgresql.conf:
     # See defaults: https://stackgres.io/doc/latest/reference/crd/sgpostgresconfig/#default-values
     shared_buffers: '512MB'
