@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  namespace: waterlog
+  name: postgres
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-minimal-trixie
+    major: 18
+  bootstrap:
+    initdb:
+      database: waterlog
+      import:
+        type: microservice
+        databases:
+          - waterlog
+        source:
+          externalCluster: stackgres-cluster
+  externalClusters:
+    - name: stackgres-cluster
+      connectionParameters:
+        host: cluster-primary
+        user: postgres
+        dbname: waterlog
+      password:
+        name: cluster
+        key: superuser-password
+  storage:
+    size: 10Gi
