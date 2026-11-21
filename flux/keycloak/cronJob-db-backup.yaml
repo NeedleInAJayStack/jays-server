@@ -55,4 +55,4 @@ spec:
           volumes:
             - name: postgres-data
               persistentVolumeClaim:
-                claimName: cluster-data-cluster-0
+                claimName: postgres-1
