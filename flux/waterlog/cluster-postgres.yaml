@@ -13,20 +13,5 @@ spec:
   bootstrap:
     initdb:
       database: waterlog
-      import:
-        type: microservice
-        databases:
-          - waterlog
-        source:
-          externalCluster: stackgres-cluster
-  externalClusters:
-    - name: stackgres-cluster
-      connectionParameters:
-        host: cluster-primary
-        user: postgres
-        dbname: waterlog
-      password:
-        name: cluster
-        key: superuser-password
   storage:
     size: 10Gi
