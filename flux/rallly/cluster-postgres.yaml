@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  namespace: rallly
+  name: postgres
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-minimal-trixie
+    major: 18
+  bootstrap:
+    initdb:
+      database: rallly
+      import:
+        type: microservice
+        databases:
+          - rallly
+        source:
+          externalCluster: stackgres-cluster
+  storage:
+    size: 1Gi
+    externalClusters:
+      - name: stackgres-cluster
+        connectionParameters:
+          host: cluster-primary
+          user: postgres
+          dbname: rallly
+        password:
+          name: cluster
+          key: superuser-password
