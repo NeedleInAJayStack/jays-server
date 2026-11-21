@@ -19,14 +19,14 @@ spec:
           - rallly
         source:
           externalCluster: stackgres-cluster
+  externalClusters:
+    - name: stackgres-cluster
+      connectionParameters:
+        host: cluster-primary
+        user: postgres
+        dbname: rallly
+      password:
+        name: cluster
+        key: superuser-password
   storage:
     size: 1Gi
-    externalClusters:
-      - name: stackgres-cluster
-        connectionParameters:
-          host: cluster-primary
-          user: postgres
-          dbname: rallly
-        password:
-          name: cluster
-          key: superuser-password
