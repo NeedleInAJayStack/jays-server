@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  namespace: keycloak
+  name: postgres
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-minimal-trixie
+    major: 17
+  bootstrap:
+    initdb:
+      database: keycloak
+      import:
+        type: microservice
+        databases:
+          - keycloak
+        source:
+          externalCluster: stackgres-cluster
+  externalClusters:
+    - name: stackgres-cluster
+      connectionParameters:
+        host: cluster-primary
+        user: postgres
+        dbname: keycloak
+      password:
+        name: cluster
+        key: superuser-password
+  storage:
+    size: 10Gi
