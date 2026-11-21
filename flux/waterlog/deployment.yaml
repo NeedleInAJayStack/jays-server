@@ -23,19 +23,19 @@ spec:
               containerPort: 8080
           env:
             - name: WATERLOG_DB_POSTGRES_HOST
-              value: cluster
+              value: postgres-rw
             - name: WATERLOG_DB_POSTGRES_NAME
               value: waterlog
             - name: WATERLOG_DB_POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: cluster
-                  key: superuser-username
+                  name: postgres-app
+                  key: username
             - name: WATERLOG_DB_POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: cluster
-                  key: superuser-password
+                  name: postgres-app
+                  key: password
           resources:
             requests:
               cpu: 10m
