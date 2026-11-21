@@ -8,7 +8,7 @@ spec:
     check: false
     clone: false
     link: true
-    postgresVersion: "18"
+    postgresVersion: "18.6"
     sgPostgresConfig: postgres-config-18
   maxRetries: 0
   op: majorVersionUpgrade
