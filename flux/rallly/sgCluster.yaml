@@ -5,7 +5,7 @@ metadata:
   name: cluster
 spec:
   postgres:
-    version: '18'
+    version: '14'
     extensions:
       - name: citext
       - name: pgcrypto

@@ -9,7 +9,7 @@ spec:
     clone: false
     link: true
     postgresVersion: "18"
-    sgPostgresConfig: postgres-config
+    sgPostgresConfig: postgres-config-18
   maxRetries: 0
   op: majorVersionUpgrade
   sgCluster: cluster
