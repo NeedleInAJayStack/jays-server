@@ -38,18 +38,11 @@ spec:
               value: 'false'
             - name: SMTP_USER
               value: email-bot@herron.dev
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: cluster
-                  key: superuser-username
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: cluster
-                  key: superuser-password
             - name: DATABASE_URL
-              value: "postgresql://$(DB_USER):$(DB_PASS)@cluster:5432/rallly"
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-app
+                  key: fqdn-uri
             - name: SECRET_PASSWORD
               valueFrom:
                 secretKeyRef:
