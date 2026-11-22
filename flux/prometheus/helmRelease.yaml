@@ -14,15 +14,10 @@ spec:
   interval: 10m
   # See https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
-    # MicroK8s runs kube-proxy inside kubelite with loopback-only metrics.
-    kubeProxy:
-      enabled: false
     crds:
       upgradeJob:
         enabled: true
         forceConflicts: true
-    grafana:
-      enabled: false
     alertmanager:
       ingress:
         enabled: false
@@ -46,6 +41,8 @@ spec:
         externalUrl: https://alertmanager.herron.dev
         secrets:
           - alertmanager-telegram
+    grafana:
+      enabled: false
     prometheus:
       ingress:
         enabled: false
@@ -68,3 +65,12 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+    kubeControllerManager:
+      endpoints:
+        - 192.168.4.100
+    # MicroK8s runs kube-proxy inside kubelite with loopback-only metrics.
+    kubeProxy:
+      enabled: false
+    kubeScheduler:
+      endpoints:
+        - 192.168.4.100
