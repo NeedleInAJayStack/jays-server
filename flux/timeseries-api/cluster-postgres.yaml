@@ -13,20 +13,5 @@ spec:
   bootstrap:
     initdb:
       database: timeseries_api
-      import:
-        type: microservice
-        databases:
-          - timeseries_api
-        source:
-          externalCluster: stackgres-cluster
-  externalClusters:
-    - name: stackgres-cluster
-      connectionParameters:
-        host: cluster-primary
-        user: postgres
-        dbname: timeseries_api
-      password:
-        name: cluster
-        key: superuser-password
   storage:
     size: 10Gi
