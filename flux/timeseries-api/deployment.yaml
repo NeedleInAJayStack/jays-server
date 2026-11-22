@@ -43,19 +43,19 @@ spec:
                   name: timeseries-api
                   key: apiKey
             - name: DATABASE_HOST
-              value: cluster
+              value: postgres-rw
             - name: DATABASE_NAME
               value: timeseries_api
             - name: DATABASE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: cluster
-                  key: superuser-username
+                  name: postgres-app
+                  key: username
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: cluster
-                  key: superuser-password
+                  name: postgres-app
+                  key: password
             - name: DATABASE_SSL
               value: prefer
             - name: MQTT_ADDRESS
