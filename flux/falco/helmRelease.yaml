@@ -39,13 +39,13 @@ spec:
           condition: >-
             or (k8s.ns.name = keycloak
                 and k8s.pod.label[app.kubernetes.io/name] = keycloak-operator
-                and container.name = keycloak-operator
+                and container.name = keycloak-operator)
             or (k8s.ns.name = kyverno
                 and k8s.pod.label[app.kubernetes.io/name] = kyverno-admission-controller
-                and container.name = kyverno
+                and container.name = kyverno)
             or (k8s.ns.name = envoy-gateway
                 and k8s.pod.label[app] = public-ip-updater
-                and container.name = updater
+                and container.name = updater)
     falcosidekick:
       enabled: true
       config:
