@@ -40,7 +40,7 @@ spec:
           - name: telegram-critical
             telegram_configs:
               - chat_id: -4577127833
-                bot_token_file: /etc/alertmanager/secrets/alertmananger-telegram/bot-token
+                bot_token_file: /etc/alertmanager/secrets/alertmanager-telegram/bot-token
                 send_resolved: true
       alertmanagerSpec:
         externalUrl: https://alertmanager.herron.dev
