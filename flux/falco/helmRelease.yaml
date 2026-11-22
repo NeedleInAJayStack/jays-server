@@ -14,6 +14,14 @@ spec:
   interval: 10m
   # See https://github.com/falcosecurity/charts/blob/master/charts/falco/values.yaml
   values:
+    falcosidekick:
+      enabled: true
+      config:
+        alertmanager:
+          hostport: "http://prometheus-kube-prometheus-alertmanager.prometheus:9093"
+          endpoint: "/api/v2/alerts"
+      serviceMonitor:
+        enabled: true
     metrics:
       enabled: true
     serviceMonitor:
