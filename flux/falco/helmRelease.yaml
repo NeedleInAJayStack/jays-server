@@ -14,6 +14,38 @@ spec:
   interval: 10m
   # See https://github.com/falcosecurity/charts/blob/master/charts/falco/values.yaml
   values:
+    collectors:
+      containerEngine:
+        engines:
+          cri:
+            # Falco needs the MicroK8s socket to resolve pod and image metadata.
+            sockets:
+              - /var/snap/microk8s/common/run/containerd.sock
+    customRules:
+      custom-rules.yaml: |-
+        # Fix CNPG WAL archiver false positive.
+        # The upstream macro expects "sh -c /controller/manager wal-archive"
+        # but newer CNPG uses "sh -c -- /controller/manager wal-archive ..."
+        - macro: postgres_running_cnpg
+          condition: >
+            (proc.pname=postgres and
+             (proc.cmdline startswith "sh -c /controller/manager wal-archive" or
+              proc.cmdline startswith "sh -c -- /controller/manager wal-archive"))
+
+        # Exclude workloads that use the k8s api.
+        - macro: user_known_contact_k8s_api_server_activities
+          override:
+            condition: append
+          condition: >-
+            or (k8s.ns.name = keycloak
+                and k8s.pod.label[app.kubernetes.io/name] = keycloak-operator
+                and container.name = keycloak-operator
+            or (k8s.ns.name = kyverno
+                and k8s.pod.label[app.kubernetes.io/name] = kyverno-admission-controller
+                and container.name = kyverno
+            or (k8s.ns.name = envoy-gateway
+                and k8s.pod.label[app] = public-ip-updater
+                and container.name = updater
     falcosidekick:
       enabled: true
       config:
