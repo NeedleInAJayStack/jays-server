@@ -21,8 +21,18 @@ spec:
           serviceName: prometheus-kube-prometheus-prometheus
           port: 9090
       customPricing:
-        # Use default custom pricing costs
         enabled: true
+        costModel:
+          description: "Local cost, but aligned to GKE Standard us-central1: N2 and zonal balanced PD"
+          CPU: "0.031611"          # per vCPU-hour, N2
+          RAM: "0.004237"          # per GiB-hour, N2
+          spotCPU: "0.01896"       # per vCPU-hour, N2 Spot; prices vary
+          spotRAM: "0.002542"      # per GiB-hour, N2 Spot; prices vary
+          GPU: "0.35"              # per T4 GPU-hour on a separate N1 node
+          storage: "0.000136986"   # per GiB-hour, $0.10/GiB-month / 730 hours
+          zoneNetworkEgress: "0.01"      # per GiB, between zones
+          regionNetworkEgress: "0.02"    # per GiB, between North American regions
+          internetNetworkEgress: "0.12"  # per GiB, Premium Tier to North America
       metrics:
         kubeStateMetrics:
           emitKsmV1Metrics: false
