@@ -1,0 +1,31 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: opencost
+  namespace: opencost
+spec:
+  chart:
+    spec:
+      chart: opencost
+      sourceRef:
+        kind: HelmRepository
+        name: opencost
+      version: '<3.0.0'
+  interval: 10m
+  # See https://github.com/opencost/opencost-helm-chart/blob/main/charts/opencost/values.yaml
+  values:
+    opencost:
+      prometheus:
+        internal:
+          namespaceName: prometheus
+          serviceName: prometheus-kube-prometheus-prometheus
+          port: 9090
+      customPricing:
+        # Use default custom pricing costs
+        enabled: true
+      metrics:
+        kubeStateMetrics:
+          emitKsmV1Metrics: false
+          emitKsmV1MetricsOnly: false
+        serviceMonitor:
+          enabled: true
