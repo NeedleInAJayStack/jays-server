@@ -36,5 +36,5 @@ spec:
             - name: envoy
               namespace: envoy-gateway
               sectionName: https
-          # hostnames:
-          #   - opencost.herron.dev
+          hostnames:
+            - opencost.herron.dev
