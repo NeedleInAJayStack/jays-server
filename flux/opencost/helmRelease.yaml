@@ -29,5 +29,12 @@ spec:
           emitKsmV1MetricsOnly: false
         serviceMonitor:
           enabled: true
-      httpRoute:
-        enabled: true
+      ui:
+        httpRoute:
+          enabled: true
+          parentRefs:
+            - name: envoy
+              namespace: envoy-gateway
+              sectionName: https
+          # hostnames:
+          #   - opencost.herron.dev
