@@ -38,3 +38,5 @@ spec:
               sectionName: https
           hostnames:
             - opencost.herron.dev
+          annotations:
+            external-dns.kubernetes.io/cloudflare-proxied: "true"
